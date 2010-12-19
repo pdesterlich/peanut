@@ -113,6 +113,33 @@
 				case 'echo': echo $result; break;
 			}
 		}
+
+		public static function button($caption, $options = null, $attr = null)
+		{
+			/**
+			 * funzione button
+			 *
+			 * genera un pulsante per una form
+			 *
+			 * @param  string $caption contenuto del pulsante
+			 * @param  array  $options opzioni del pulsante
+			 * @param  array  $attr    attributi del pulsante
+			 *
+			 * @access public
+			 * @since  0.0.1
+			 */
+
+			$options = arrays::defaults($options, array('display' => 'return', 'id' => 'button'.mt_rand(1,99999)));
+			$attributes = arrays::attributes(arrays::defaults($attr, array("type" => "button"))); // genero la stringa degli attributi
+
+			$result = "<button id='{$options["id"]}' {$attributes}>{$caption}</button>"; // genero il pulsante
+
+			switch ($options["display"]) {
+				case 'return': return $result; break;
+				case 'echo': echo $result; break;
+			}
+		}
+
 	}
 
 ?>
