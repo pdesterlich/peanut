@@ -43,6 +43,10 @@
 
 			// richiamo la procedura __construct della classe padre
 			parent::__construct();
+
+			// se il nome della tabella non è specificato, lo imposto al nome del modello (meno la parola "Model")
+			if ($this->tableName == "") $this->tableName = strtolower(str_replace("Model", "", get_class($this)));
+
 			// carico il record di cui è passato l'identificativo
 			$this->load($id);
 		}
