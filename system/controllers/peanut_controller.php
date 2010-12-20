@@ -13,6 +13,7 @@
 		public $useModel = false; // disabilito l'uso del modello
 
 		function index() {
+			$this->layout->set("appname", "Peanut!");
 			$this->template->set("appname", "Peanut!");
 		}
 
