@@ -89,7 +89,7 @@
 			$attributes = arrays::attributes($attr);
 
 			$result = "<textarea name='{$name}' id='{$options["id"]}' {$attributes}>{$value}</textarea>";
-			if (isset($options["label"])) $result = "<label for='{$name}'>{$options['label']}</label>" . $result;
+			if (isset($options["label"])) $result = "<label class='label' for='{$name}'>{$options['label']}</label>" . $result;
 
 			switch ($options["display"]) {
 				case 'return': return $result; break;
@@ -106,7 +106,7 @@
 			if ($checked) $htmlAttributes .= "checked ";
 
 			$result = "<input type='checkbox' name='{$name}' id='{$options["id"]}' value='{$options["value"]}' {$attributes} {$htmlAttributes}> {$caption}";
-			if (isset($options["label"])) $result = "<label for='{$name}'>{$options['label']}</label>" . $result;
+			if (isset($options["label"])) $result = "<label class='label' for='{$name}'>{$options['label']}</label>" . $result;
 
 			switch ($options["display"]) {
 				case 'return': return $result; break;
