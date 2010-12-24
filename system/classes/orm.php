@@ -426,6 +426,28 @@
 			// ritorno il numero di records presenti
 			return $result["totale"];
 		}
+
+		/**
+		 * funzione getComboValues
+		 * ritorna un array id => descrizione dei record da utilizzare in una combo
+		 *
+		 * @return array
+		 * @author Phelipe de Sterlich
+		 **/
+		function getComboValues($valueField, $descField, $where = null, $order = null)
+		{
+			// inizializza l'array dei risultati
+			$result = array();
+			// ottiene i record che corrispondono ai criteri di ricerca
+			$records = $this->find(array($valueField, $descField), $where, $order);
+			// cicla sui record ottenuti
+			foreach ($records as $record) {
+				// aggiunge all'array dei risultati la coppia id > descrizione
+				$result[$record[$valueField]] = $record[$descField];
+			}
+			// ritorna l'array dei risultati
+			return $result;
+		}
 	}
 
 /*

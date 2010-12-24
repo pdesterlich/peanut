@@ -114,6 +114,31 @@
 			}
 		}
 
+		public static function select ($name, $caption, $items, $selected_item, $options = null, $attr = null)
+		{
+			$options = arrays::defaults($options, array('id' => $name, 'display' => 'return'));
+			$attributes = arrays::attributes($attr);
+
+			$result = "";
+			if (is_array($items))
+			{
+				foreach ($items as $key => $value) {
+					$selected = ($selected_item == $key) ? ' selected' : '';
+					$result .= "<option value='{$key}'{$selected}>{$value}</option>\n";
+				}
+			} else {
+				$result .= $items;
+			}
+
+			$result = "<select name='{$name}' id='{$options["id"]}' {$attributes}>{$result}</select>\n";
+			if (isset($options["label"])) $result = "<label class='label' for='{$name}'>{$options['label']}</label>" . $result;
+
+			switch ($options["display"]) {
+				case 'return': return $result; break;
+				case 'echo': echo $result; break;
+			}
+		}
+
 		public static function button($caption, $options = null, $attr = null)
 		{
 			/**
