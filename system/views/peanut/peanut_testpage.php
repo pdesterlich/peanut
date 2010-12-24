@@ -20,5 +20,5 @@
 	<dt>cipher - decrypt
 	<dd><?php echo $cipher_decrypt; ?>
 	<dt>select
-	<dd><?php echo form::select("test_select", "", array(1 => "cipolla", 2 => "peperone", 3 => "melanzana"), 2); ?>
+	<dd><?php echo form::select("test_select", array(1 => "cipolla", 2 => "peperone", 3 => "melanzana"), 2); ?>
 </dl>

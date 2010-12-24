@@ -114,7 +114,7 @@
 			}
 		}
 
-		public static function select ($name, $caption, $items, $selected_item, $options = null, $attr = null)
+		public static function select ($name, $items, $selected_item, $options = null, $attr = null)
 		{
 			$options = arrays::defaults($options, array('id' => $name, 'display' => 'return'));
 			$attributes = arrays::attributes($attr);
