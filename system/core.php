@@ -88,6 +88,24 @@
 		else { die (__("system.file_not_found", array(":filename" => $className))); }
 	}
 
+	/**
+	 * funzione loadClass
+	 * crea e ritorna un'istanza di una classe, eventualmente caricandone anche la relativa libreria
+	 *
+	 * @param  className string nome della classe da creare
+	 * @param  libName   string (opzionale) nome della libreria da caricare prima di creare la classe
+	 * @return object
+	 * @author Phelipe de Sterlich
+	 **/
+	function loadClass($className, $libName = "")
+	{
+		if ($libName != "") {
+			if (file_exists(APP.DS."libs".DS."{$libName}.php")) { require_once APP.DS."libs".DS."{$libName}.php"; }
+			else if (file_exists(SYSTEM.DS."libs".DS."{$className}.php")) { require_once SYSTEM.DS."libs".DS."{$className}.php"; }
+		}
+		return new $className();
+	}
+
 	function getBasicVars() {
 		global $config, $controllerName, $actionName, $idValue;
 
