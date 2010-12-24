@@ -146,7 +146,7 @@
 
 			$attributes = arrays::attributes($attr);
 			if ($id != "") $attributes .= " id='{$id}'";
-			return "<div {$attributes}'>{$content}</div>";
+			return "<div {$attributes}>{$content}</div>";
 		}
 
 		public static function img ($src, $alt = "", $attr = null)
@@ -172,7 +172,7 @@
 
 			$attributes = arrays::attributes($attr);
 			if ($id != "") $attributes .= " id='{$id}'";
-			return "<{$element} {$attributes}'>{$content}</{$element}>";
+			return "<{$element} {$attributes}>{$content}</{$element}>";
 		}
 
 		public static function mailto($address, $caption = "")
