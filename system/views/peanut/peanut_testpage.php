@@ -1,3 +1,9 @@
+<?php
+	session::add(array("chiave1" => mt_rand(1,9999), "chiave2" => mt_rand(1,9999)));
+	dump($_SESSION);
+	session::remove(array("chiave1", "chiave2"));
+	dump($_SESSION);
+?>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
 		$("#hashajax").keypress(function() {
