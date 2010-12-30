@@ -1,3 +1,3 @@
 <?php
-	echo "<a href='".html::url("peanut", "testpage")."'>pagina test</a><br>";
+	echo "<a href='".html::url("", "testpage")."'>pagina test</a><br>";
 ?>

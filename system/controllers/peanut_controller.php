@@ -12,9 +12,15 @@
 
 		public $useModel = false; // disabilito l'uso del modello
 
-		function index() {
+		function __construct($id = 0)
+		{
+			parent::__construct($id);
 			$this->layout->set("appname", "Peanut!");
 			$this->template->set("appname", "Peanut!");
+		}
+
+		function index() {
+
 		}
 
 		function testpage() {

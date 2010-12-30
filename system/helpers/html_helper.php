@@ -9,35 +9,34 @@
 	 * @package   peanut
 	 **/
 
+	/**
+	 * classe html
+	 *
+	 * funzioni di generazione codice html
+	 *
+	 * @author    Phelipe de Sterlich
+	 * @copyright Moorea Software | Elco Sistemi srl
+	 * @package   peanut
+	 */
 	class html
 	{
-		/**
-		 * classe html
-		 *
-		 * funzioni di generazione codice html
-		 *
-		 * @author    Phelipe de Sterlich
-		 * @copyright Moorea Software | Elco Sistemi srl
-		 * @package   peanut
-		 */
 
+		/**
+		 * funzione url
+		 *
+		 * genera un url dai parametri passati
+		 *
+		 * @param  string $controller nome del controller per cui generare il link
+		 * @param  string $action     nome dell'azione per cui generare il link
+		 * @param  mixed  $params     parametri aggiuntivi
+		 * @return string             url generato
+		 */
 		public static function url($controller = "", $action = "", $params = null)
 		{
-			/**
-			 * funzione url
-			 *
-			 * genera un url dai parametri passati
-			 *
-			 * @param  string $controller nome del controller per cui generare il link
-			 * @param  string $action     nome dell'azione per cui generare il link
-			 * @param  mixed  $params     parametri aggiuntivi
-			 * @return string             url generato
-			 */
-
-			// genero l'url di base con il controller
-			$result = "index.php";
+			// inizializzo il risultato
+			$result = "";
 			// se definito, aggiungo il controller
-			if ($controller != "") $result .= "?controller={$controller}";
+			if ($controller != "") $result .= "&controller={$controller}";
 			// se definito, aggiungo l'action
 			if ($action != "") $result .= "&action={$action}";
 			// se è presente un ulteriore parametro
@@ -55,6 +54,10 @@
 					$result .= "&id={$params}";
 				}
 			}
+			// se il risultato è diverso da vuoto, rimuovo il primo carattere (&) e lo sostituisco con ?
+			if ($result != "") $result = "?" . substr($result, 1);
+			// aggiungo la pagina base
+			$result = "index.php" . $result;
 			// ritorno l'url generato
 			return $result;
 		}
