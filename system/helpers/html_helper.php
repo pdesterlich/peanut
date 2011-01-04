@@ -159,23 +159,38 @@
 			return "<img src='{$src}' {$alt} $attributes>";
 		}
 
-		public static function element($element, $content, $id = "", $attr = null)
+		/**
+		 * genera uno o piu' tag html con apertura, contenuto e chiusura
+		 *
+		 * @param  string $tag     elemento html da generare
+		 * @param  mixed  $content se stringa: contenuto del tag; se array: contenuti multipli (un tag per elemento)
+		 * @param  string $id      identificativo (id="")
+		 * @param  array  $attr    attributi opzionali
+		 * @return string          codice html generato
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function element($tag, $content, $id = "", $attr = null)
 		{
-			/**
-			 * funzione element
-			 *
-			 * genera un tag html (specificato in $element) con apertura, contenuto e chiusura
-			 *
-			 * @param  string $element elemento html da generare
-			 * @param  string $content contenuto
-			 * @param  string $id      identificativo (id="")
-			 * @param  array  $attr    attributi opzionali
-			 * @return string          codice html generato
-			 */
-
+			// converte l'array degli attributi in una stringa
 			$attributes = arrays::attributes($attr);
-			if ($id != "") $attributes .= " id='{$id}'";
-			return "<{$element} {$attributes}>{$content}</{$element}>";
+			// inizializza il codice html da ritornare
+			$result = "";
+			// se il contenuto è un array (generazione di piu' tag)
+			if (is_array($content)) {
+				// per ogni coppia tag > contenuto dell'array
+				foreach ($content as $value) {
+					// aggiunge al risultato il tag ed il relativo contentu
+					$result .= "<{$tag} {$attributes}>{$value}</{$tag}>\n";
+				}
+			// altrimenti viene considerato come stringa (generazione tag singolo)
+			} else {
+				// se è specificato l'id lo aggiunge agli attributi
+				if ($id != "") $attributes .= " id='{$id}'";
+				// aggiunge al risultato il tag ed il relativo contentu
+				$result .= "<{$tag} {$attributes}>{$content}</{$tag}>\n";
+			}
+			// ritorna il risultato
+			return $result;
 		}
 
 		public static function mailto($address, $caption = "")
