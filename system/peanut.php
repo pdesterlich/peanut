@@ -66,6 +66,8 @@
 	$timerStop = microtime(true);
 	if ($config["debug"]) debugItem("inizializzazione controller", $timerStop - $timerStart);
 
+	// se l'azione non esiste nel controller, esce dall'applicazione mostrando il messaggio d'errore
+	if (!method_exists($controller, $actionName)) die (__("system.method_not_found", array(":controller" => $controllerName, ":action" => $actionName)));
 	$timerStart = microtime(true);
 	$controller->$actionName();
 	$timerStop = microtime(true);
