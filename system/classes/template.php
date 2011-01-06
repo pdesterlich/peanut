@@ -35,7 +35,7 @@
 				require ($fullPath);
 				return ob_get_clean();
 			} else {
-				die (__("system.template_file_not_found", array(":filename" => $className)));
+				die (__("system.template_file_not_found", array(":filename" => $fileName)));
 			}
 		}
 
