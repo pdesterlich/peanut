@@ -11,6 +11,7 @@
 
 	return array(
 		"system.file_not_found" => ":filename non trovato",
+		"system.template_file_not_found" => "template :filename non trovato",
 		"system.method_not_found" => "l'azione :action non esiste nel controller :controller",
 		"system.query_fail" => "query fallita:<br>:sql<br>errore:<br>:errore",
 		"system.mysql_server_connect_fail" => "connessione al server mysql :server non possibile: :errore",

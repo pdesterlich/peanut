@@ -35,7 +35,7 @@
 				require ($fullPath);
 				return ob_get_clean();
 			} else {
-				echo "file {$fileName} non trovato";
+				die (__("system.template_file_not_found", array(":filename" => $className)));
 			}
 		}
 
