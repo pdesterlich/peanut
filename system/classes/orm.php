@@ -365,8 +365,16 @@
 			unset($fields[$this->idFieldName]);
 
 			if ($this->id === 0) {
+				// se esiste, imposta il valore del campo "created" alla data / ora corrente
+				if (array_key_exists('created', $fields)) $fields['created'] = date("Y-m-d H:i");
+				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
+				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i");
+
 				$this->id = database::insert($this->tableName, $fields, true);
 			} else {
+				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
+				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i");
+
 				database::update($this->tableName, $fields, array($this->idFieldName => $this->id));
 			}
 		}
