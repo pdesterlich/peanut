@@ -439,13 +439,26 @@
 		 * funzione getComboValues
 		 * ritorna un array id => descrizione dei record da utilizzare in una combo
 		 *
+		 * @param  string $valueField nome del campo contenente l'identificativo del record
+		 * @param  string $descField  nome del campo contenente la descrizione del record
+		 * @param  mixed  $where      (opzionale) eventuali condizioni where per l'estrapolazione dei records
+		 * @param  mixed  $order      (opzionale) eventuali condizioni order by per l'estrapolazione dei records
+		 * @param  array  $prepend    (opzionale) eventuali elementi da aggiungere in testa all'array
 		 * @return array
 		 * @author Phelipe de Sterlich
 		 **/
-		function getComboValues($valueField, $descField, $where = null, $order = null)
+		function getComboValues($valueField, $descField, $where = null, $order = null, $prepend = null)
 		{
 			// inizializza l'array dei risultati
 			$result = array();
+			// se è definito un array di elementi da aggiungere in testa al risultato
+			if (($prepend != null) AND (is_array($prepend))) {
+				// per ogni elemento dell'array
+				foreach ($prepend as $key => $value) {
+					// aggiunge l'elemento al risultato
+					$result[$key] = $value;
+				}
+			}
 			// ottiene i record che corrispondono ai criteri di ricerca
 			$records = $this->find(array($valueField, $descField), $where, $order);
 			// cicla sui record ottenuti
