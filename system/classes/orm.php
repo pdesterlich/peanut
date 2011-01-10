@@ -9,9 +9,26 @@
 
 	class Orm extends base
 	{
-		protected $id = 0; // identificativo record
-		protected $tableName = ""; // nome tabella
-		protected $idFieldName = "id"; // nome del campo chiave
+		/**
+		 * identificativo record
+		 *
+		 * @var integer
+		 **/
+		protected $id = 0;
+
+		/**
+		 * nome tabella
+		 *
+		 * @var string
+		 **/
+		protected $tableName = "";
+
+		/**
+		 * nome campo chiave
+		 *
+		 * @var string
+		 **/
+		protected $idFieldName = "id";
 
 		/**
 		 * array contenente campi e valori del record attuale
@@ -33,33 +50,65 @@
 		 **/
 		protected $fieldTypes = array(); // array contenente informazioni sui tipi record
 
-		function __construct($id = 0) {
-			/** orm **
-			 * funzione __construct
-			 * inizializzazione oggetto
-			 * -- input --
-			 * $id (integer) eventuale identificativo del record
-			 **/
+		/**
+		 * elenco oggetti collegati in relazione uno (molti) a uno
+		 * per ogni tabella collegata, l'array deve contenere un elemento cosi' impostato:
+		 * nome => array("modelName" => modelName, "sourceField" => nomeCampoTabellaOrigine)
+		 *
+		 * @var array
+		 *
+		 * esempio: $hasOne = array("project" => array("modelName" => "ProjectsModel", "sourceField" => "project_id"));
+		 **/
+		protected $hasOne = array();
 
-			// richiamo la procedura __construct della classe padre
-			parent::__construct();
-
-			// se il nome della tabella non è specificato, lo imposto al nome del modello (meno la parola "Model")
-			if ($this->tableName == "") $this->tableName = strtolower(str_replace("Model", "", get_class($this)));
-
-			// carico il record di cui è passato l'identificativo
-			$this->load($id);
+		/**
+		 * funzione _initializeHasOne
+		 * inizializzazione modelli collegato in relazione uno (molti) a uno
+		 *
+		 * @return void
+		 * @access private
+		 * @author Phelipe de Sterlich
+		 **/
+		function _initializeHasOne()
+		{
+			// per ogni record in $hasOne
+			foreach ($this->hasOne as $object => &$data) {
+				// legge il nome del modello
+				$modelName = $data["modelName"];
+				// crea un nuovo oggetto, assegnandogli il modello generato dinamicamente
+				$data["model"] = new $modelName($this->$data["sourceField"]);
+			}
 		}
 
+		/**
+		 * funzione __construct
+		 * inizializzazione class
+		 *
+		 * @param  int $id identificativo record
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		function __construct($id = 0)
+		{
+			// richiama la procedura di inizializzazione della classe padre
+			parent::__construct();
+			// se il nome della tabella non è specificato, lo imposta al nome del modello (meno la parola "Model")
+			if ($this->tableName == "") $this->tableName = strtolower(str_replace("Model", "", get_class($this)));
+			// carica il record di cui è passato l'identificativo
+			$this->load($id);
+			// richiama la funzione di inizializzazione oggetti collegati
+			$this->_initializeHasOne();
+		}
+
+		/**
+		 * funzione __get
+		 * magic get per ottenere le proprietà dell'oggetto
+		 *
+		 * @param  string $var nome della proprietà da ottenere
+		 * @return mixed
+		 * @author Phelipe de Sterlich
+		 **/
 		function __get($var) {
-			/** orm **
-			 * funzione __get
-			 * magic get per ottenere le proprietà dell'oggetto
-			 * -- input --
-			 * $var (string) nome della proprietà da ritornare
-			 * -- output --
-			 * (variant) valore della proprietà
-			 **/
 
 			// se esiste una proprietà col nome indicato
 			if (isset($this->$var)) {
@@ -69,6 +118,10 @@
 			} else if (array_key_exists($var, $this->fields)) {
 				// ritorno il valore del campo (eventualmente convertito per la visualizzazione)
 				return $this->getField($var);
+			// se esiste un oggetto hasOne col nome indicato
+			} else if (array_key_exists($var, $this->hasOne)) {
+				// ritorno il modello collegato all'oggetto $hasOne
+				return $this->hasOne[$var]["model"];
 			}
 		}
 
@@ -402,17 +455,16 @@
 			database::delete($this->tableName, $where); // elimina il record (o i record, se e' specificato il parametro $where) dalla tabella
 		}
 
+		/**
+		 * funzione count
+		 * ritorna il numero di records presenti nella tabella
+		 *
+		 * @param  mixed $where (string) condizioni di ricerca (WHERE)
+		 *                      (array) elenco dei campi / valori da utilizzare come condizioni di ricerca (WHERE)
+		 * @return int          numero di records presenti
+		 * @author Phelipe de Sterlich
+		 **/
 		function count($where = null) {
-			/** orm **
-			 * funzione count
-			 * conta i record nella tabella
-			 * -- input --
-			 * $where (string) condizioni di ricerca (WHERE)
-			 *        (array) elenco dei campi / valori da utilizzare come condizioni di ricerca (WHERE)
-			 * -- output --
-			 * (integer) numero di record presenti
-			 **/
-
 			// imposto la query di selezione
 			$sql = "SELECT COUNT(*) totale FROM {$this->tableName}";
 			// se sono impostate le condizioni di ricerca
