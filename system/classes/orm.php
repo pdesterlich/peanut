@@ -93,7 +93,7 @@
 			// richiama la procedura di inizializzazione della classe padre
 			parent::__construct();
 			// se il nome della tabella non è specificato, lo imposta al nome del modello (meno la parola "Model")
-			if ($this->tableName == "") $this->tableName = strtolower(str_replace("Model", "", get_class($this)));
+			if ($this->tableName == "") $this->tableName = from_camel_case(str_replace("Model", "", get_class($this)));
 			// carica il record di cui è passato l'identificativo
 			$this->load($id);
 			// richiama la funzione di inizializzazione oggetti collegati
