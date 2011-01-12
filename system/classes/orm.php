@@ -179,7 +179,7 @@
 				global $cipher;
 
 				// leggo il valore del campo
-				$value = $this->fields[$field];
+				$value = stripslashes($this->fields[$field]);
 
 				// se il campo è presente nell'array dei tipi campo
 				if (array_key_exists($field, $this->fieldTypes)) {
