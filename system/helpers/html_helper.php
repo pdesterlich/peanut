@@ -95,7 +95,7 @@
 			// se la location NON è una stringa vuota, gli aggiunge in testa il carattere ?
 			if ($location != "") $location = "?".$location;
 			// genera l'header verso la location e lo invia al browser
-			header("Location: index.php".$location));
+			header("Location: index.php".$location);
 			// se previsto, esce dall'applicazione
 			if ($exit) exit;
 		}
