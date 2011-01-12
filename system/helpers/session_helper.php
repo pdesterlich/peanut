@@ -27,6 +27,28 @@
 		}
 
 		/**
+		 * funzione get
+		 * legge un valore dalla sessione
+		 *
+		 * @param  string $var     nome del valore da ritornare
+		 * @param  mixed  $default (opzionale) valore di default, in caso il parametro non sia presente (default: "")
+		 * @return mixed
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function get($var, $default = "")
+		{
+			// se il parametro esiste nella sessione
+			if (isset($_SESSION[$var])) {
+				// ritorna il valore del parametro
+				return $_SESSION[$var];
+			// altrimenti
+			} else {
+				// ritorna il valore di default
+				return $default;
+			}
+		}
+
+		/**
 		 * funzione remove
 		 * rimuove dalla sessione uno o piu' valori
 		 *

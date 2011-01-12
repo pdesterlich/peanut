@@ -81,6 +81,25 @@
 			if ($exit) exit;
 		}
 
+		/**
+		 * funzione locationDirect
+		 * genera un header "location" verso la location passata (interna all'applicazione)
+		 *
+		 * @param  string $location location verso cui fare il redirect
+		 * @param  bool   $exit     flag per eseguire l'uscita dall'esecuzione del codice php
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function locationDirect($location, $exit = true)
+		{
+			// se la location NON è una stringa vuota, gli aggiunge in testa il carattere ?
+			if ($location != "") $location = "?".$location;
+			// genera l'header verso la location e lo invia al browser
+			header("Location: index.php".$location));
+			// se previsto, esce dall'applicazione
+			if ($exit) exit;
+		}
+
 		public static function link($caption, $controller = "", $action = "", $params = null, $attr = null)
 		{
 			/**
