@@ -10,6 +10,14 @@
 	class Orm extends base
 	{
 		/**
+		 * array per cache query eseguite
+		 *
+		 * @var array
+		 * @access protected
+		 **/
+		protected static $queryCache = array();
+
+		/**
 		 * identificativo record
 		 *
 		 * @var integer
@@ -296,15 +304,39 @@
 
 			// se l'identificativo record è specificato
 			if ($this->id) {
+				// imposta la query di lettura record
+				$query = "SELECT * FROM {$this->tableName} WHERE {$this->idFieldName} = '{$this->id}'";
 				// carico l'array associativo dei campi del record nella proprietà fields
-				$this->fields = database::query("SELECT * FROM {$this->tableName} WHERE {$this->idFieldName} = '{$this->id}'", "array");
+				// $this->fields = database::query($query, "array");
+				// se la query è già presente nella cache
+				if (isset(self::$queryCache[$query])) {
+					// carica il risultato dalla cache
+					$this->fields = self::$queryCache[$query];
+				// altrimenti (query non in cache)
+				} else {
+					// esegue la query e ottiene la descrizione delle colonne dalla tabella
+					$this->fields = database::query($query, "array");
+					// salva il risultato della query in cache
+					self::$queryCache[$query] = $this->fields;
+				}
 			}
 			// se l'identificativo non è passato, oppure non ci sono campi ottenuti dalla precedente query
 			if ((!$this->id) OR (count($this->fields) == 0) OR ($this->fields == null))
 			{
-				// carico la descrizione delle colonne dalla tabella
-				$fields = database::query("SHOW COLUMNS FROM {$this->tableName}", "records");
-				// per ogni colonna
+				// imposta la query di lettura struttura tabella
+				$query = "SHOW COLUMNS FROM {$this->tableName}";
+				// se la query è già presente nella cache
+				if (isset(self::$queryCache[$query])) {
+					// carica il risultato dalla cache
+					$fields = self::$queryCache[$query];
+				// altrimenti (query non in cache)
+				} else {
+					// esegue la query e ottiene la descrizione delle colonne dalla tabella
+					$fields = database::query($query, "records");
+					// salva il risultato della query in cache
+					self::$queryCache[$query] = $fields;
+				}
+				// per ogni colonna trovata
 				foreach ($fields as $field) {
 					// aggiungo la colonna all'array campi / valori
 					$this->fields[$field["Field"]] = "";
