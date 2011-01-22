@@ -47,6 +47,14 @@
 		protected $fields = array(); // array contenente campi e valori del record
 
 		/**
+		 * array contenente campi e valori del record attuale, non modificati (per connfronto)
+		 *
+		 * @var    array
+		 * @access protected
+		 **/
+
+		protected $originalFields = array();
+		/**
 		 * array contenente informazioni sui tipi record
 		 *
 		 * @var    array
@@ -116,7 +124,8 @@
 		 * @return mixed
 		 * @author Phelipe de Sterlich
 		 **/
-		function __get($var) {
+		function __get($var)
+		{
 
 			// se esiste una proprietà col nome indicato
 			if (isset($this->$var)) {
@@ -133,7 +142,8 @@
 			}
 		}
 
-		function __set($var, $value) {
+		function __set($var, $value)
+		{
 			/** orm **
 			 * funzione __set
 			 * magic set per impostare il valore di una proprietà dell'oggetto
@@ -153,7 +163,8 @@
 			}
 		}
 
-		function getRecord() {
+		function getRecord()
+		{
 			/** orm **
 			 * funzione getRecord
 			 * ritorna il record gestito dall'oggetto
@@ -172,66 +183,76 @@
 			return $result;
 		}
 
-		function getField($field) {
-			/** orm **
-			 * funzione getField
-			 * ritorna il valore di un campo, eventualmente convertendolo per la visualizzazione
-			 * -- input --
-			 * $field (string) nome del campo per cui ottenere il valore
-			 * -- output --
-			 * (string) valore del campo
-			 **/
-
-			// se esiste un il campo passato come parametro
-			if (array_key_exists($field, $this->fields)) {
-				global $cipher;
-
-				// leggo il valore del campo
-				$value = stripslashes($this->fields[$field]);
-
-				// se il campo è presente nell'array dei tipi campo
-				if (array_key_exists($field, $this->fieldTypes)) {
-					// imposto i valori di default
-					$tipo = ""; // tipo campo
-					$bCipher = false; // flag campo cifrato
-					// se il tipo di informazione sul campo é un'array
-					if (is_array($this->fieldTypes[$field])) {
-						// leggo il tipo di campo
-						if (isset($this->fieldTypes[$field]["tipo"])) $tipo = $this->fieldTypes[$field]["tipo"];
-						// leggo il flag campo cifrato
-						if (isset($this->fieldTypes[$field]["cipher"])) $tipo = $this->fieldTypes[$field]["cipher"];
-					// se invece è una stringa
-					} else {
-						// leggo il tipo di campo
-						$tipo = $this->fieldTypes[$field];
-					}
-
-					// in base al tipo di campo
-					switch ($tipo) {
-						// data: converto il valore in formato visualizzabile (tramite apposita funzione)
-						case "date": $value = ($value == "") ? date("Y-m-d") : utils::sql2date($value); break;
-						// data (anche vuota): converto il valore in formato visualizzabile (tramite apposita funzione)
-						case "date_empty": $value = utils::sql2date($value); break;
-						// data / ora: converto il valore in formato visualizzabile (tramite apposita funzione)
-						case "datetime": $value = utils::sql2datetime($value); break;
-						// ora: converto il valore in formato visualizzabile (tramite apposita funzione)
-						case "time": $value = strftime("%H:%M", strtotime($value)); break;
-					}
-
-					// se il campo è cifrato lo decifro
-					if ($bCipher) $value = $cipher->decrypt($value);
+		/**
+		 * funzione getField
+		 * ritorna il valore del campo specificato, formattandolo per la visualizzazione se previsto
+		 *
+		 * @param  string $field    nome del campo per cui ritornare il valore
+		 * @param  bool   $original se true, legge il valore dal record originale (non modificato), altrimenti dal record attivo
+		 * @return mixed            (in base al nome del campo)
+		 * @author Phelipe de Sterlich
+		 */
+		function getField($field, $original = false)
+		{
+			// inizializza il valore letto ad una stringa vuota
+			$value = "";
+			// se deve leggere dal record originale
+			if ($original) {
+				// se il campo non esiste ritorna una stringa vuota, altrimenti legge il valore del campo
+				if (!array_key_exists($field, $this->originalFields)) {
+					return "";
+				} else {
+					$value = stripslashes($this->originalFields[$field]);
+				}
+			// se invece deve leggere dal record attivo
+			} else {
+				// se il campo non esiste ritorna una stringa vuota, altrimenti legge il valore del campo
+				if (!array_key_exists($field, $this->fields)) {
+					return "";
+				} else {
+					$value = stripslashes($this->fields[$field]);
+				}
+			}
+			// rende disponibile la variabile globale $cipher
+			global $cipher;
+			// se il campo è presente nell'array dei tipi campo
+			if (array_key_exists($field, $this->fieldTypes)) {
+				// imposto i valori di default
+				$tipo = ""; // tipo campo
+				$bCipher = false; // flag campo cifrato
+				// se il tipo di informazione sul campo é un'array
+				if (is_array($this->fieldTypes[$field])) {
+					// leggo il tipo di campo
+					if (isset($this->fieldTypes[$field]["tipo"])) $tipo = $this->fieldTypes[$field]["tipo"];
+					// leggo il flag campo cifrato
+					if (isset($this->fieldTypes[$field]["cipher"])) $tipo = $this->fieldTypes[$field]["cipher"];
+				// se invece è una stringa
+				} else {
+					// leggo il tipo di campo
+					$tipo = $this->fieldTypes[$field];
 				}
 
-				// ritorno il valore del campo
-				return $value;
-			// se invece il campo non esiste
-			} else {
-				// ritorno una stringa vuota
-				return "";
+				// in base al tipo di campo
+				switch ($tipo) {
+					// data: converto il valore in formato visualizzabile (tramite apposita funzione)
+					case "date": $value = ($value == "") ? date("Y-m-d") : utils::sql2date($value); break;
+					// data (anche vuota): converto il valore in formato visualizzabile (tramite apposita funzione)
+					case "date_empty": $value = utils::sql2date($value); break;
+					// data / ora: converto il valore in formato visualizzabile (tramite apposita funzione)
+					case "datetime": $value = utils::sql2datetime($value); break;
+					// ora: converto il valore in formato visualizzabile (tramite apposita funzione)
+					case "time": $value = strftime("%H:%M", strtotime($value)); break;
+				}
+
+				// se il campo è cifrato lo decifro
+				if ($bCipher) $value = $cipher->decrypt($value);
 			}
+			// ritorno il valore del campo
+			return $value;
 		}
 
-		function setField($field, $value) {
+		function setField($field, $value)
+		{
 			/** orm **
 			 * funzione setField
 			 * imposta il valore di un campo, eventualmente convertendolo per il salvataggio
@@ -288,7 +309,8 @@
 			}
 		}
 
-		function load($id = false) {
+		function load($id = false)
+		{
 			/** orm **
 			 * funzione load
 			 * carica il record dal database, se non presente carica la struttura della tabella
@@ -316,6 +338,8 @@
 				} else {
 					// esegue la query e ottiene la descrizione delle colonne dalla tabella
 					$this->fields = database::query($query, "array");
+					// copia i dati del record nell'array originalFields
+					$this->originalFields = $this->fields;
 					// salva il risultato della query in cache
 					self::$queryCache[$query] = $this->fields;
 				}
@@ -340,11 +364,14 @@
 				foreach ($fields as $field) {
 					// aggiungo la colonna all'array campi / valori
 					$this->fields[$field["Field"]] = "";
+					// aggiungo la colonna all'array campi / valori originali
+					$this->originalFields[$field["Field"]] = "";
 				}
 			}
 		}
 
-		function find($fields = null, $where = null, $order = null, $limit = "") {
+		function find($fields = null, $where = null, $order = null, $limit = "")
+		{
 			/**
 			 * funzione find
 			 *
@@ -405,7 +432,8 @@
 			return database::query($sql, "records");
 		}
 
-		function findAll($fields = null, $order = null) {
+		function findAll($fields = null, $order = null)
+		{
 			/** orm **
 			 * funzione findAll
 			 * ritorna tutti i record (shortcut per Orm->find)
@@ -420,7 +448,8 @@
 			return $this->find($fields, null, $order);
 		}
 
-		function fromPost($header = "") {
+		function fromPost($header = "")
+		{
 			/** orm **
 			 * funzione fromPost
 			 * valorizza i campi del record in base ai dati passati via POST (in genere da una form)
@@ -440,7 +469,8 @@
 			}
 		}
 
-		function save() {
+		function save()
+		{
 			/** orm **
 			 * funzione save
 			 * salva il record nella tabella
@@ -464,7 +494,8 @@
 			}
 		}
 
-		function insert() {
+		function insert()
+		{
 			/** orm **
 			 * funzione insert
 			 * inserisce un nuovo record nella tabella, indipendentemente dal fatto che il record attuale esista (id != 0) o meno
@@ -476,7 +507,8 @@
 			$this->save();
 		}
 
-		function delete($where = null) {
+		function delete($where = null)
+		{
 			/** orm **
 			 * funzione delete
 			 * elimina il record dalla tabella
@@ -496,7 +528,8 @@
 		 * @return int          numero di records presenti
 		 * @author Phelipe de Sterlich
 		 **/
-		function count($where = null) {
+		function count($where = null)
+		{
 			// imposto la query di selezione
 			$sql = "SELECT COUNT(*) totale FROM {$this->tableName}";
 			// se sono impostate le condizioni di ricerca
@@ -551,6 +584,29 @@
 				$result[$record[$valueField]] = $record[$descField];
 			}
 			// ritorna l'array dei risultati
+			return $result;
+		}
+
+		/**
+		 * funzione getModifiedFields
+		 * ritorna un array contenente i campi del record che sono stati modificati rispetto al loro valore originale
+		 *
+		 * @return array "nome_campo" => array("old" => "valore_originale", "new" => "valore_modificato")
+		 * @author Phelipe de Sterlich
+		 **/
+		function getModifiedFields()
+		{
+			// inizializza l'array risultato
+			$result = array();
+			// per ogni campo presente
+			foreach ($this->fields as $fieldName => $fieldValue) {
+				// se il valore originale del campo è diverso dal calore corrente
+				if ($this->originalFields[$fieldName] != $fieldValue) {
+					// aggiunge il campo e i due valori all'array
+					$result[$fieldName] = array("old" => $this->getField($fieldName, true), "new" => $this->getField($fieldName));
+				}
+			}
+			// ritorna l'array dei campi modificati
 			return $result;
 		}
 	}
