@@ -591,7 +591,8 @@
 		 * funzione getModifiedFields
 		 * ritorna un array contenente i campi del record che sono stati modificati rispetto al loro valore originale
 		 *
-		 * @return array "nome_campo" => array("old" => "valore_originale", "new" => "valore_modificato")
+		 * @return mixed array "nome_campo" => array("old" => "valore_originale", "new" => "valore_modificato")
+		 *               false se non ci sono campi modificati
 		 * @author Phelipe de Sterlich
 		 **/
 		function getModifiedFields()
@@ -606,8 +607,32 @@
 					$result[$fieldName] = array("old" => $this->getField($fieldName, true), "new" => $this->getField($fieldName));
 				}
 			}
-			// ritorna l'array dei campi modificati
-			return $result;
+			// ritorna l'array dei campi modificati (o false se non ci sono campi modificati)
+			if (count($result) == 0) {
+				return false;
+			} else {
+				return $result;
+			}
+		}
+
+		/**
+		 * funzione locateFieldValue
+		 * ottiene il valore del campo richiesto per il record il cui identificativo corrisponde a quello passato
+		 *
+		 * @param  string $fieldName    nome del campo da leggere
+		 * @param  mixed  $idFieldValue valore del campo chiave
+		 * @param  string $idFieldName  nome del campo chiave (opzionale, se non specificato viene letto il campo chiave default)
+		 * @return mixed
+		 * @author Phelipe de Sterlich
+		 **/
+		function locateFieldValue($fieldName, $idFieldValue, $idFieldName = "")
+		{
+			// se non specificato da parametro, legge il nome del campo chiave
+			if ($idFieldName == "") $idFieldName = $this->idFieldName;
+			// ottiene il record corrispondente al campo chiave
+			$record = database::query("SELECT {$fieldName} FROM {$this->tableName} WHERE {$idFieldName} = '$idFieldValue'", "array");
+			// ritorna il valore del campo richiesto
+			return stripslashes($record[$fieldName]);
 		}
 	}
 
