@@ -78,6 +78,23 @@
 		protected $hasOne = array();
 
 		/**
+		 * funzione factory
+		 * crea e ritorna un nuovo modello
+		 *
+		 * @concatenabile
+		 * @param  string nome modello
+		 * @param  mixed  identificativo record
+		 * @return object (Orm)
+		 */
+		public static function factory($model, $id = 0)
+		{
+			// imposta il nome della classe del modello
+			$model = to_camel_case($model)."Model";
+			// crea il modello e lo ritorna
+			return new $model($id);
+		}
+
+		/**
 		 * funzione _initializeHasOne
 		 * inizializzazione modelli collegato in relazione uno (molti) a uno
 		 *
@@ -142,16 +159,18 @@
 			}
 		}
 
-		function __set($var, $value)
+		/**
+		 * funzione __set (magic set)
+		 * imposta il valore di una proprietà dell'oggetto
+		 *
+		 * @param  mixed $var   (string) nome della proprietà da impostare
+		 *                       (array) array associativo nome => valore
+		 * @param  mixed $value valore da impostare (se $var è una stringa)
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 */
+		function __set($var, $value = "")
 		{
-			/** orm **
-			 * funzione __set
-			 * magic set per impostare il valore di una proprietà dell'oggetto
-			 * -- input --
-			 * $var (string) nome della proprietà da modificare
-			 * $value (variant) valore da impostare
-			 **/
-
 			// se esiste una proprietà col nome indicato
 			if (isset($this->$var)) {
 				// ne imposto il valore
@@ -161,6 +180,32 @@
 				// ne imposto il valore
 				$this->setField($var, $value);
 			}
+		}
+
+		/**
+		 * funzione set
+		 * imposta il valore di una o piu' proprietà dell'oggetto
+		 *
+		 * @concatenabile
+		 * @param  array $vars array associativo nome => valore
+		 * @return object (Orm)
+		 * @author Phelipe de Sterlich
+		 */
+		function set($vars)
+		{
+			foreach ($vars as $varName => $varValue) {
+				// se esiste una proprietà col nome indicato
+				if (isset($this->$varName)) {
+					// ne imposto il valore
+					$this->$varName = $varValue;
+				// se esiste un campo col nome indicato
+				} else if (array_key_exists($varName, $this->fields)) {
+					// ne imposto il valore
+					$this->setField($varName, $varValue);
+				}
+			}
+			// ritorna l'oggetto Orm (per concatenazione)
+			return $this;
 		}
 
 		function getRecord()
