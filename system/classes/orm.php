@@ -187,12 +187,24 @@
 		 * imposta il valore di una o piu' proprietà dell'oggetto
 		 *
 		 * @concatenabile
-		 * @param  array $vars array associativo nome => valore
+		 * @param  mixed $var   (array) array associativo nome => valore
+		 *                      (string) nome della proprietà da impostare
+		 * @param  mixed $value (opzionale) se $var è una stringa, $value rappresenta il valore da impostare sulla proprietà
 		 * @return object (Orm)
 		 * @author Phelipe de Sterlich
 		 */
-		function set($vars)
+		function set($var, $value = "")
 		{
+			// inizializza l'array $vars
+			$vars = array();
+			// se $var è un array lo copia su $vars, altrimenti aggiunge a $vars il nome ed il valore della proprietà da impostare
+			if (is_array($var)) {
+				$vars = $var;
+			} else {
+				$vars[$var] = $value;
+			}
+
+			// per ogni coppia proprietà => valore presente nell'array
 			foreach ($vars as $varName => $varValue) {
 				// se esiste una proprietà col nome indicato
 				if (isset($this->$varName)) {
@@ -493,25 +505,28 @@
 			return $this->find($fields, null, $order);
 		}
 
+		/**
+		 * funzione fromPost
+		 * valorizza i campi del record in base ai dati passati via POST
+		 *
+		 * @concatenabile
+		 * @param  string $header (opzionale) eventuale prefisso al nome dei campi utilizzato nel POST
+		 * @return object (Orm)
+		 * @author Phelipe de Sterlich
+		 */
 		function fromPost($header = "")
 		{
-			/** orm **
-			 * funzione fromPost
-			 * valorizza i campi del record in base ai dati passati via POST (in genere da una form)
-			 * -- input --
-			 * $header (string) eventuale prefisso al nome dei campi utilizzato nel POST
-			 **/
-
 			// ciclo su tutti i campi del record
 			foreach ($this->fields as $key => $value) {
-				// se il campo non è l'identificativo record
-				if ($key != $this->idFieldName) {
-					// se nel post esiste un input con lo stesso nome del campo
-					if (isset($_POST[$header.$key])) {
-						$this->setField($key, $_POST[$header.$key]);
-					}
+				// se il campo non è l'identificativo record e nel post esiste un input con lo stesso nome del campo (con l'eventuale prefisso)
+				if (($key != $this->idFieldName) AND (isset($_POST[$header.$key]))) {
+					// imposta il valore del campo al valore dell'elemento nel post
+					$this->setField($key, $_POST[$header.$key]);
 				}
 			}
+
+			// ritorna l'oggetto Orm (per concatenazione)
+			return $this;
 		}
 
 		function save()
