@@ -29,10 +29,13 @@
 		 * @param  string $controller nome del controller per cui generare il link
 		 * @param  string $action     nome dell'azione per cui generare il link
 		 * @param  mixed  $params     parametri aggiuntivi
+		 * @param  bool   $addBase    se true, aggiunge l'url base al risultato
 		 * @return string             url generato
 		 */
-		public static function url($controller = "", $action = "", $params = null)
+		public static function url($controller = "", $action = "", $params = null, $addBase = false)
 		{
+			// aggiunge la variabile globale $config
+			global $config;
 			// inizializzo il risultato
 			$result = "";
 			// se definito, aggiungo il controller
@@ -58,6 +61,8 @@
 			if ($result != "") $result = "?" . substr($result, 1);
 			// aggiungo la pagina base
 			$result = "index.php" . $result;
+			// se previsto, aggiunge il path base all'url generato
+			if ($addBase) $result = $config["url"]["base"].$result;
 			// ritorno l'url generato
 			return $result;
 		}

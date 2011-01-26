@@ -6,6 +6,9 @@
 
 	$config["debug"] = false;
 
+	// indirizzo base dell'applicazione (esempio: http://tikehau.mooreasoft.ch/)
+	$config["url"]["base"] = "";
+
 	$config["routes"]["controller"] = "peanut";
 	$config["routes"]["action"] = "index";
 
