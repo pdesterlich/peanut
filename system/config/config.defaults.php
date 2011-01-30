@@ -1,13 +1,42 @@
 <?php
-	/** peanut **
-	 * the small php framework
-	 * (c) Phelipe de Sterlich | Moorea Software | Elco Sistemi srl
-	 **/
+	/**
+	 * configurazione peanut framework
+	 * valori di default
+	 *
+	 * @package peanut
+	 * @author Phelipe de Sterlich
+	 */
 
+	/**
+	 * flag attivazione informazioni di debug
+	 *
+	 * @var bool
+	 **/
 	$config["debug"] = false;
 
-	// indirizzo base dell'applicazione (esempio: http://tikehau.mooreasoft.ch/)
+	/**
+	 * indirizzo base dell'applicazione (senza il protocollo)
+	 * (esempio: tikehau.mooreasoft.ch)
+	 *
+	 * @var string
+	 **/
 	$config["url"]["base"] = "";
+
+	/**
+	 * protocollo di comunicazione
+	 * (esempio: http)
+	 *
+	 * @var string
+	 **/
+	$config["url"]["protocol"] = "http";
+
+	/**
+	 * flag attivazione url brevi
+	 * (es. http://tikehau.mooreasoft.ch/projects/view/1 al posto di http://tikehau.mooreasoft.ch/index.php?controller=projects&action=view&id=1)
+	 *
+	 * @var bool
+	 **/
+	$config["url"]["short"] = false;
 
 	$config["routes"]["controller"] = "peanut";
 	$config["routes"]["action"] = "index";

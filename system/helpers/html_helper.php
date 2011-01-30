@@ -22,48 +22,61 @@
 	{
 
 		/**
-		 * funzione url
-		 *
 		 * genera un url dai parametri passati
 		 *
 		 * @param  string $controller nome del controller per cui generare il link
 		 * @param  string $action     nome dell'azione per cui generare il link
-		 * @param  mixed  $params     parametri aggiuntivi
-		 * @param  bool   $addBase    se true, aggiunge l'url base al risultato
+		 * @param  mixed  $params     (array) parametri aggiuntivi: array associativo nome => valore
+		 *                            (string) parametri aggiuntivi: 
 		 * @return string             url generato
 		 */
-		public static function url($controller = "", $action = "", $params = null, $addBase = false)
+		public static function url($controller = "", $action = "", $params = null)
 		{
-			// aggiunge la variabile globale $config
 			global $config;
-			// inizializzo il risultato
+
 			$result = "";
-			// se definito, aggiungo il controller
-			if ($controller != "") $result .= "&controller={$controller}";
-			// se definito, aggiungo l'action
-			if ($action != "") $result .= "&action={$action}";
-			// se è presente un ulteriore parametro
-			if ($params != null) {
-				// se il parametro è un array
-				if (is_array($params)) {
-					// per ogni elemento dell'array
-					foreach ($params as $key => $value) {
-						// lo aggiungo come parametro GET
-						$result .= "&{$key}={$value}";
-					}
-				// se il parametro non è un array
-				} else {
-					// lo considero come identificativo record e lo aggiungo come parametro GET
-					$result .= "&id={$params}";
+
+			// legge l'url base e aggiunge, se necessario, lo slash finale
+			$basePath = $config["url"]["base"];
+			if (substr($basePath, -1) != "/") $basePath .= "/";
+
+			// legge l'impostazione del parametro short url
+			$shortUrl = $config["url"]["short"];
+
+			// aggiunge il controller
+			if ($controller != "") $result .= ($shortUrl) ? "/{$controller}" : "&controller={$controller}";
+
+			// aggiunge l'action
+			if ($action != "") $result .= ($shortUrl) ? "/{$action}" : "&action={$action}";
+
+			if ($params != null)
+			{
+				if (is_numeric($params))
+				{
+					// lo considera come identificativo record e lo aggiunge all'url
+					$result .= ($shortUrl) ? "/{$params}" : "&id={$params}";
+				}
+				else if (is_array($params))
+				{
+					// aggiunge ogni parametro presente nell'array
+					foreach ($params as $key => $value) $result .= "&{$key}={$value}";
+				}
+				else
+				{
+					// lo aggiunge cosi' com'è all'url
+					$result .= "&".$params;
 				}
 			}
+
 			// se il risultato è diverso da vuoto, rimuovo il primo carattere (&) e lo sostituisco con ?
-			if ($result != "") $result = "?" . substr($result, 1);
-			// aggiungo la pagina base
-			$result = "index.php" . $result;
-			// se previsto, aggiunge il path base all'url generato
-			if ($addBase) $result = $config["url"]["base"].$result;
-			// ritorno l'url generato
+			// sostituisce la prima occorrenza di & con ?
+			$result = preg_replace('/&/', '?', $result, 1);
+
+			// aggiunge protocollo, path base e la pagina base
+			$result = $basePath . (($shortUrl) ? "" : "index.php") . $result;
+			$result = $config["url"]["protocol"] . "://" . str_replace("//", "/", $result);
+
+			// ritorna l'url generato, rimuovendo eventuali doppi slash
 			return $result;
 		}
 
@@ -97,10 +110,8 @@
 		 **/
 		public static function locationDirect($location, $exit = true)
 		{
-			// se la location NON è una stringa vuota, gli aggiunge in testa il carattere ?
-			if ($location != "") $location = "?".$location;
 			// genera l'header verso la location e lo invia al browser
-			header("Location: index.php".$location);
+			header("Location: ".$location);
 			// se previsto, esce dall'applicazione
 			if ($exit) exit;
 		}
