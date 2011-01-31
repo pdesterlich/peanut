@@ -133,16 +133,18 @@
 		} else {
 			$idValue = 0;
 		}
-		if (isset($_SERVER["PATH_INFO"]))
+		if (isset($_SERVER["REQUEST_URI"]))
 		{
-			$pathInfo = $_SERVER["PATH_INFO"];
+			$pathInfo = $_SERVER["REQUEST_URI"];
 			if (substr($pathInfo, 0, 1) == "/") $pathInfo = substr($pathInfo, 1);
 			if (substr($pathInfo, -1, 1) == "/") $pathInfo = substr($pathInfo, 0, -1);
-			$pathInfo = explode("/", $pathInfo);
-			$pathInfoCount = count($pathInfo);
-			if ($pathInfoCount > 0) $controllerName = $pathInfo[0];
-			if ($pathInfoCount > 1) $actionName = $pathInfo[1];
-			if ($pathInfoCount > 2) $idValue = $pathInfo[2];
+			if (trim($pathInfo) != "") {
+				$pathInfo = explode("/", $pathInfo);
+				$pathInfoCount = count($pathInfo);
+				if ($pathInfoCount > 0) $controllerName = $pathInfo[0];
+				if ($pathInfoCount > 1) $actionName = $pathInfo[1];
+				if ($pathInfoCount > 2) $idValue = $pathInfo[2];
+			}
 		}
 	}
 
