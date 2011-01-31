@@ -106,6 +106,12 @@
 		return new $className();
 	}
 
+	/**
+	 * legge da GET, POST e REQUEST_URI i nomi del controller, dell'action e dell'id
+	 *
+	 * @return void
+	 * @author Phelipe de Sterlich
+	 */
 	function getBasicVars() {
 		global $config, $controllerName, $actionName, $idValue;
 
@@ -133,14 +139,20 @@
 		} else {
 			$idValue = 0;
 		}
-		if (isset($_SERVER["REQUEST_URI"]))
+		// se è impostato un request e non inizia con /index.php
+		if ((isset($_SERVER["REQUEST_URI"])) AND (strtolower(substr($_SERVER["REQUEST_URI"], 0, 10)) != "/index.php"))
 		{
 			$pathInfo = $_SERVER["REQUEST_URI"];
+			// rimuove, se presente, la parte di paraemtri GET
+			if ((isset($_SERVER["QUERY_STRING"])) AND ($_SERVER["QUERY_STRING"] != "")) $pathInfo = str_replace("?".$_SERVER["QUERY_STRING"], "", $pathInfo);
+			// rimuove gli eventuali slash iniziale e finale
 			if (substr($pathInfo, 0, 1) == "/") $pathInfo = substr($pathInfo, 1);
 			if (substr($pathInfo, -1, 1) == "/") $pathInfo = substr($pathInfo, 0, -1);
+			// se quello che resta è una stringa non vuota
 			if (trim($pathInfo) != "") {
 				$pathInfo = explode("/", $pathInfo);
 				$pathInfoCount = count($pathInfo);
+				// legge, se presenti, controller, action e id
 				if ($pathInfoCount > 0) $controllerName = $pathInfo[0];
 				if ($pathInfoCount > 1) $actionName = $pathInfo[1];
 				if ($pathInfoCount > 2) $idValue = $pathInfo[2];
