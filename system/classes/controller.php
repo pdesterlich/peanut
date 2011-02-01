@@ -67,30 +67,31 @@
 				if ($id) $this->template->set("record", $this->model->getRecord());
 			}
 		}
-	}
 
-	/**
-	 * funzione index
-	 * visualizzazione elenco record - template generico, in caso di specificità viene sovrascritta da una funzione specifica nel controller
-	 *
-	 * @return void
-	 * @author Phelipe de Sterlich
-	 **/
-	function index()
-	{
-		
-	}
+		/**
+		 * funzione index
+		 * visualizzazione elenco record - template generico, in caso di specificità viene sovrascritta da una funzione specifica nel controller
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		function index()
+		{
 
-	/**
-	 * funzione view
-	 * visualizzazione record - template generico, in caso di specificità viene sovrascritta da una funzione specifica nel controller
-	 *
-	 * @return void
-	 * @author Phelipe de Sterlich
-	 **/
-	function view()
-	{
-		
+		}
+
+		/**
+		 * funzione view
+		 * visualizzazione record - template generico, in caso di specificità viene sovrascritta da una funzione specifica nel controller
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		function view()
+		{
+
+		}
+
 	}
 
 	/*
