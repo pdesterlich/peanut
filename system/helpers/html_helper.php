@@ -38,7 +38,7 @@
 
 			// legge l'url base e aggiunge, se necessario, lo slash finale
 			$basePath = $config["url"]["base"];
-			if (substr($basePath, -1) != "/") $basePath .= "/";
+			if (($basePath != "") AND (substr($basePath, -1) != "/")) $basePath .= "/";
 
 			// legge l'impostazione del parametro short url
 			$shortUrl = $config["url"]["short"];
@@ -71,10 +71,9 @@
 			// se il risultato è diverso da vuoto, rimuovo il primo carattere (&) e lo sostituisco con ?
 			// sostituisce la prima occorrenza di & con ?
 			$result = preg_replace('/&/', '?', $result, 1);
-
 			// aggiunge protocollo, path base e la pagina base
 			$result = $basePath . (($shortUrl) ? "" : "index.php") . $result;
-			$result = $config["url"]["protocol"] . "://" . str_replace("//", "/", $result);
+			$result = (($basePath == "") ? "" : $config["url"]["protocol"] . "://") . str_replace("//", "/", $result);
 
 			// ritorna l'url generato, rimuovendo eventuali doppi slash
 			return $result;
