@@ -26,7 +26,8 @@
 	if ($config["debug"]) debugItem("inizializzazione cipher", $timerStop - $timerStart);
 
 	include SYSTEM.DS."config".DS."config.defaults.php"; // includo il file di configurazione di default
-	if (file_exists(APP.DS."config".DS."config.php")) include APP.DS."config".DS."config.php"; // includo, se esiste, il file di configurazione
+	if (file_exists(APP.DS."config".DS."config.application.php")) include APP.DS."config".DS."config.application.php"; // includo, se esiste, il file di configurazione dell'applicazione
+	if (file_exists(APP.DS."config".DS."config.php")) include APP.DS."config".DS."config.php"; // includo, se esiste, il file di configurazione locale
 
 	// se è abilitata la connessione al database
 	if ($config["database"]["enabled"]) {
