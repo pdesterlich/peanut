@@ -27,6 +27,35 @@
 		}
 
 		/**
+		 * funzione exists
+		 * controlla l'esistenza di un valore nella sessione
+		 *
+		 * @return bool true se il valore esiste, false altrimenti
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function exists($var)
+		{
+			return isset($_SESSION[$var]);
+		}
+
+		/**
+		 * funzione set
+		 * imposta un valore nella sessione
+		 *
+		 * @param  string $var             nome del valore da impostare
+		 * @param  mixed  $value           valore da impostare
+		 * @param  bool   $onlyIfNotExists se True, il valore viene impostato solo se non esiste già
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function set($var, $value, $onlyIfNotExists = false)
+		{
+			if ((!$onlyIfNotExists) OR (!isset($_SESSION[$var]))) {
+				$_SESSION[$var] = $value;
+			}
+		}
+
+		/**
 		 * funzione get
 		 * legge un valore dalla sessione
 		 *
