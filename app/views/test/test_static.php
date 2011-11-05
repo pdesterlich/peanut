@@ -1,0 +1,1 @@
+Questa &egrave; una pagina statica

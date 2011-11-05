@@ -71,6 +71,10 @@
 		return preg_replace_callback('/_([a-z])/', $func, $str);
 	}
 
+	function controllerExists($controllerName) {
+		return (file_exists(APP.DS."controllers".DS."{$controllerName}.php")) OR (file_exists(SYSTEM.DS."controllers".DS."{$controllerName}.php"));
+	}
+
 	function __autoload($class_name) {
 		$className = from_camel_case($class_name);
 		// modelli

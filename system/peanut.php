@@ -62,15 +62,27 @@
 	header('Content-type: text/html; charset=utf-8');
 
 	$timerStart = microtime(true);
-	$controllerClass = to_camel_case($controllerName."_controller", true);
-	$controller = new $controllerClass($idValue); // creo un oggetto controller e, se presente, ne carico i parametri
+	if (!controllerExists($controllerName."_controller")) {
+		$controller = new StaticController();
+	} else {
+		$controllerClass = to_camel_case($controllerName."_controller", true);
+		$controller = new $controllerClass($idValue); // creo un oggetto controller e, se presente, ne carico i parametri
+	}
 	$timerStop = microtime(true);
 	if ($config["debug"]) debugItem("inizializzazione controller", $timerStop - $timerStart);
 
 	// se l'azione non esiste nel controller, esce dall'applicazione mostrando il messaggio d'errore
-	if (!method_exists($controller, $actionName)) die (__("system.method_not_found", array(":controller" => $controllerName, ":action" => $actionName)));
 	$timerStart = microtime(true);
-	$controller->$actionName();
+	if (!method_exists($controller, $actionName)) {
+		if ((file_exists(APP.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php")) OR (file_exists(SYSTEM.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php"))) {
+			$controller = new StaticController();
+			$controller->index();
+		} else {
+			die (__("system.method_not_found", array(":controller" => $controllerName, ":action" => $actionName)));
+		}
+	} else {
+		$controller->$actionName();
+	}
 	$timerStop = microtime(true);
 	if ($config["debug"]) debugItem("esecuzione azione", $timerStop - $timerStart);
 
