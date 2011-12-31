@@ -1,27 +1,18 @@
 <?php
 	/**
-	 * html_helper.php
+	 * helper html
 	 *
 	 * funzioni di generazione codice html
 	 *
-	 * @author    Phelipe de Sterlich
-	 * @copyright Moorea Software | Elco Sistemi srl
-	 * @package   peanut
-	 **/
-
-	/**
-	 * classe html
-	 *
-	 * funzioni di generazione codice html
-	 *
-	 * @author    Phelipe de Sterlich
-	 * @copyright Moorea Software | Elco Sistemi srl
-	 * @package   peanut
+	 * @package   system > helpers
+	 * @copyright Moorea Software
 	 */
+
 	class html
 	{
 
 		/**
+		 * funzione url
 		 * genera un url dai parametri passati
 		 *
 		 * @param  string $controller nome del controller per cui generare il link
@@ -29,6 +20,7 @@
 		 * @param  mixed  $params     (array) parametri aggiuntivi: array associativo nome => valore
 		 *                            (string) parametri aggiuntivi: 
 		 * @return string             url generato
+		 * @author Phelipe de Sterlich
 		 */
 		public static function url($controller = "", $action = "", $params = null)
 		{
@@ -79,19 +71,19 @@
 			return $result;
 		}
 
+		/**
+		 * funzione location
+		 * genera un header "location" verso l'url dai parametri passati
+		 *
+		 * @param  string $controller nome del controller per cui generare il link
+		 * @param  string $action     nome dell'azione per cui generare il link
+		 * @param  mixed  $params     parametri aggiuntivi
+		 * @param  bool   $exit       flag per eseguire l'uscita dall'esecuzione del codice php
+		 * @return string             url generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function location($controller = "", $action = "", $params = null, $exit = true)
 		{
-			/**
-			 * funzione location
-			 *
-			 * genera un header "location" verso l'url dai parametri passati
-			 *
-			 * @param  string $controller nome del controller per cui generare il link
-			 * @param  string $action     nome dell'azione per cui generare il link
-			 * @param  mixed  $params     parametri aggiuntivi
-			 * @param  bool   $exit       flag per eseguire l'uscita dall'esecuzione del codice php
-			 * @return string             url generato
-			 */
 
 			// genero l'header e lo invio al browser
 			header("Location: ".html::url($controller, $action, $params));
@@ -115,77 +107,85 @@
 			if ($exit) exit;
 		}
 
+		/**
+		 * funzione link
+		 * genera un link "<a href ..." verso l'url dai parametri passati
+		 *
+		 * @param  string $caption    testo del link
+		 * @param  string $controller nome del controller per cui generare il link
+		 * @param  string $action     nome dell'azione per cui generare il link
+		 * @param  mixed  $params     parametri aggiuntivi
+		 * @param  array  $attr       attributi opzionali del link
+		 * @return string             url generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function link($caption, $controller = "", $action = "", $params = null, $attr = null)
 		{
-			/**
-			 * funzione link
-			 *
-			 * genera un link "<a href ..." verso l'url dai parametri passati
-			 *
-			 * @param  string $caption    testo del link
-			 * @param  string $controller nome del controller per cui generare il link
-			 * @param  string $action     nome dell'azione per cui generare il link
-			 * @param  mixed  $params     parametri aggiuntivi
-			 * @param  array  $attr       attributi opzionali del link
-			 * @return string             url generato
-			 */
-
 			$attributes = arrays::attributes($attr);
 			return "<a href='".html::url($controller, $action, $params)."' {$attributes}>{$caption}</a>";
 		}
 
+		/**
+		 * funzione ext_link
+		 *
+		 * genera un link "<a href ..." verso l'url indicato
+		 *
+		 * @param  string $caption testo del link
+		 * @param  string $url     indirizzo per cui generare il link
+		 * @param  array  $attr    attributi opzionali del link
+		 * @return string          url generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function ext_link($caption, $url, $attr = null)
 		{
-			/**
-			 * funzione ext_link
-			 *
-			 * genera un link "<a href ..." verso l'url indicato
-			 *
-			 * @param  string $caption testo del link
-			 * @param  string $url     indirizzo per cui generare il link
-			 * @param  array  $attr    attributi opzionali del link
-			 * @return string          url generato
-			 */
-
 			$attributes = arrays::attributes($attr);
 			return "<a href='{$url}' {$attributes}>{$caption}</a>";
 		}
 
+		/**
+		 * funzione js_link
+		 *
+		 * genera un link "<a onClick ..." che esegue il codice javascript indicato
+		 *
+		 * @param  string $caption testo del link
+		 * @param  string $action  codice javascript da eseguire
+		 * @param  array  $attr    attributi opzionali del link
+		 * @return string          url generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function js_link($caption, $action, $attr = null)
 		{
-			/**
-			 * funzione js_link
-			 *
-			 * genera un link "<a onClick ..." che esegue il codice javascript indicato
-			 *
-			 * @param  string $caption testo del link
-			 * @param  string $action  codice javascript da eseguire
-			 * @param  array  $attr    attributi opzionali del link
-			 * @return string          url generato
-			 */
-
 			$attributes = arrays::attributes($attr);
 			return "<a href='#' onClick='{$action}' {$attributes}>{$caption}</a>";
 		}
 
+		/**
+		 * funzione div
+		 * genera un tag <div>
+		 *
+		 * @param  string $content contenuto
+		 * @param  string $id      identificativo (id="")
+		 * @param  array  $attr    attributi opzionali
+		 * @return string          div generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function div($content, $id = "", $attr = null)
 		{
-			/**
-			 * funzione div
-			 *
-			 * genera un tag <div>
-			 *
-			 * @param  string $content contenuto
-			 * @param  string $id      identificativo (id="")
-			 * @param  array  $attr    attributi opzionali
-			 * @return string          div generato
-			 */
-
 			$attributes = arrays::attributes($attr);
 			if ($id != "") $attributes .= " id='{$id}'";
 			return "<div {$attributes}>{$content}</div>";
 		}
 
+		/**
+		 * funzione img
+		 * genera un tag <img>
+		 *
+		 * @param  string $src  origine immagine
+		 * @param  string $alt  testo alternativo
+		 * @param  array  $attr attributi opzionali
+		 * @return string       img generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function img ($src, $alt = "", $attr = null)
 		{
 			$attributes = arrays::attributes($attr);
@@ -227,18 +227,18 @@
 			return $result;
 		}
 
+		/**
+		 * funzione mailto
+		 *
+		 * genera un link html a un'indirizzo email
+		 *
+		 * @param  string $address indirizzo email per cui generare il link
+		 * @param  string $caption testo da mostrare (opzionale - se non specificato viene mostrato l'indirizzo stesso)
+		 * @return string          codice html generato
+		 * @author Phelipe de Sterlich
+		 */
 		public static function mailto($address, $caption = "")
 		{
-			/**
-			 * funzione mailto
-			 *
-			 * genera un link html a un'indirizzo email
-			 *
-			 * @param  string $address indirizzo email per cui generare il link
-			 * @param  string $caption testo da mostrare (opzionale - se non specificato viene mostrato l'indirizzo stesso)
-			 * @return string          codice html generato
-			 */
-
 			if ($caption == "") $caption = $address;
 			return "<a href='mailto://{$address}'>{$caption}</a>";
 		}
