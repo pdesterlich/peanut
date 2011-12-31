@@ -41,7 +41,7 @@
 	$config["routes"]["controller"] = "peanut";
 	$config["routes"]["action"] = "index";
 
-	$config["controller"]["layout"] = "default.php";
+	$config["controller"]["layout"] = "peanut_layout.php";
 
 	$config["database"]["enabled"] = false;
 	$config["database"]["host"] = "";
