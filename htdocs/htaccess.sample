@@ -1,0 +1,19 @@
+# per abilitare la gestione degli url brevi è necessaria la presenza di un file .htaccess
+# inoltre bisogna impostare il parametro $config["url"]["short"] a True
+# questo file è un esempio di .htaccess, in generale dovrebbe essere sufficiente rinominarlo
+
+# Turn on URL rewriting
+RewriteEngine On
+
+# Installation directory
+RewriteBase /
+
+# Protect application and system files from being viewed
+# RewriteRule ^(?:application|modules|system)\b.* index.php/$0 [L]
+
+# Allow any files or directories that exist to be displayed directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite all other URLs to index.php/URL
+RewriteRule .* index.php/$1 [PT]
