@@ -19,7 +19,7 @@
 		protected $modelName = ""; // nome del modello da utilizzare (default vuoto, viene generato a runtime)
 
 		public $layoutContent = ""; // testo generato dal controller, da utilizzare se non viene usato un template
-		public $layoutTitle = "Peanut!"; // titolo della pagina, utilizzato nel layout
+		public $layoutTitle = ""; // titolo della pagina, utilizzato nel layout
 
 		protected $model; // modello per l'accesso ai dati
 		protected $id = 0; // identificativo record
@@ -45,6 +45,8 @@
 			$this->layout = new Template();
 			// imposto il nome del layout in base alla configurazione
 			$this->layout->templateName = $config["controller"]["layout"];
+			// imposto il titolo del layout in base alla configurazione
+			$this->layoutTitle = $config["layout"]["title"];
 
 			// creo il template
 			$this->template = new Template();
