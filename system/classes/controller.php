@@ -94,6 +94,19 @@
 
 		}
 
+		/**
+		 * funzione staticPage
+		 * visualizzazione pagina statica
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 */
+		function staticPage() {
+			global $controllerName, $actionName;
+			// imposta il nome del template in base a controller / action specificati
+			$this->template->templateName = $controllerName.DS.$controllerName."_".$actionName.".php";
+		}
+
 	}
 
 	/*

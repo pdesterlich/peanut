@@ -75,8 +75,8 @@
 	$timerStart = microtime(true);
 	if (!method_exists($controller, $actionName)) {
 		if ((file_exists(APP.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php")) OR (file_exists(SYSTEM.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php"))) {
-			$controller = new StaticController();
-			$controller->index();
+			// $controller = new StaticController();
+			$controller->staticPage();
 		} else {
 			die (__("system.method_not_found", array(":controller" => $controllerName, ":action" => $actionName)));
 		}
