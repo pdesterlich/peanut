@@ -25,25 +25,57 @@
 		if ($config["debug"]) $debug[] = array("item" => $item, "time" => sprintf("%.6f", $time), "details" => $details);
 	}
 
-	function dump($var, $return = false) {
+	function _dump($var, $usePre) {
 		/** peanut **
 		 * funzione dump
 		 * mostra il dump della variabile passata, formattandolo opportunamente per la corretta visualizzazione
 		 * -- input --
 		 * $var (variant) variabile da visualizzare
-		 * $return (boolean) (opzionale) se True il debug viene ritornato come stringa e non mandato in output
+		 * $usePre (boolean) incapsula il dump in un blocco <pre>
 		 * -- output --
-		 * (string) (se $return = True) dump della variabile passata
+		 * (string)
 		 **/
 
-		// ottengo il dump della variabile, incluso in un tag html <pre>
-		$result = "<pre>".print_r($var, true)."</pre>";
-		// ritorno il risultato o lo mando in output a seconda del valore di $return
+		// ottengo il dump della variabile
+		$result = print_r($var, true);
+
+		// se necessario, aggiungo i tag <pre> per la visualizzazione html
+		if ($usePre) $result = "<pre>".$result."</pre>";
+
+		// ritorno il risultato
+		return $result;
+	}
+
+
+	/**
+	 * funzione dump
+	 * mostra il dump della variabile passata, formattandolo opportunamente per la corretta visualizzazione
+	 *
+	 * @return string
+	 * @author Phelipe de Sterlich
+	 **/
+	function dump($var, $return = false)
+	{
+		// ottengo il dump della variabile
+		$result = _dump($var, true);
+
 		if ($return) {
 			return $result;
 		} else {
 			echo $result;
 		}
+	}
+
+	/**
+	 * funzione clDump
+	 * dump variabile, da utilizzare nei tools da riga di comando
+	 *
+	 * @return string
+	 * @author Phelipe de Sterlich
+	 **/
+	function clDump($var)
+	{
+		echo _dump($var, false);
 	}
 
 	function from_camel_case($str) {
