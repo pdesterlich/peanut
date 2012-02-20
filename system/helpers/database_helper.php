@@ -10,7 +10,7 @@
 	class database
 	{
 
-		public static function query($sql, $fetch = "query") {
+		public static function query($sql, $fetch = "query", $doDebug = true) {
 			/** database_helper **
 			 * funzione query
 			 * esegue una query sul database
@@ -82,7 +82,7 @@
 			$timeStop = microtime(true);
 
 			// aggiungo al debug le informazioni sull'esecuzione della query
-			debugItem("esecuzione query", $timeStop - $timeStart, "<div class='query'>".$sql."</div>numero record: ".$numRec);
+			if ($doDebug) debugItem("esecuzione query", $timeStop - $timeStart, "<div class='query'>".$sql."</div>numero record: ".$numRec);
 
 			// ritorno il risultato
 			return $result;

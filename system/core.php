@@ -75,7 +75,7 @@
 	 **/
 	function clDump($var)
 	{
-		echo _dump($var, false);
+		echo _dump($var, false)."\n";
 	}
 
 	function from_camel_case($str) {
