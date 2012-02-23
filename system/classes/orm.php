@@ -375,18 +375,22 @@
 			 * $id (integer o string) identificativo univoco del record
 			 **/
 
-			// se è passato un identificativo, lo imposto 
-			if ($id) $this->id = $id;
+			// se è passato un identificativo (e non un array), lo imposto 
+			if (($id) AND (!is_array($id))) $this->id = $id;
 
 			// inizializzo l'array campi / valori
 			$this->fields = array();
 
-			// se l'identificativo record è specificato
-			if ($this->id) {
+			// se l'identificativo record è specificato (o sono specificati i criteri per la ricerca)
+			if (($this->id) OR (is_array($id))) {
 				// imposta la query di lettura record
-				$query = "SELECT * FROM {$this->tableName} WHERE {$this->idFieldName} = '{$this->id}'";
-				// carico l'array associativo dei campi del record nella proprietà fields
-				// $this->fields = database::query($query, "array");
+				$query = "SELECT * FROM {$this->tableName}";
+				if (is_array($id)) {
+					$query .= " WHERE ".arrays::implode($where, " = ", " AND ", "'", "mysql_real_escape_string");
+				} else {
+					$query .= " WHERE {$this->idFieldName} = '{$this->id}'";	
+				}
+
 				// se la query è già presente nella cache
 				if (isset(self::$queryCache[$query])) {
 					// carica il risultato dalla cache
