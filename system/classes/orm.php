@@ -408,7 +408,7 @@
 				if (is_array($id)) $this->id = $this->fields["id"];
 			}
 			// se l'identificativo non è passato, oppure non ci sono campi ottenuti dalla precedente query
-			if ((!$this->id) OR (count($this->fields) == 0) OR ($this->fields == null))
+			if ((count($this->fields) == 0) OR ($this->fields == null))
 			{
 				// imposta la query di lettura struttura tabella
 				$query = "SHOW COLUMNS FROM {$this->tableName}";
@@ -545,7 +545,7 @@
 			$fields = $this->fields;
 			unset($fields[$this->idFieldName]);
 
-			if ($this->id === 0) {
+			if (!$this->id) {
 				// se esiste, imposta il valore del campo "created" alla data / ora corrente
 				if (array_key_exists('created', $fields)) $fields['created'] = date("Y-m-d H:i");
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
