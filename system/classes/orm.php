@@ -386,7 +386,7 @@
 				// imposta la query di lettura record
 				$query = "SELECT * FROM {$this->tableName}";
 				if (is_array($id)) {
-					$query .= " WHERE ".arrays::implode($where, " = ", " AND ", "'", "mysql_real_escape_string");
+					$query .= " WHERE ".arrays::implode($id, " = ", " AND ", "'", "mysql_real_escape_string");
 				} else {
 					$query .= " WHERE {$this->idFieldName} = '{$this->id}'";	
 				}
@@ -404,6 +404,8 @@
 					// salva il risultato della query in cache
 					self::$queryCache[$query] = $this->fields;
 				}
+
+				if (is_array($id)) $this->id = $this->fields["id"];
 			}
 			// se l'identificativo non è passato, oppure non ci sono campi ottenuti dalla precedente query
 			if ((!$this->id) OR (count($this->fields) == 0) OR ($this->fields == null))
