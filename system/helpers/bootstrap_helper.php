@@ -30,6 +30,35 @@
 			return $result;
 		}
 
+		/**
+		 * funzione carousel
+		 * generazione codice html per carousel
+		 *
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function carousel($divId, $images)
+		{
+			$result = "<div id='{$divId}' class='carousel'>";
+			$result .= "<div class='carousel-inner'>";
+			$i = 0;
+			foreach ($images as $image => $title) {
+				$result .= "<div class='item ".(($i == 0) ? "active'" : "'").">";
+				$result .= "<img src='{$image}' alt=''>";
+				$result .= "<div class='carousel-caption'>";
+				$result .= "<p>{$title}</p>";				
+				$result .= "</div>";
+				$result .= "</div>";
+				$i++;
+			}
+			$result .= "</div>";
+            $result .= "<a class='left carousel-control' href='#{$divId}' data-slide='prev'>‹</a>";
+            $result .= "<a class='right carousel-control' href='#{$divId}' data-slide='next'>›</a>";
+			$result .= "</div>";
+
+			return $result;
+		}
+
 	}
 
 ?>
