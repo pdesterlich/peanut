@@ -547,9 +547,9 @@
 
 			if (!$this->id) {
 				// se esiste, imposta il valore del campo "created" alla data / ora corrente
-				if (array_key_exists('created', $fields)) $fields['created'] = date("Y-m-d H:i");
+				if (array_key_exists('created', $fields)) $fields['created'] = date("Y-m-d H:i:s");
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
-				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i");
+				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i:s");
 
 				$this->id = database::insert($this->tableName, $fields, true);
 			} else {
@@ -701,81 +701,5 @@
 			return stripslashes($record[$fieldName]);
 		}
 	}
-
-/*
-class orm extends base
-{
-	// table: nome della tabella
-	protected $table = 'tabella';
-	// id_field: nome del campo id
-	protected $id_field = 'id';
-	// temp_id_field: nome del campo temp_id
-	protected $temp_id_field = 'temp_id';
-	// id: identificativo del record
-	protected $id = 0;
-	// fields: campi del record
-	protected $fields = array();
-	// date_fields: elenco dei campi in formato data
-	protected $date_fields = array();
-	// date_fields: elenco dei campi in formato data (default vuoto)
-	protected $date_fields_empty = array();
-	// time_fields: elenco dei campi in formato ora
-	protected $time_fields = array();
-	// encrypted_fields: elenco dei campi codificati
-	protected $encrypted_fields = array();
-	// datetime_fields: elenco dei campi in formato data ora
-	protected $datetime_fields = array('insert_date', 'edit_date');
-
-	// factory: creazione classe (per concatenazione)
-	public static function factory($id = 0) {
-		return new self($id);
-	}
-
-	// save: salva il record
-	public function save() {
-		global $utente;
-
-		// genero un id temporaneo
-		$temp_id = rand(1000,999999);
-
-		// se id è a 0 (nuovo record)
-		if ($this->id == 0)
-		{
-			// rimuovo l'id dall'elenco dei campi
-			unset($this->fields[$this->id_field]);
-			// imposto l'id temporaneo
-			$this->fields[$this->temp_id_field] = $temp_id;
-			// imposto, se presenti, i campi insert_date / insert_user
-			if (array_key_exists('insert_date', $this->fields))
-			{
-				$this->fields['insert_date'] = date("Y-m-d H:i");
-				$this->fields['insert_user'] = $utente;
-				$this->fields['edit_date'] = date("Y-m-d H:i");
-				$this->fields['edit_user'] = $utente;
-			}
-
-			if (array_key_exists('created', $this->fields)) $this->fields['created'] = date("Y-m-d H:i");
-			if (array_key_exists('created_username', $this->fields)) $this->fields['created_username'] = $utente;
-			if (array_key_exists('modified', $this->fields)) $this->fields['modified'] = date("Y-m-d H:i");
-			if (array_key_exists('modified_username', $this->fields)) $this->fields['modified_username'] = $utente;
-
-			// aggiungo il record
-			database::insert($this->table, $this->fields);
-			// recupero l'id del record inserito
-			$this->id = database::select($this->table, $this->id_field, array($this->temp_id_field => $temp_id), $this->id_field.' DESC');
-			// azzero l'id temporaneo
-			database::update($this->table, array('temp_id' => 0), array($this->id_field => $this->id));
-		} else {
-			// aggiorno il record
-			if (array_key_exists('edit_date', $this->fields)) $this->fields['edit_date'] = date("Y-m-d H:i");
-			if (array_key_exists('edit_user', $this->fields)) $this->fields['edit_user'] = $utente;
-			if (array_key_exists('modified', $this->fields)) $this->fields['modified'] = date("Y-m-d H:i");
-			if (array_key_exists('modified_username', $this->fields)) $this->fields['modified_username'] = $utente;
-
-			database::update($this->table, $this->fields, array($this->id_field => $this->id));
-		}
-	}
-
-	*/
 
 ?>
