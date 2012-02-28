@@ -121,14 +121,14 @@
 		 * @return void
 		 * @author Phelipe de Sterlich
 		 **/
-		function __construct($id = 0)
+		function __construct($id = 0, $useCache = true)
 		{
 			// richiama la procedura di inizializzazione della classe padre
 			parent::__construct();
 			// se il nome della tabella non è specificato, lo imposta al nome del modello (meno la parola "Model")
 			if ($this->tableName == "") $this->tableName = from_camel_case(str_replace("Model", "", get_class($this)));
 			// carica il record di cui è passato l'identificativo
-			$this->load($id);
+			$this->load($id, $useCache);
 			// richiama la funzione di inizializzazione oggetti collegati
 			$this->_initializeHasOne();
 		}
@@ -366,13 +366,14 @@
 			}
 		}
 
-		function load($id = false)
+		function load($id = false, $useCache = true)
 		{
 			/** orm **
 			 * funzione load
 			 * carica il record dal database, se non presente carica la struttura della tabella
 			 * -- input --
-			 * $id (integer o string) identificativo univoco del record
+			 * $id (integer, string o array) identificativo univoco del record (o array associativo campo => valore da usare per la ricerca)
+			 * $useCache (bool)
 			 **/
 
 			// se è passato un identificativo (e non un array), lo imposto 
@@ -392,7 +393,7 @@
 				}
 
 				// se la query è già presente nella cache
-				if (isset(self::$queryCache[$query])) {
+				if (($useCache == true) AND (isset(self::$queryCache[$query]))) {
 					// carica il risultato dalla cache
 					$this->fields = self::$queryCache[$query];
 				// altrimenti (query non in cache)
