@@ -59,6 +59,25 @@
 			return $result;
 		}
 
+		/**
+		 * funzione formElement
+		 * genera il codice html per un elemento della form
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function formElement($itemId, $label, $value, $width = "span5")
+		{
+			$result = "";
+			$result .= "<div class='control-group'>";
+			$result .= "<label class='control-label' for='{$itemId}'>{$label}</label>";
+			$result .= "<div class='controls'>";
+			$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
+			$result .= "</div>";
+			$result .= "</div>";
+
+			return $result;
+		}
 	}
 
 ?>
