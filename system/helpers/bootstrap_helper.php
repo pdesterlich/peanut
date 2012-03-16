@@ -66,13 +66,36 @@
 		 * @return void
 		 * @author Phelipe de Sterlich
 		 **/
-		public static function formElement($itemId, $label, $value, $width = "span5")
+		public static function formElement($itemId, $label, $value, $width = "span5", $itemType = "input", $options = null)
 		{
+			$labelClass = "control-label";
+			if (is_array($options)) {
+				if (array_key_exists('labelClass', $options)) {
+					$labelClass .= " ".$options["labelClass"];
+				}
+			}
 			$result = "";
 			$result .= "<div class='control-group'>";
-			$result .= "<label class='control-label' for='{$itemId}'>{$label}</label>";
+			$result .= "<label class='{$labelClass}' for='{$itemId}'>{$label}</label>";
 			$result .= "<div class='controls'>";
-			$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
+			switch ($itemType) {
+				case 'input':
+					$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
+					break;
+				case 'select':
+					$result .= "<select class='{$width} id='$itemId' name='{$itemId}'>";
+					if (is_array($options)) {
+						if (array_key_exists('selectOptions', $options)) {
+							if (is_array($options["selectOptions"])) {
+								foreach ($options["selectOptions"] as $key => $value) {
+									$result .= "<option value='{$key}'>{$value}</option>";
+								}
+							}
+						}
+					}
+					$result .= "</select>";
+					break;
+			}
 			$result .= "</div>";
 			$result .= "</div>";
 
