@@ -83,12 +83,12 @@
 					$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
 					break;
 				case 'select':
-					$result .= "<select class='{$width} id='$itemId' name='{$itemId}'>";
+					$result .= "<select class='{$width} id='$itemId' name='{$itemId}'>";					
 					if (is_array($options)) {
 						if (array_key_exists('selectOptions', $options)) {
 							if (is_array($options["selectOptions"])) {
-								foreach ($options["selectOptions"] as $key => $value) {
-									$result .= "<option value='{$key}'>{$value}</option>";
+								foreach ($options["selectOptions"] as $optionKey => $optionValue) {
+									$result .= "<option value='{$optionKey}' ".(($optionKey == $value) ? "selected" : "").">{$optionValue}</option>";
 								}
 							}
 						}
