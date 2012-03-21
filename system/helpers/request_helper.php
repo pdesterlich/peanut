@@ -21,6 +21,7 @@
 		{
 			$result = $default;
 			if (isset($_REQUEST[$valueName])) $result = $_REQUEST[$valueName];
+			return $result;
 		}
 
 	}
