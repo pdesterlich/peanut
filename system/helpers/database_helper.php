@@ -10,20 +10,23 @@
 	class database
 	{
 
+		/**
+		 * funzione query
+		 * esegue una query, ritornando un valore differente a seconda delle impostazioni
+		 *
+		 * @param $sql     string query da eseguire
+		 * @param $fetch   string tipo variabile da ritornare
+		 * @param $doDebug bool   flag per attivazione informazioni di debug
+		 * @return resource - se $fetch = "query", ritorna la risorsa ottenuta da mysql_query
+		 *         array    - se $fetch = "array", ritorna il singolo record (il primo se la query prevede più record come risultato) in forma di array
+		 *         object   - se $fetch = "object", ritorna il singolo record (il primo se la query prevede più record come risultato) in forma di oggetto
+		 *         array    - se $fetch = "records", ritorna un array dei record ottenuti dalla query, associando i campi per nome
+		 *         int      - se $fetch = "records_num", ritorna un array dei record ottenuti dalla query, associando i campi per indice
+		 * @author Phelipe de Sterlich
+		 **/
 		public static function query($sql, $fetch = "query", $doDebug = true) {
-			/** database_helper **
-			 * funzione query
-			 * esegue una query sul database
-			 * -- input --
-			 * $sql (string) query da eseguire
-			 * $fetch (string) (opzionale) tipo di risultato da ottenere
-			 * -- output --
-			 * $fetch = "query" -> viene ritornato l'oggetto mysql_query (da utilizzare in genere per query di insert / update / delete)
-			 * $fetch = "array" -> ritorna il singolo record (il primo se la query prevede più record come risultato) in forma di array
-			 * $fetch = "object" -> ritorna il singolo record (il primo se la query prevede più record come risultato) in forma di oggetto
-			 * $fetch = "records" -> ritorna un array dei record ottenuti dalla query, associando i campi per nome
-			 * $fetch = "records_num" -> ritorna un array dei record ottenuti dalla query, associando i campi per indice
-			 **/
+			// importa la variabile globale $config
+			global $config;
 
 			/*
 				TODO : migliorare gestione errori su esecuzione query
@@ -34,6 +37,9 @@
 
 			// rimuovo eventuali spazi presenti in testa e in coda alla stringa sql
 			$sql = trim($sql);
+
+			// imposta, se previsto, il prefisso delle tabelle
+			$sql = str_replace($config["database"]["prefix_search"], $config["database"]["prefix_replace"], $sql);
 
 			// eseguo la query sul database
 			$query = mysql_query($sql) or die (__("system.query_fail", array(":sql" => $sql, ":errore" => mysql_error())));

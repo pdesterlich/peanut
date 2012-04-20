@@ -52,6 +52,22 @@
 	$config["database"]["username"] = "";
 	$config["database"]["password"] = "";
 
+	/**
+	 * prefisso tabelle in database - istanza da sostituire
+	 * se specificato, viene sostituito con il valore del prefisso (indicato in prefix_replace)
+	 *
+	 * @var string
+	 **/
+	$config["database"]["prefix_search"] = "{table_prefix}";
+
+	/**
+	 * prefisso tabelle in database
+	 * se specificato, viene sostituito a tutte le istanze di $config["database"]["prefix_search"] nelle query eseguite dall'helper database
+	 *
+	 * @var string
+	 **/
+	$config["database"]["prefix_replace"] = "";
+
 	$config["security"]["salt"] = "cj9aht3lfj7hw3ac37thmu34f83jc2mhdzo7i853";
 	$config["security"]["cipher"] = "h3x4tc347tf2gy3ih2xdq876293cjo182u3hgn2c";
 	$config["security"]["disconnect"]["timeout"] = 30; // tempo in minuti dopo cui l'utente, se non ha attività, viene disconnesso
