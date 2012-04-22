@@ -34,11 +34,28 @@ class Migrations extends base
 	protected $availableVersion = 0;
 
 	/**
-	 * undocumented class variable
+	 * migrationFiles
+	 * elenco files migrazioni (con numero migrazione)
 	 *
 	 * @var array (migrationNum => migrationFile)
 	 **/
 	protected $migrationFiles = array();
+
+	/**
+	 * defines
+	 * elenco definizioni per sostituzione in query
+	 *
+	 * @var array
+	 **/
+	protected $defines = array();
+
+	/**
+	 * definesFilePath
+	 * percorso completo del file delle definizioni
+	 *
+	 * @var string
+	 **/
+	public $definesFilePath = "";
 
 	/**
 	 * migrationsTableName
@@ -129,6 +146,27 @@ class Migrations extends base
 	}
 
 	/**
+	 * funzione loadDefines
+	 * carica le definizioni per le sostituzioni in query
+	 *
+	 * @return void
+	 * @author Phelipe de Sterlich
+	 **/
+	protected function loadDefines()
+	{
+		if (file_exists($this->definesFilePath)) {
+			// rimuove l'eventuale riferimento alla variabile $defines
+			if (isset($defines)) unset($defines);
+			// include il file delle definizioni
+			include $this->definesFilePath;
+			// aggiunge le definizioni all'array interno delle definizioni
+			foreach ($defines as $key => $value) {
+				$this->defines[$key] = $value;
+			}
+		}
+	}
+
+	/**
 	 * funzione executeFile
 	 * esegue le migrazioni contenute in un file
 	 *
@@ -153,6 +191,10 @@ class Migrations extends base
 		if ((isset($migrations)) && (is_array($migrations))) {
 			// per ogni query presente nell'array
 			foreach ($migrations as $query) {
+				// esegue le eventuali sostituzioni delle definizioni
+				foreach ($this->defines as $key => $value) {
+					$query = str_replace($key, $value, $query);
+				}
 				// esegue la query
 				database::query($query);
 			}
@@ -170,6 +212,9 @@ class Migrations extends base
 	{
 		// inizializza, se serve, il percorso delle migrazioni
 		if ($this->migrationsPath == "") $this->migrationsPath = APP.DS."migrations";
+		// inizializza, se serve, il percorso delle definizioni
+		if ($this->definesFilePath == "") $this->definesFilePath = $this->migrationsPath.DS."defines.php";
+
 		// ottiene la versione corrente sul database
 		$this->getCurrentVersion();
 		// ottiene la lista dei files di migrazione e la versione disponibile
