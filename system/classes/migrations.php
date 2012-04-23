@@ -100,7 +100,6 @@ class Migrations extends base
 	{
 		if (mysql_num_rows(database::query("SHOW TABLES LIKE '{$this->migrationsTableName}'"))) {
 			$record = database::query("SELECT * FROM {$this->migrationsTableName} ORDER BY id", "array");
-			dump ($record);
 			$this->currentVersion = $record["current"];
 		} else {
 			database::query("CREATE TABLE {$this->migrationsTableName} (id INTEGER AUTO_INCREMENT PRIMARY KEY, current INTEGER DEFAULT 0)");
@@ -175,8 +174,6 @@ class Migrations extends base
 	 **/
 	protected function executeFile($file)
 	{
-		dump ("processo file: ".$file);
-
 		// rimuove i riferimenti alle variabili $description e $migrations
 		if (isset($description)) unset($description);
 		if (isset($migrations)) unset($migrations);
@@ -185,7 +182,7 @@ class Migrations extends base
 		include $file;
 
 		// aggiunge all'output la descrizione della migrazione
-		if (isset($descrizione)) $this->output[] = $description;
+		if (isset($description)) $this->output[] = $description;
 
 		// se è presente l'array delle query
 		if ((isset($migrations)) && (is_array($migrations))) {
@@ -219,11 +216,14 @@ class Migrations extends base
 		$this->getCurrentVersion();
 		// ottiene la lista dei files di migrazione e la versione disponibile
 		$this->findMigrationFiles();
-		// se la versione corrente non esiste (database vuoto)
-		dump ($this->currentVersion);
+		// carica le definizioni
+		$this->loadDefines();
+		// se la versione corrente non esiste (database vuoto)		
 		if ($this->currentVersion == 0) {
 			// esegue il file completo di creazione database
 			$this->executeFile($this->migrationsPath.DS.$this->migrationFullFile);
+			// imposta sul database la versione disponibile
+			$this->setAvailableVersion();
 		// se invece la versione disponibile è superiore alla versione corrente
 		} else if ($this->availableVersion > $this->currentVersion) {
 			// per ogni migrazione presente
@@ -231,6 +231,8 @@ class Migrations extends base
 				// esegue la migrazione
 				$this->executeFile($this->migrationFiles[$i]);
 			}
+			// imposta sul database la versione disponibile
+			$this->setAvailableVersion();
 		}
 	}
 }
