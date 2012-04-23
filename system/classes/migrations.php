@@ -116,6 +116,7 @@ class Migrations extends base
 	 **/
 	protected function setAvailableVersion()
 	{
+		dump ("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
 		database::query("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
 	}
 
@@ -131,13 +132,14 @@ class Migrations extends base
 		// cerca tutti i files php nella directory impostata per le migrazioni, per ogni file trovato
 		foreach (glob($this->migrationsPath.DS."*.php") as $file) {
 			// ottiene il nome del file senza estensione
-			$fileName = str_replace(".php", "", $file);
+			$fileNameFull = basename($file);
+			$fileName = basename($file, ".php");
 			// se il file è un numero
 			if (is_numeric($fileName)) {
 				// ottiene il numero di migrazione
 				$migrationNum = intval($fileName);
 				// aggiunge il file all'array dei files delle migrazioni
-				$this->migrationFiles[$migrationNum] = $this->migrationsPath.DS.$file;
+				$this->migrationFiles[$migrationNum] = $file;
 				// se il numero di migrazione è superiore alla versione attuale la aggiorna
 				if ($migrationNum > $this->availableVersion) $this->availableVersion = $migrationNum;
 			}
@@ -216,6 +218,7 @@ class Migrations extends base
 		$this->getCurrentVersion();
 		// ottiene la lista dei files di migrazione e la versione disponibile
 		$this->findMigrationFiles();
+
 		// carica le definizioni
 		$this->loadDefines();
 		// se la versione corrente non esiste (database vuoto)		
@@ -233,6 +236,8 @@ class Migrations extends base
 			}
 			// imposta sul database la versione disponibile
 			$this->setAvailableVersion();
+		} else {
+			$this->output[] = "aggiornamento non necessario";
 		}
 	}
 }
