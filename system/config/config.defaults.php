@@ -15,6 +15,15 @@
 	$config["debug"] = false;
 
 	/**
+	 * flag stato applicazione (produzione)
+	 * definisce lo stato in cui si trova l'applicazione: false = sviluppo, true = produzione
+	 * utile per attivare / disattivare determinate funzionalità del programma per la fase di sviluppo
+	 *
+	 * @var bool
+	 **/
+	$config["production"] = false;
+
+	/**
 	 * indirizzo base dell'applicazione (senza il protocollo)
 	 * (esempio: tikehau.mooreasoft.ch)
 	 *
