@@ -116,7 +116,6 @@ class Migrations extends base
 	 **/
 	protected function setAvailableVersion()
 	{
-		dump ("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
 		database::query("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
 	}
 
