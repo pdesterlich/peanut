@@ -101,6 +101,31 @@
 
 			return $result;
 		}
+
+		/**
+		 * funzione breadcrumb
+		 * genera il codice html per un elemento breadcrumb
+		 *
+		 * @param $items array elementi del breadcrumb
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function breadcrumb($items)
+		{
+			$count = count($items);
+			$i = 0;
+			$result = "<ul class='breadcrumb'>";
+			foreach ($items as $item) {
+				$i++;
+				$result .= "<li>".$item;
+				if ($i < $count) $result .= "<span class='divider'>/</span>";
+				$result .= "</li>";
+			}
+			$result .= "</ul>";
+
+			return $result;
+		}
+
 	}
 
 ?>
