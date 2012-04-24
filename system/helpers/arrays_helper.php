@@ -61,6 +61,24 @@
 			return $options;
 		}
 
+		/**
+		 * funzione getVal
+		 * ritorna il valore di un elemento di un array
+		 *
+		 * @param  $array   array   insieme di elementi in cui effettuare la ricerca
+		 * @param  $key     variant chiave da cercare
+		 * @param  $default variant valore di default (se chiave non trovata)
+		 * @return variant
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function getVal($array, $key, $default = "")
+		{
+			if (array_key_exists($key, $array)) {
+				return $array[$key];
+			} else {
+				return $default;
+			}
+		}
 	}
 
 ?>
