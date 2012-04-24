@@ -52,7 +52,7 @@
 			$this->template = new Template();
 			// imposto il nome del template in base al nome del controller
 			$this->template->templateName = $controllerName.DS.$controllerName."_".$actionName.".php";
-			
+
 			// se è abilitato l'utilizzo del modello
 			if ($this->useModel) {
 				$timerStart = microtime(true);
@@ -66,7 +66,11 @@
 				if ($config["debug"]) debugItem("inizializzazione modello controller", $timerStop - $timerStart);
 
 				// carico il record corrente (se presente) nel template
-				if ($id) $this->template->set("record", $this->model->getRecord());
+				if ($id) {
+					$this->template->set("record", $this->model->getRecord());
+				} else {
+					$this->template->set("record", array());
+				}
 			}
 		}
 
@@ -108,29 +112,4 @@
 		}
 
 	}
-
-	/*
-	protected $modelName;
-	protected $model = false;
-	protected $oldModel = false;
-	protected $id = 0;
-	protected $currentUser = array();
-	protected $controllerName;
-
-	function __construct($id = 0) {
-		if ($id) $this->id = $id;
-		$this->modelName = str_replace("Controller", "Model", get_class($this));
-		$this->model = new $this->modelName($this->id);
-		$this->oldModel = new $this->modelName($this->id);
-		$this->currentUser = database::select('utenti', '*', array('username' => $_SESSION["username"]));
-
-		// inizializzazione classe zend gdata
-		require_once 'Zend/Loader.php';
-		Zend_Loader::loadClass('Zend_Gdata');
-		// Zend_Loader::loadClass('Zend_Gdata_AuthSub');
-		Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
-		Zend_Loader::loadClass('Zend_Gdata_Calendar');
-	}
-	
-	*/
 ?>
