@@ -61,15 +61,23 @@
 		 *
 		 * @param  string $var     nome del valore da ritornare
 		 * @param  mixed  $default (opzionale) valore di default, in caso il parametro non sia presente (default: "")
+		 * @param  bool   $remove  (opzionale) se True, la chiave viene rimossa dalla sessione
 		 * @return mixed
 		 * @author Phelipe de Sterlich
 		 **/
-		public static function get($var, $default = "")
+		public static function get($var, $default = "", $remove = false)
 		{
 			// se il parametro esiste nella sessione
 			if (isset($_SESSION[$var])) {
 				// ritorna il valore del parametro
-				return $_SESSION[$var];
+				$result = $_SESSION[$var];
+				// se è prevista la rimozione
+				if ($remove) {
+					// rimuove il valore dalla sessione
+					unset($_SESSION[$var]);
+				}
+				// ritorna il valore
+				return $result;
 			// altrimenti
 			} else {
 				// ritorna il valore di default
