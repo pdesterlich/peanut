@@ -82,6 +82,9 @@
 				case 'input':
 					$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
 					break;
+				case 'textarea':
+					$result .= "<textarea class='{$width}' id='{$itemId}' name='{$itemId}' rows='6'></textarea>";
+					break;
 				case 'select':
 					$result .= "<select class='{$width} id='$itemId' name='{$itemId}'>";					
 					if (is_array($options)) {
