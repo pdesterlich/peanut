@@ -126,6 +126,26 @@
 			return $result;
 		}
 
+		/**
+		 * funzione alert
+		 * genera il codice html per un elemento alert
+		 *
+		 * @param $testo      string testo dell'alert
+		 * @param $alertClass string classe dell'alert (per determinare il colore della visualizzazione)
+		 * @param $showClose  bool   abilita la visualizzazione del pulsante di chiusura
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function alert($testo, $alertClass = "", $showClose = true)
+		{
+			$result = "<div class='alert {$alertClass}'>";
+			if ($showClose) $result .= "<a class='close' data-dismiss='alert'>&times;</a>";
+			$result .= $testo;
+			$result .= "</div>";
+
+			return $result;
+		}
+
 	}
 
 ?>
