@@ -83,7 +83,7 @@
 					$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
 					break;
 				case 'textarea':
-					$result .= "<textarea class='{$width}' id='{$itemId}' name='{$itemId}' rows='6'></textarea>";
+					$result .= "<textarea class='{$width}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
 					break;
 				case 'select':
 					$result .= "<select class='{$width} id='$itemId' name='{$itemId}'>";					
