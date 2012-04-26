@@ -25,8 +25,19 @@
 		protected $id = 0; // identificativo record
 		protected $isAjax = false; // flag tipo richiesta
 
+		/**
+		 * controllerName
+		 * nome del controller
+		 *
+		 * @var string
+		 **/
+		protected $controllerName = "";
+
 		function __construct($id = 0) {
 			global $controllerName, $actionName, $config;
+
+			// imposta la proprietà controllerName del controller
+			$this->controllerName = $controllerName;
 
 			// verifico se la richiesta è stata fatta via ajax
 			if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') $this->isAjax = true;
