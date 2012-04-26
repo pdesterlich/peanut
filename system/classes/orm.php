@@ -52,8 +52,8 @@
 		 * @var    array
 		 * @access protected
 		 **/
-
 		protected $originalFields = array();
+
 		/**
 		 * array contenente informazioni sui tipi record
 		 *
@@ -658,11 +658,12 @@
 		 * funzione getModifiedFields
 		 * ritorna un array contenente i campi del record che sono stati modificati rispetto al loro valore originale
 		 *
+		 * @param  bool  $asText se true, l'aray viene ritornato come stringa
 		 * @return mixed array "nome_campo" => array("old" => "valore_originale", "new" => "valore_modificato")
 		 *               false se non ci sono campi modificati
 		 * @author Phelipe de Sterlich
 		 **/
-		function getModifiedFields()
+		function getModifiedFields($asText = false)
 		{
 			// inizializza l'array risultato
 			$result = array();
@@ -674,12 +675,38 @@
 					$result[$fieldName] = array("old" => $this->getField($fieldName, true), "new" => $this->getField($fieldName));
 				}
 			}
-			// ritorna l'array dei campi modificati (o false se non ci sono campi modificati)
+			// se non ci sono record modificati
 			if (count($result) == 0) {
+				// ritorna false
 				return false;
+			// se è impostato l'apposito flag
+			} else if ($asText) {
+				// ritorna i campi modificati come stringa
+				$result_s = "";
+				foreach ($result as $key => $value) {
+					$result_s .= sprintf("campo = %s\nold = %s\nnew = %s\n-----\n", $key, $value["old"], $value["new"]);
+				}
+				return $result_s;
 			} else {
+				// ritorna l'array con i campi modificati
 				return $result;
 			}
+		}
+
+		/**
+		 * funzione asText
+		 * ritorna il record in versione testuale
+		 *
+		 * @return void
+		 * @author 
+		 **/
+		function asText()
+		{
+			$result = "";
+			foreach ($this->fields as $key => $value) {
+				$result .= sprintf("%s = %s\n", $key, ($key == $this->idFieldName) ? $this->id : $this->getField($key));
+			}
+			return $result;
 		}
 
 		/**
