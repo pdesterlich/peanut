@@ -240,7 +240,8 @@
 		public static function mailto($address, $caption = "")
 		{
 			if ($caption == "") $caption = $address;
-			return "<a href='mailto://{$address}'>{$caption}</a>";
+
+			return ($address == "") ? "" : "<a href='mailto://{$address}'>{$caption}</a>";
 		}
 
 	}
