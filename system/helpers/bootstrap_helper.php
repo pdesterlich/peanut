@@ -82,6 +82,9 @@
 				case 'input':
 					$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
 					break;
+				case 'password':
+					$result .= "<input type='password' class='{$width}' id='{$itemId}' name='{$itemId}' autocomplete='off'>";
+					break;
 				case 'textarea':
 					$result .= "<textarea class='{$width}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
 					break;
@@ -98,6 +101,11 @@
 					}
 					$result .= "</select>";
 					break;
+			}
+			if (is_array($options)) {
+				if (array_key_exists('helpBlock', $options)) {
+					$result .= "<p class='help-block'>".$options["helpBlock"]."</p>";
+				}
 			}
 			$result .= "</div>";
 			$result .= "</div>";
