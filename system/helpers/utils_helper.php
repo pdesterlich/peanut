@@ -103,11 +103,14 @@
 		 * funzione age
 		 * calcola l'età partendo da una data (in formato yyyy-mm-dd)
 		 *
+		 * @param $data  date - data per cui calcolare l'età
+		 * @param $isSql bool - true (default) se la data è in formato sql (yyyy-mm-dd), false se è in formato standard (dd/mm/yyyy)
 		 * @return integer
 		 * @author Phelipe de Sterlich
 		 **/
-		public static function age($data)
+		public static function age($data, $isSql = true)
 		{
+			if (!$isSql) $data = utils::date2sql($data);
 			list($Y,$m,$d) = explode("-", $data);
     		return ( (date("md") < $m.$d) ? date("Y")-$Y-1 : date("Y")-$Y );
 		}
