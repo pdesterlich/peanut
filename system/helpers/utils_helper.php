@@ -98,6 +98,19 @@
 		public static function loadFile($file) {
 			return include $file;
 		}
+
+		/**
+		 * funzione age
+		 * calcola l'età partendo da una data (in formato yyyy-mm-dd)
+		 *
+		 * @return integer
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function age($data)
+		{
+			list($Y,$m,$d) = explode("-", $data);
+    		return ( (date("md") < $m.$d) ? date("Y")-$Y-1 : date("Y")-$Y );
+		}
 	}
 
 ?>
