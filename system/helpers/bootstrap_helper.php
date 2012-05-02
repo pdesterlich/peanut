@@ -69,9 +69,13 @@
 		public static function formElement($itemId, $label, $value, $width = "span5", $itemType = "input", $options = null)
 		{
 			$labelClass = "control-label";
+			$itemClass = "";
 			if (is_array($options)) {
 				if (array_key_exists('labelClass', $options)) {
 					$labelClass .= " ".$options["labelClass"];
+				}
+				if (array_key_exists('itemClass', $options)) {
+					$itemClass = $options["itemClass"];
 				}
 			}
 			$result = "";
@@ -80,16 +84,16 @@
 			$result .= "<div class='controls'>";
 			switch ($itemType) {
 				case 'input':
-					$result .= "<input type='text' class='{$width}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
+					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
 					break;
 				case 'password':
-					$result .= "<input type='password' class='{$width}' id='{$itemId}' name='{$itemId}' autocomplete='off'>";
+					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off'>";
 					break;
 				case 'textarea':
-					$result .= "<textarea class='{$width}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
+					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
 					break;
 				case 'select':
-					$result .= "<select class='{$width} id='$itemId' name='{$itemId}'>";					
+					$result .= "<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}'>";					
 					if (is_array($options)) {
 						if (array_key_exists('selectOptions', $options)) {
 							if (is_array($options["selectOptions"])) {
