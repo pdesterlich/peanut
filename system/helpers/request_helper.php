@@ -24,6 +24,17 @@
 			return $result;
 		}
 
+		/**
+		 * funzione exists
+		 * controlla l'esistenza di un parametro nella richiesta
+		 *
+		 * @return bool
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function exists($valueName)
+		{
+			return (isset($_REQUEST[$valueName]));
+		}
 	}
 
 ?>
