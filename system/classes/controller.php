@@ -63,6 +63,11 @@
 			$this->template = new Template();
 			// imposto il nome del template in base al nome del controller
 			$this->template->templateName = $controllerName.DS.$controllerName."_".$actionName.".php";
+			// imposta nomie controller e action nel template
+			$this->template->set(array(
+				"controllerName" => $controllerName,
+				"actionName" => $actionName,
+				));
 
 			// se è abilitato l'utilizzo del modello
 			if ($this->useModel) {
