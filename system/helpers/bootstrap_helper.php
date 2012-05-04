@@ -105,6 +105,13 @@
 					}
 					$result .= "</select>";
 					break;
+				case 'yesno':
+					$result .=
+						"<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}'>"
+						. "<option value='0' ".(($value == 0) ? "selected" : "").">no</option>"
+						. "<option value='1' ".(($value == 1) ? "selected" : "").">si</option>"
+						. "</select>";
+					break;
 			}
 			if (is_array($options)) {
 				if (array_key_exists('helpBlock', $options)) {
