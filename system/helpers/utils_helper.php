@@ -114,6 +114,22 @@
 			list($Y,$m,$d) = explode("-", $data);
     		return ( (date("md") < $m.$d) ? date("Y")-$Y-1 : date("Y")-$Y );
 		}
+
+		/**
+		 * funzione intToStrTime
+		 * converte un tempo da minuti a stringa
+		 *
+		 * @param $iTime integer tempo da convertire
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function intToStrTime($iTime)
+		{
+			$ore = floor($iTime / 60);
+			$minuti = $iTime % 60;
+			return date("H:i", mktime($ore, $minuti, 0, 0, 0, 0));
+		}
+
 	}
 
 ?>
