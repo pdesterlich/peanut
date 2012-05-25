@@ -244,6 +244,35 @@
 			return ($address == "") ? "" : "<a href='mailto://{$address}'>{$caption}</a>";
 		}
 
+		/**
+		 * funzione tr
+		 *
+		 * genera una riga di una tabella
+		 *
+		 * @param  array  $values  valori da aggiungere come colonne (<td>)
+		 * @param  array  $attr    attributi della riga
+		 * @param  string $colType tipo elemento per dato colonna (default: td)
+		 * @return string          codice html generato
+		 * @author Phelipe de Sterlich
+		 */
+		public static function tr($values, $attr = null, $colType = "td")
+		{
+			// apre la riga
+			$result = "<tr ".arrays::attributes($attr).">";
+			// per ogni valore della riga
+			foreach ($values as $item => $data) {
+				if (!is_array($data)) {
+					$result .= "<{$colType}>{$data}</{$colType}>";
+				} else {
+					$result .= "<{$colType} ".arrays::attributes($data).">{$item}</{$colType}>";
+				}
+			}
+			// chiude la riga
+			$result .= "</tr>";
+			
+			return $result;
+		}
+
 	}
 
 ?>
