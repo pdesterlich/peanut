@@ -130,6 +130,30 @@
 			return date("H:i", mktime($ore, $minuti, 0, 0, 0, 0));
 		}
 
+		/**
+		 * funzione sqlDateBetween
+		 * verifica se una data è all'interno di un range
+		 *
+		 * @param string $data     data da verificare (formato yyyy-mm-dd)
+		 * @param string $inizio   data inizio range (formato yyyy-mm-dd)
+		 * @param string $fine     data fine range (formato yyyy-mm-dd)
+		 * @param bool   $bEstremi flag per attivare la verifica anche sugli estremi del range
+		 * @return bool
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function sqlDateBetween($data, $inizio, $fine, $bEstremi = true)
+		{
+			$dData = (($data == "") OR ($data == "0000-00-00")) ? strtotime(date("Y-m-d")) : strtotime($data);
+			$dInizio = (($inizio == "") OR ($inizio == "0000-00-00")) ? ($dData - 1) : strtotime($inizio);
+			$dFine = (($fine == "") OR ($fine == "0000-00-00")) ? ($dData + 1) : strtotime($fine);
+
+			if ($bEstremi) {
+				return (($dData >= $dInizio) && ($dData <= $dFine));
+			} else {
+				return (($dData > $dInizio) && ($dData < $dFine));
+			}
+		}
+
 	}
 
 ?>
