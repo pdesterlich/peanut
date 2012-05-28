@@ -262,8 +262,10 @@
 			// per ogni valore della riga
 			foreach ($values as $item => $data) {
 				if (!is_array($data)) {
+					if ($data == "") $data = "&nbsp;";
 					$result .= "<{$colType}>{$data}</{$colType}>";
 				} else {
+					if ($item == "") $item = "&nbsp;";
 					$result .= "<{$colType} ".arrays::attributes($data).">{$item}</{$colType}>";
 				}
 			}
