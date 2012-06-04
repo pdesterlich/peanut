@@ -103,17 +103,43 @@
 		return preg_replace_callback('/_([a-z])/', $func, $str);
 	}
 
+	/**
+	 * funzione findAlternateName
+	 * ritorna il percorso alternativo per il nome passato, sostituendo tutte le occorrenze (tranne l'ultima) del _ con DS
+	 **/
+	function findAlternateName($originalName) {
+		$result = $originalName;
+
+		$isFirst = true;
+		for ($i = strlen($result); $i >= 0; $i--) {
+			if (substr($result, $i, 1) == "_") {
+				if (!$isFirst) {
+					$result = substr_replace($result, DS, $i, 1);
+				}
+				$isFirst = false;
+			}
+		}
+
+		return $result;
+	}
+
 	function controllerExists($controllerName) {
-		return (file_exists(APP.DS."controllers".DS."{$controllerName}.php")) OR (file_exists(SYSTEM.DS."controllers".DS."{$controllerName}.php"));
+		$altControllerName = findAlternateName($controllerName);
+		return (file_exists(APP.DS."controllers".DS."{$controllerName}.php"))
+			OR (file_exists(APP.DS."controllers".DS."{$altControllerName}.php"))
+			OR (file_exists(SYSTEM.DS."controllers".DS."{$controllerName}.php"));
 	}
 
 	function __autoload($class_name) {
 		$className = from_camel_case($class_name);
+		$altClassName = findAlternateName($className);
 		// modelli
 		if (file_exists(APP.DS."models".DS."{$className}.php")) { require_once APP.DS."models".DS."{$className}.php"; }
+		else if (file_exists(APP.DS."models".DS."{$altClassName}.php")) { require_once APP.DS."models".DS."{$altClassName}.php"; }
 		else if (file_exists(SYSTEM.DS."models".DS."{$className}.php")) { require_once SYSTEM.DS."models".DS."{$className}.php"; }
 		// controller
 		else if (file_exists(APP.DS."controllers".DS."{$className}.php")) { require_once APP.DS."controllers".DS."{$className}.php"; }
+		else if (file_exists(APP.DS."controllers".DS."{$altClassName}.php")) { require_once APP.DS."controllers".DS."{$altClassName}.php"; }
 		else if (file_exists(SYSTEM.DS."controllers".DS."{$className}.php")) { require_once SYSTEM.DS."controllers".DS."{$className}.php"; }
 		// helpers
 		else if (file_exists(APP.DS."helpers".DS."{$className}_helper.php")) { require_once APP.DS."helpers".DS."{$className}_helper.php"; }
