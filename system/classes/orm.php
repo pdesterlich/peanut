@@ -553,6 +553,7 @@
 				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i:s");
 
 				$this->id = database::insert($this->tableName, $fields, true);
+				$this->_initializeHasOne();
 			} else {
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
 				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i");
