@@ -81,7 +81,7 @@
 			$result = "";
 			$result .= "<div class='control-group'>";
 			$result .= "<label class='{$labelClass}' for='{$itemId}'>{$label}</label>";
-			$result .= "<div class='controls'>";
+			$result .= "<div class='controls' id='controls-{$itemId}'>";
 			switch ($itemType) {
 				case 'input':
 					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
