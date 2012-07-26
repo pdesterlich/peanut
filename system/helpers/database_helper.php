@@ -94,7 +94,7 @@
 			return $result;
 		}
 
-		public static function insert($tableName, $fields, $returnId = false) {
+		public static function insert($tableName, $fields, $returnId = false, $doDebug = true) {
 			/** database_helper **
 			 * funzione insert
 			 * esegue una query di inserimento sul database
@@ -117,13 +117,13 @@
 				);
 
 			// eseguo la query di inserimento
-			database::query($sql);
+			database::query($sql, "query", $doDebug);
 
 			// 
 			if ($returnId) return mysql_insert_id();
 		}
 
-		public static function update($tableName, $fields, $where = null) {
+		public static function update($tableName, $fields, $where = null, $doDebug = true) {
 			/** database_helper **
 			 * funzione update
 			 * esegue una query di aggiornamento sul database
@@ -151,10 +151,10 @@
 			}
 
 			// esegue la query di aggiornamento
-			return database::query($sql);
+			return database::query($sql, "query", $doDebug);
 		}
 
-		public static function delete($tableName, $where = null) {
+		public static function delete($tableName, $where = null, $doDebug = true) {
 			/** database_helper **
 			 * funzione delete
 			 * esegue una query di eliminazione sul database
@@ -181,7 +181,7 @@
 			}
 
 			// esegue la query di eliminazione
-			return database::query($sql);
+			return database::query($sql, "query", $doDebug);
 		}
 	}
 
