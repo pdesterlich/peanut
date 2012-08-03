@@ -46,7 +46,7 @@
 		}
 
 		public static function sql2datetime($data, $advanced = false) {
-			if (($data == "") OR ($data = "0000-00-00 00:00:00")) {
+			if (($data == "") OR ($data == "0000-00-00 00:00:00")) {
 				return "";
 			} else if (!$advanced) {
 				return date('d/m/Y H:i', strtotime($data));
