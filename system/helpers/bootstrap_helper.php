@@ -98,7 +98,12 @@
 						if (array_key_exists('selectOptions', $options)) {
 							if (is_array($options["selectOptions"])) {
 								foreach ($options["selectOptions"] as $optionKey => $optionValue) {
-									$result .= "<option value='{$optionKey}' ".(($optionKey == $value) ? "selected" : "").">{$optionValue}</option>";
+									if (is_array($optionValue)) {
+										$selected = ($optionKey == $value) ? "selected" : "";
+										$result .= sprintf("<option value='%s' action='%s' %s>%s</option>", $optionKey, $optionValue["action"], $selected, $optionValue["title"]);
+									} else {
+										$result .= "<option value='{$optionKey}' ".(($optionKey == $value) ? "selected" : "").">{$optionValue}</option>";
+									}
 								}
 							}
 						}
@@ -111,6 +116,9 @@
 						. "<option value='0' ".(($value == 0) ? "selected" : "").">no</option>"
 						. "<option value='1' ".(($value == 1) ? "selected" : "").">si</option>"
 						. "</select>";
+					break;
+				case 'file':
+					$result .= "<input type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}'>";
 					break;
 			}
 			if (is_array($options)) {
