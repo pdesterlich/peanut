@@ -24,6 +24,18 @@
 			return str_replace($english, $italian, parent::format($format));
 		}
 
+		/**
+		 * imposta la data in base al parametro passato
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public function fromDate($date)
+		{
+			list($giorno, $mese, $anno) = explode("/", $date);
+			$this->setDate($anno, $mese, $giorno);
+		}
+
 	} // END class DateTimeItalian extends DateTime
 
 ?>
