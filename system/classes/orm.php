@@ -465,7 +465,7 @@
 			$sql .= " FROM {$this->tableName}"; // aggiungo il nome della tabella
 
 			// se sono impostate le condizioni di ricerca
-			if ($where != null) {
+			if (($where != null) && ($where != "")) {
 				// se le condizioni di ricerca sono un array
 				if (is_array($where)) {
 					// converto da array a stringa e aggiungo alla query
