@@ -55,11 +55,12 @@
 	
 	$config["layout"]["title"] = "Peanut!";
 
-	$config["database"]["enabled"] = false;
-	$config["database"]["host"] = "";
-	$config["database"]["name"] = "";
+	$config["database"]["enabled"]  = false;
+	$config["database"]["host"]     = "";
+	$config["database"]["name"]     = "";
 	$config["database"]["username"] = "";
 	$config["database"]["password"] = "";
+	$config["database"]["create"]   = false; // crea il database se non esiste
 
 	/**
 	 * prefisso tabelle in database - istanza da sostituire

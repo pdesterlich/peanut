@@ -40,8 +40,22 @@
 		}
 		// eseguo la connessione al database
 		if (!mysql_select_db($config["database"]["name"])) {
-			// se non riesco, mostro un messaggio di errore
-			die (__("system.mysql_database_connect_fail", array(":database" => $config["database"]["name"], ":errore" => mysql_error())));
+			// se non riesco, verifico se devo tentarne la creazione
+			// se la creazione non è abilitata
+			if ($config["database"]["create"] == false) {
+				// mostro un messaggio di errore
+				die (__("system.mysql_database_connect_fail", array(":database" => $config["database"]["name"], ":errore" => mysql_error())));
+			} else {
+				if (!mysql_query("CREATE DATABASE " . $config["database"]["name"])) {
+					// mostro un messaggio di errore
+					die (__("system.mysql_database_create_fail", array(":database" => $config["database"]["name"], ":errore" => mysql_error())));
+				} else {
+					if (!mysql_select_db($config["database"]["name"])) {
+						// mostro un messaggio di errore
+						die (__("system.mysql_database_connect_fail", array(":database" => $config["database"]["name"], ":errore" => mysql_error())));
+					}
+				}
+			}
 		}
 		// imposto il charset a utf-8
 		if (!mysql_query("SET CHARACTER SET utf8")) {

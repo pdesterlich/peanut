@@ -16,6 +16,7 @@
 		"system.query_fail" => "query fallita:<br>:sql<br>errore:<br>:errore",
 		"system.mysql_server_connect_fail" => "connessione al server mysql :server non possibile: :errore",
 		"system.mysql_database_connect_fail" => "connessione al database :database non possibile: :errore",
+		"system.mysql_database_create_fail" => "creazione database :database non possibile: :errore",
 		"system.mysql_set_charset_fail" => "impostazione charset sul database :database non possibile: :errore",
 		);
 ?>
