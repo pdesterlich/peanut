@@ -70,6 +70,7 @@
 		{
 			$labelClass = "control-label";
 			$itemClass = "";
+			$groupAttr = "";
 			if (is_array($options)) {
 				if (array_key_exists('labelClass', $options)) {
 					$labelClass .= " ".$options["labelClass"];
@@ -77,9 +78,12 @@
 				if (array_key_exists('itemClass', $options)) {
 					$itemClass = $options["itemClass"];
 				}
+				if (array_key_exists('groupAttr', $options)) {
+					$groupAttr = arrays::attributes($options["groupAttr"]);
+				}				
 			}
 			$result = "";
-			$result .= "<div class='control-group'>";
+			$result .= "<div class='control-group' {$groupAttr}>";
 			$result .= "<label class='{$labelClass}' for='{$itemId}'>{$label}</label>";
 			$result .= "<div class='controls' id='controls-{$itemId}'>";
 			switch ($itemType) {
