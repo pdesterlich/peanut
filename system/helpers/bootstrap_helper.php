@@ -68,9 +68,11 @@
 		 **/
 		public static function formElement($itemId, $label, $value, $width = "span5", $itemType = "input", $options = null)
 		{
-			$labelClass = "control-label";
-			$itemClass = "";
-			$groupAttr = "";
+			$labelClass        = "control-label";
+			$itemClass         = "";
+			$groupAttr         = "";
+			$passwordShowValue = false;
+
 			if (is_array($options)) {
 				if (array_key_exists('labelClass', $options)) {
 					$labelClass .= " ".$options["labelClass"];
@@ -80,7 +82,10 @@
 				}
 				if (array_key_exists('groupAttr', $options)) {
 					$groupAttr = arrays::attributes($options["groupAttr"]);
-				}				
+				}
+				if (array_key_exists('passwordShowValue', $options)) {
+					$passwordShowValue = $options["passwordShowValue"];
+				}
 			}
 			$result = "";
 			$result .= "<div class='control-group' {$groupAttr}>";
@@ -91,7 +96,8 @@
 					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
 					break;
 				case 'password':
-					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off'>";
+					$value = ($passwordShowValue) ? "value='{$value}'" : "";
+					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value}>";
 					break;
 				case 'textarea':
 					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
