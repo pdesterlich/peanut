@@ -154,6 +154,27 @@
 			}
 		}
 
+		/**
+		 * funzione downloadFile
+		 * scarica un file remoto e lo salva il un percorso locale
+		 *
+		 * @param string $source url completo del file da scaricare
+		 * @param string $dest   percorso completo del file da scrivere
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function downloadFile($source, $dest)
+		{
+			$fp = fopen($dest, 'w');
+
+			$ch = curl_init($source);
+			curl_setopt($ch, CURLOPT_FILE, $fp);
+
+			$data = curl_exec($ch);
+
+			curl_close($ch);
+			fclose($fp);
+		}
 	}
 
 ?>
