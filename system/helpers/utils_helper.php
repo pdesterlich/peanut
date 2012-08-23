@@ -52,19 +52,15 @@
 				return date('d/m/Y H:i', strtotime($data));
 			} else {
 				$giorni = floor((mktime (0,0,0,date("m")  ,date("d")+1,date("Y")) - strtotime($data)) / (60*60*24));
-				$format = "d/m H:i";
-				switch ($giorni) {
-					case 0:
-						$format = "H:i";
-						break;
-					case 1:
-						$format = "\i\e\\r\i H:i";
-						break;
-					default:
-						break;
+				if ($giorni == 0) {
+					return date("H:i", strtotime($data));
+				} else if ($giorni == 1) {
+					return "ieri " . date("H:i", strtotime($data));
+				} else if (date("Y") != date("Y", strtotime($data))) {
+					return date("d/m/Y H:i", strtotime($data));	
+				} else {
+					return date("d/m H:i", strtotime($data));	
 				}
-				if (date("Y") != date("Y", strtotime($data))) $format = "d/m/Y H:i";
-				return date($format, strtotime($data));
 			}
 		}
 
