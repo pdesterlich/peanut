@@ -659,12 +659,13 @@
 		 * funzione getModifiedFields
 		 * ritorna un array contenente i campi del record che sono stati modificati rispetto al loro valore originale
 		 *
-		 * @param  bool  $asText se true, l'aray viene ritornato come stringa
+		 * @param  $asText     bool    se true, l'aray viene ritornato come stringa
+		 * @param  $outputType integer flag per attivazione scrittura in modalità standard (0), textile (1)
 		 * @return mixed array "nome_campo" => array("old" => "valore_originale", "new" => "valore_modificato")
 		 *               false se non ci sono campi modificati
 		 * @author Phelipe de Sterlich
 		 **/
-		function getModifiedFields($asText = false)
+		function getModifiedFields($asText = false, $outputType = 0)
 		{
 			// inizializza l'array risultato
 			$result = array();
@@ -685,7 +686,15 @@
 				// ritorna i campi modificati come stringa
 				$result_s = "";
 				foreach ($result as $key => $value) {
-					$result_s .= sprintf("campo = %s\nold = %s\nnew = %s\n-----\n", $key, $value["old"], $value["new"]);
+
+					switch ($outputType) {
+						case 1: // textile
+							$result_s .= sprintf("|_. %s|%s|%s|\n", $key, ($value["old"] == "") ? "-" : $value["old"], $value["new"]);
+							break;
+						default:
+							$result_s .= sprintf("campo = %s\nold = %s\nnew = %s\n-----\n", $key, $value["old"], $value["new"]);
+							break;
+					}
 				}
 				return $result_s;
 			} else {
@@ -698,14 +707,22 @@
 		 * funzione asText
 		 * ritorna il record in versione testuale
 		 *
+		 * @param $outputType integer flag per attivazione scrittura in modalità standard (0), textile (1)
 		 * @return void
-		 * @author 
+		 * @author Phelipe de Sterlich
 		 **/
-		function asText()
+		function asText($outputType = 0)
 		{
 			$result = "";
 			foreach ($this->fields as $key => $value) {
-				$result .= sprintf("%s = %s\n", $key, ($key == $this->idFieldName) ? $this->id : $this->getField($key));
+				switch ($outputType) {
+					case 1: // textile
+						$result .= sprintf("|_. %s|%s|\n", $key, ($key == $this->idFieldName) ? $this->id : $this->getField($key));
+						break;
+					default:
+						$result .= sprintf("%s = %s\n", $key, ($key == $this->idFieldName) ? $this->id : $this->getField($key));
+						break;
+				}
 			}
 			return $result;
 		}
