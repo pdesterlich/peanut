@@ -275,6 +275,26 @@
 			return $result;
 		}
 
+		/**
+		 * crea un link a uno o piu' file javascript
+		 *
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function scriptSrc($script)
+		{
+			$result = '';
+			if (!is_array($script)) {
+				$result = "<script type='text/javascript' src='{$script}'></script>\n";
+			} else {
+				foreach ($script as $file) {
+					$result .= "<script type='text/javascript' src='{$file}'></script>\n";
+				}
+			}
+
+			return $result;
+		}
+
 	}
 
 ?>
