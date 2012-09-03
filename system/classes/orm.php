@@ -689,7 +689,9 @@
 
 					switch ($outputType) {
 						case 1: // textile
-							$result_s .= sprintf("|_. %s|%s|%s|\n", $key, ($value["old"] == "") ? "-" : $value["old"], $value["new"]);
+							$oldValue = ($value["old"] == "") ? "&nbsp;" : $value["old"];
+							$newValue = ($value["new"] == "") ? "&nbsp;" : $value["new"];
+							$result_s .= sprintf("|_. %s|%s|%s|\n", $key, $oldValue, $newValue);
 							break;
 						default:
 							$result_s .= sprintf("campo = %s\nold = %s\nnew = %s\n-----\n", $key, $value["old"], $value["new"]);
@@ -714,10 +716,13 @@
 		function asText($outputType = 0)
 		{
 			$result = "";
+
 			foreach ($this->fields as $key => $value) {
 				switch ($outputType) {
 					case 1: // textile
-						$result .= sprintf("|_. %s|%s|\n", $key, ($key == $this->idFieldName) ? $this->id : $this->getField($key));
+						$value = ($key == $this->idFieldName) ? $this->id : $this->getField($key);
+						$value = ($value == "") ? "&nbsp;" : $value;
+						$result .= sprintf("|_. %s|%s|\n", $key, $value);
 						break;
 					default:
 						$result .= sprintf("%s = %s\n", $key, ($key == $this->idFieldName) ? $this->id : $this->getField($key));
