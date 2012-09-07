@@ -31,7 +31,6 @@
 		public static function read($path)
 		{
 			if (empty(self::$_config)) {
-				dump ("lettura configurazione");
 				global $config;
 				self::$_config = $config;
 			}
