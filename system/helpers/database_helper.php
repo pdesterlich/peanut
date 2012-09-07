@@ -25,9 +25,6 @@
 		 * @author Phelipe de Sterlich
 		 **/
 		public static function query($sql, $fetch = "query", $doDebug = true) {
-			// importa la variabile globale $config
-			global $config;
-
 			/*
 				TODO : migliorare gestione errori su esecuzione query
 			*/
@@ -39,7 +36,7 @@
 			$sql = trim($sql);
 
 			// imposta, se previsto, il prefisso delle tabelle
-			$sql = str_replace($config["database"]["prefix_search"], $config["database"]["prefix_replace"], $sql);
+			$sql = str_replace(Configure::read("database.prefix_search"), Configure::read("database.prefix_replace"), $sql);
 
 			// eseguo la query sul database
 			$query = mysql_query($sql) or die (__("system.query_fail", array(":sql" => $sql, ":errore" => mysql_error())));

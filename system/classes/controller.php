@@ -34,7 +34,7 @@
 		protected $controllerName = "";
 
 		function __construct($id = 0) {
-			global $controllerName, $actionName, $config;
+			global $controllerName, $actionName;
 
 			// imposta la proprietà controllerName del controller
 			$this->controllerName = $controllerName;
@@ -46,7 +46,7 @@
 				// disabilito l'uso del layout
 				$this->useLayout = false;
 				// disabilito il debug
-				$config["debug"] = false;
+				Configure::write("debug", false);
 			}
 
 			// imposto l'identificativo dell'oggetto
@@ -55,9 +55,9 @@
 			// creo il layout
 			$this->layout = new Template();
 			// imposto il nome del layout in base alla configurazione
-			$this->layout->templateName = $config["controller"]["layout"];
+			$this->layout->templateName = Configure::read("controller.layout");
 			// imposto il titolo del layout in base alla configurazione
-			$this->layoutTitle = $config["layout"]["title"];
+			$this->layoutTitle = Configure::read("layout.title");
 
 			// creo il template
 			$this->template = new Template();
@@ -79,7 +79,7 @@
 				// creo il modello
 				$this->model = new $modelName($this->id);
 				$timerStop = microtime(true);
-				if ($config["debug"]) debugItem("inizializzazione modello controller", $timerStop - $timerStart);
+				if (Configure::read("debug")) debugItem("inizializzazione modello controller", $timerStop - $timerStart);
 
 				// carico il record corrente (se presente) nel template
 				if ($id) {

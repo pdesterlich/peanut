@@ -63,6 +63,14 @@
 	$config["database"]["create"]   = false; // crea il database se non esiste
 
 	/**
+	 * charset da impostare sul database
+	 * se specificato, viene eseguita la query "SET CHARACTER SET x"
+	 *
+	 * @var string
+	 **/
+	$config["database"]["charset"]  = "";
+
+	/**
 	 * prefisso tabelle in database - istanza da sostituire
 	 * se specificato, viene sostituito con il valore del prefisso (indicato in prefix_replace)
 	 *

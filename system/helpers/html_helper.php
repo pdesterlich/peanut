@@ -24,16 +24,14 @@
 		 */
 		public static function url($controller = "", $action = "", $params = null)
 		{
-			global $config;
-
 			$result = "";
 
 			// legge l'url base e aggiunge, se necessario, lo slash finale
-			$basePath = $config["url"]["base"];
+			$basePath = Configure::read("url.base");
 			if (($basePath != "") AND (substr($basePath, -1) != "/")) $basePath .= "/";
 
 			// legge l'impostazione del parametro short url
-			$shortUrl = $config["url"]["short"];
+			$shortUrl = Configure::read("url.short");
 
 			// aggiunge il controller
 			if ($controller != "") $result .= ($shortUrl) ? "/{$controller}" : "&controller={$controller}";
@@ -65,7 +63,7 @@
 			$result = preg_replace('/&/', '?', $result, 1);
 			// aggiunge protocollo, path base e la pagina base
 			$result = $basePath . (($shortUrl) ? "" : "index.php") . $result;
-			$result = (($basePath == "") ? "" : $config["url"]["protocol"] . "://") . str_replace("//", "/", $result);
+			$result = (($basePath == "") ? "" : Configure::read("url.protocol") . "://") . str_replace("//", "/", $result);
 
 			// ritorna l'url generato, rimuovendo eventuali doppi slash
 			return $result;

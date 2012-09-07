@@ -20,9 +20,9 @@
 		 * $details (string) eventuali informazioni aggiuntive
 		 **/
 
-		global $debug, $config;
+		global $debug;
 		// se il sistema è in modalità di debug, aggiungo le informazioni all'array di debug
-		if ($config["debug"]) $debug[] = array("item" => $item, "time" => sprintf("%.6f", $time), "details" => $details);
+		if (Configure::read("debug")) $debug[] = array("item" => $item, "time" => sprintf("%.6f", $time), "details" => $details);
 	}
 
 	function _dump($var, $usePre) {
@@ -175,7 +175,7 @@
 	 * @author Phelipe de Sterlich
 	 */
 	function getBasicVars() {
-		global $config, $controllerName, $actionName, $idValue;
+		global $controllerName, $actionName, $idValue;
 
 		// leggo il nome del controller
 		if (isset($_GET["controller"])) {
@@ -183,7 +183,7 @@
 		} elseif (isset($_POST["controller"])) {
 			$controllerName = $_POST["controller"];
 		} else {
-			$controllerName = $config["routes"]["controller"];
+			$controllerName = Configure::read("routes.controller");
 		}
 		// leggo il nome dell'action
 		if (isset($_GET["action"])) {
@@ -191,7 +191,7 @@
 		} elseif (isset($_POST["action"])) {
 			$actionName = $_POST["action"];
 		} else {
-			$actionName = $config["routes"]["action"];
+			$actionName = Configure::read("routes.action");
 		}
 		// leggo l'identificativo record
 		if (isset($_GET["id"])) {

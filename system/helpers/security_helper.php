@@ -66,9 +66,7 @@
 			 * basato su http://www.php.net/manual/en/function.md5.php#98314
 			 */
 
-			global $config;
-
-			$str .= md5($config["security"]["salt"]); // aggiungo al testo il salt (stringa pseudo casuale per rendere più complesso il testo)
+			$str .= md5(Configure::read("security.salt")); // aggiungo al testo il salt (stringa pseudo casuale per rendere più complesso il testo)
 			return md5($str); // ritorno l'hash md5 del testo ottenuto
 		}
 

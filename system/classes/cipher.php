@@ -6,9 +6,7 @@ class cipher {
 	private $iv;
 
 	function __construct() {
-		global $config;
-
-		$this->securekey = hash('sha256',$config["security"]["cipher"],TRUE);
+		$this->securekey = hash('sha256', Configure::read("security.cipher"), TRUE);
 		$this->iv = mcrypt_create_iv(32, MCRYPT_DEV_URANDOM);
 	}
 
