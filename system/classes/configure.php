@@ -32,7 +32,7 @@
 		 * @return void
 		 * @author Phelipe de Sterlich
 		 **/
-		protected function _loadConfig()
+		protected static function _loadConfig()
 		{
 			global $config;
 			self::$_config = $config;
