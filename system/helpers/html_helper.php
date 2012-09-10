@@ -286,8 +286,16 @@
 				if ($devMode) $script = str_replace(".min", "", $script);
 				$result = "<script type='text/javascript' src='{$script}'></script>\n";
 			} else {
-				foreach ($script as $file) {
-					if ($devMode) $file = str_replace(".min", "", $file);
+				foreach ($script as $key => $value) {
+					if (!is_array($value)) {
+						$file = $value;
+						if ($devMode) $file = str_replace(".min", "", $file);
+					} else {
+						$file = $key;
+						if (arrays::getVal($value, "noReplace", false) == false) {
+							if ($devMode) $file = str_replace(".min", "", $file);
+						}
+					}
 					$result .= "<script type='text/javascript' src='{$file}'></script>\n";
 				}
 			}
