@@ -9,9 +9,6 @@
 
 	session_start(); // inizializzo la sessione
 
-	$debug = array(); // inizializzo l'array per le informazioni di debugItem
-	$mainTimerStart = microtime(true); // inizializzo il timer per il tempo di esecuzione complessivo
-
 	// inizializzo le variabili per controller, action e id
 	$controllerName = "";
 	$actionName = "";
@@ -30,15 +27,17 @@
 		lang::setLang(session::get("lang", ""));
 	}
 
-	$timerStart = microtime(true);
+	Configure::write("debug", true);
+
+	Debug::start("generazione pagina (complessivo)");
+	Debug::start("inizializzazione cipher");
 	$cipher = new cipher(); // inizializzo la classe per codifica / decodifica
-	$timerStop = microtime(true);
-	if (Configure::read("debug")) debugItem("inizializzazione cipher", $timerStop - $timerStart);
+	Debug::stop();
 
 	// se è abilitata la connessione al database
 	if (Configure::read("database.enabled")) {
 		// debug: avvio timer
-		$timeStart = microtime(true);
+		Debug::start("apertura database");
 		// eseguo la connessione al server mysql
 		if (!mysql_connect(Configure::read("database.host"), Configure::read("database.username"), Configure::read("database.password"))) {
 			// se non riesco, mostro un messaggio di errore
@@ -71,10 +70,7 @@
 				die (__("system.mysql_set_charset_fail", array(":database" => Configure::read("database.name"), ":errore" => mysql_error())));
 			}
 		}
-		// debug: stop timer
-		$timeStop = microtime(true);
-		// debug
-		if (Configure::read("debug")) debugItem("apertura database", $timeStop - $timeStart);
+		Debug::stop("apertura database");
 	}
 
 	getBasicVars();
@@ -84,18 +80,17 @@
 	*/
 	header('Content-type: text/html; charset=utf-8');
 
-	$timerStart = microtime(true);
+	Debug::start("inizializzazione controller");
 	if (!controllerExists($controllerName."_controller")) {
 		$controller = new StaticController();
 	} else {
 		$controllerClass = to_camel_case($controllerName."_controller", true);
 		$controller = new $controllerClass($idValue); // creo un oggetto controller e, se presente, ne carico i parametri
 	}
-	$timerStop = microtime(true);
-	if (Configure::read("debug")) debugItem("inizializzazione controller", $timerStop - $timerStart);
+	Debug::stop("inizializzazione controller");
 
 	// se l'azione non esiste nel controller, esce dall'applicazione mostrando il messaggio d'errore
-	$timerStart = microtime(true);
+	Debug::start("esecuzione azione");
 	if (!method_exists($controller, $actionName)) {
 		if ((file_exists(APP.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php")) OR (file_exists(SYSTEM.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php"))) {
 			// $controller = new StaticController();
@@ -106,34 +101,30 @@
 	} else {
 		$controller->$actionName();
 	}
-	$timerStop = microtime(true);
-	if (Configure::read("debug")) debugItem("esecuzione azione", $timerStop - $timerStart);
+	Debug::stop();
 
 	if ($controller->useTemplate) {
-		$timerStart = microtime(true);
+		Debug::start("rendering template");
 		$layoutContent = $controller->template->render();
-		$timerStop = microtime(true);
-		if (Configure::read("debug")) debugItem("rendering template", $timerStop - $timerStart);
+		Debug::stop("rendering template");
 	} else {
 		$layoutContent = $controller->layoutContent;
 	}
 
 	if ($controller->useLayout) {
-		$timerStart = microtime(true);
+		Debug::start("rendering layout");
 		$controller->layout->set(array("layoutTitle" => $controller->layoutTitle, "layoutContent" => $layoutContent));
 		echo $controller->layout->render("layouts");
-		$timerStop = microtime(true);
-		if (Configure::read("debug")) debugItem("rendering layout", $timerStop - $timerStart);
+		Debug::stop("rendering layout");
 	} else {
 		echo $layoutContent;
 	}
 
-	$mainTimerStop = microtime(true);
+	Debug::stop("generazione pagina (complessivo)");
 
 	if (Configure::read("debug")) {
-		debugItem("generazione pagina (tempo complessivo)", $mainTimerStop - $mainTimerStart);
 		$debugTemplate = new Template("debug.php");
-		$debugTemplate->set("debug", $debug);
+		$debugTemplate->set("debug", Debug::get());
 		echo $debugTemplate->render();
 	}
 

@@ -71,15 +71,14 @@
 
 			// se è abilitato l'utilizzo del modello
 			if ($this->useModel) {
-				$timerStart = microtime(true);
+				Debug::start("inizializzazione modello controller");
 				// se il nome del modello non è assegnato, lo imposto in base al nome del controller
 				if ($this->modelName == "") $this->modelName = str_replace("Controller", "Model", get_class($this));
 				// leggo il nome del modello
 				$modelName = $this->modelName;
 				// creo il modello
 				$this->model = new $modelName($this->id);
-				$timerStop = microtime(true);
-				if (Configure::read("debug")) debugItem("inizializzazione modello controller", $timerStop - $timerStart);
+				Debug::stop("inizializzazione modello controller");
 
 				// carico il record corrente (se presente) nel template
 				if ($id) {

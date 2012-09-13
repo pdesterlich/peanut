@@ -19,6 +19,7 @@
 	div#debug table td {
 		border: 1px dotted silver;
 		padding: 1px 5px;
+		vertical-align: top;
 	}
 	div#debug div.query {
 		font-family: "Courier New", Courier, mono;
@@ -34,8 +35,20 @@
 		<thead><tr><td style="min-width: 200px">elemento</td><td>tempo (sec.)</td><td>dettagli</td></tr></thead>
 		<tbody>
 	<?php
-		foreach ($debug as $debugItem) {
-			echo "<tr><td>{$debugItem['item']}</td><td>{$debugItem['time']}</td><td>{$debugItem['details']}</td></tr>\n";
+		foreach ($debug as $key => $attr) {
+			$data = "";
+			if (array_key_exists("data", $attr)) {
+				foreach ($attr["data"] as $key => $value) {
+					$data .= sprintf("<div><span class='attr-name'>%s</span> %s</div>", $key, $value);
+				}
+			}
+			if ($data == "") $data = "&nbsp;";
+
+			printf("<tr><td>%s</td><td>%.6f</td><td>%s</td>",
+				$key,
+				$attr["time"],
+				$data
+				);
 		}
 	?>
 		</tbody>

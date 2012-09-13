@@ -16,7 +16,6 @@
 		 *
 		 * @param $sql     string query da eseguire
 		 * @param $fetch   string tipo variabile da ritornare
-		 * @param $doDebug bool   flag per attivazione informazioni di debug
 		 * @return resource - se $fetch = "query", ritorna la risorsa ottenuta da mysql_query
 		 *         array    - se $fetch = "array", ritorna il singolo record (il primo se la query prevede più record come risultato) in forma di array
 		 *         object   - se $fetch = "object", ritorna il singolo record (il primo se la query prevede più record come risultato) in forma di oggetto
@@ -24,13 +23,13 @@
 		 *         int      - se $fetch = "records_num", ritorna un array dei record ottenuti dalla query, associando i campi per indice
 		 * @author Phelipe de Sterlich
 		 **/
-		public static function query($sql, $fetch = "query", $doDebug = true) {
+		public static function query($sql, $fetch = "query") {
 			/*
 				TODO : migliorare gestione errori su esecuzione query
 			*/
 
 			// inizializzo il timer (per debug)
-			$timeStart = microtime(true);
+			Debug::start("esecuzione query");
 
 			// rimuovo eventuali spazi presenti in testa e in coda alla stringa sql
 			$sql = trim($sql);
@@ -85,13 +84,13 @@
 			$timeStop = microtime(true);
 
 			// aggiungo al debug le informazioni sull'esecuzione della query
-			if ($doDebug) debugItem("esecuzione query", $timeStop - $timeStart, "<div class='query'>".$sql."</div>numero record: ".$numRec);
+			Debug::stop("esecuzione query", array("query" => $sql, "records" => $numRec));
 
 			// ritorno il risultato
 			return $result;
 		}
 
-		public static function insert($tableName, $fields, $returnId = false, $doDebug = true) {
+		public static function insert($tableName, $fields, $returnId = false) {
 			/** database_helper **
 			 * funzione insert
 			 * esegue una query di inserimento sul database
@@ -114,13 +113,13 @@
 				);
 
 			// eseguo la query di inserimento
-			database::query($sql, "query", $doDebug);
+			database::query($sql, "query");
 
 			// 
 			if ($returnId) return mysql_insert_id();
 		}
 
-		public static function update($tableName, $fields, $where = null, $doDebug = true) {
+		public static function update($tableName, $fields, $where = null) {
 			/** database_helper **
 			 * funzione update
 			 * esegue una query di aggiornamento sul database
@@ -148,10 +147,10 @@
 			}
 
 			// esegue la query di aggiornamento
-			return database::query($sql, "query", $doDebug);
+			return database::query($sql, "query");
 		}
 
-		public static function delete($tableName, $where = null, $doDebug = true) {
+		public static function delete($tableName, $where = null) {
 			/** database_helper **
 			 * funzione delete
 			 * esegue una query di eliminazione sul database
@@ -178,7 +177,7 @@
 			}
 
 			// esegue la query di eliminazione
-			return database::query($sql, "query", $doDebug);
+			return database::query($sql, "query");
 		}
 	}
 

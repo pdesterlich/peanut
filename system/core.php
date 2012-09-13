@@ -10,21 +10,6 @@
 	 * @package   peanut
 	 **/
 
-	function debugItem($item, $time, $details = "") {
-		/** peanut **
-		 * funzione debugItem
-		 * aggiunge le informazioni passate all'array di debug
-		 * -- input --
-		 * $item (string) oggetto del debug
-		 * $time ($float) tempo di esecuzione
-		 * $details (string) eventuali informazioni aggiuntive
-		 **/
-
-		global $debug;
-		// se il sistema è in modalità di debug, aggiungo le informazioni all'array di debug
-		if (Configure::read("debug")) $debug[] = array("item" => $item, "time" => sprintf("%.6f", $time), "details" => $details);
-	}
-
 	function _dump($var, $usePre) {
 		/** peanut **
 		 * funzione dump
