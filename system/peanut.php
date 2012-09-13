@@ -8,7 +8,6 @@
 	 **/
 
 	session_start(); // inizializzo la sessione
-	if (isset($_SESSION['lang'])) lang::setLang($_SESSION['lang']); // se previsto, imposto il linguaggio in base al dato indicato nella sessione
 
 	$debug = array(); // inizializzo l'array per le informazioni di debugItem
 	$mainTimerStart = microtime(true); // inizializzo il timer per il tempo di esecuzione complessivo
@@ -24,6 +23,12 @@
 	if (file_exists(APP.DS."config".DS."config.php")) include APP.DS."config".DS."config.php"; // includo, se esiste, il file di configurazione locale
 
 	include "core.php";
+
+	// se è definita la variabile di sessione "lang"
+	if (session::exists("lang")) {
+		// imposta il linguaggio in base a quanto impostato nella sessione
+		lang::setLang(session::get("lang", ""));
+	}
 
 	$timerStart = microtime(true);
 	$cipher = new cipher(); // inizializzo la classe per codifica / decodifica
