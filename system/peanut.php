@@ -27,9 +27,8 @@
 		lang::setLang(session::get("lang", ""));
 	}
 
-	Configure::write("debug", true);
-
 	Debug::start("generazione pagina (complessivo)");
+
 	Debug::start("inizializzazione cipher");
 	$cipher = new cipher(); // inizializzo la classe per codifica / decodifica
 	Debug::stop();

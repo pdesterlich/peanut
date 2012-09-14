@@ -190,7 +190,7 @@
 		if ((isset($_SERVER["REQUEST_URI"])) AND (strtolower(substr($_SERVER["REQUEST_URI"], 0, 10)) != "/index.php"))
 		{
 			$pathInfo = $_SERVER["REQUEST_URI"];
-			// rimuove, se presente, la parte di paraemtri GET
+			// rimuove, se presente, la parte di parametri GET
 			if ((isset($_SERVER["QUERY_STRING"])) AND ($_SERVER["QUERY_STRING"] != "")) $pathInfo = str_replace("?".$_SERVER["QUERY_STRING"], "", $pathInfo);
 			// rimuove gli eventuali slash iniziale e finale
 			if (substr($pathInfo, 0, 1) == "/") $pathInfo = substr($pathInfo, 1);
