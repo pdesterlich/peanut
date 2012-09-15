@@ -67,53 +67,14 @@
 		Debug::stop("apertura database");
 	}
 
-	Router::init(); // getBasicVars();
+	Router::init();
 
 	/*
 		TODO : rendere utf-8 configurabile da opzioni
 	*/
 	header('Content-type: text/html; charset=utf-8');
 
-	Debug::start("inizializzazione controller");
-	if (!controllerExists(Router::controller()."_controller")) {
-		$controller = new StaticController();
-	} else {
-		$controllerClass = to_camel_case(Router::controller()."_controller", true);
-		$controller = new $controllerClass(Router::id()); // creo un oggetto controller e, se presente, ne carico i parametri
-	}
-	Debug::stop("inizializzazione controller");
-
-	// se l'azione non esiste nel controller, esce dall'applicazione mostrando il messaggio d'errore
-	Debug::start("esecuzione azione");
-	if (!method_exists($controller, Router::action())) {
-		if ((file_exists(APP.DS."views".DS.Router::controller().DS.Router::controller()."_".Router::action().".php")) OR (file_exists(SYSTEM.DS."views".DS.Router::controller().DS.Router::controller()."_".Router::action().".php"))) {
-			// $controller = new StaticController();
-			$controller->staticPage();
-		} else {
-			die (__("system.method_not_found", array(":controller" => Router::controller(), ":action" => Router::action())));
-		}
-	} else {
-		$action = Router::action();
-		$controller->$action();
-	}
-	Debug::stop();
-
-	if ($controller->useTemplate) {
-		Debug::start("rendering template");
-		$layoutContent = $controller->template->render();
-		Debug::stop("rendering template");
-	} else {
-		$layoutContent = $controller->layoutContent;
-	}
-
-	if ($controller->useLayout) {
-		Debug::start("rendering layout");
-		$controller->layout->set(array("layoutTitle" => $controller->layoutTitle, "layoutContent" => $layoutContent));
-		echo $controller->layout->render("layouts");
-		Debug::stop("rendering layout");
-	} else {
-		echo $layoutContent;
-	}
+	Router::route();
 
 	Debug::stop("generazione pagina (complessivo)");
 

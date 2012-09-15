@@ -34,6 +34,43 @@
 		 **/
 		protected static $_id = 0;
 
+
+		/**
+		 * funzione controller
+		 * ritorna il nome del controller
+		 *
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function controller()
+		{
+			return self::$_controller;
+		}
+
+		/**
+		 * funzione action
+		 * ritorna il nome dell'action
+		 *
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function action()
+		{
+			return self::$_action;
+		}
+
+		/**
+		 * funzione id
+		 * ritorna l'identificativo del record
+		 *
+		 * @return integer
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function id()
+		{
+			return self::$_id;
+		}
+
 		/**
 		 * funzione init
 		 * inizializzazione classe, lettura e impostazione controller, action e id
@@ -92,39 +129,54 @@
 		}
 
 		/**
-		 * funzione controller
-		 * ritorna il nome del controller
+		 * funzione route
+		 * carica il controller ed esegue l'azione corrispondente
 		 *
-		 * @return string
+		 * @return void
 		 * @author Phelipe de Sterlich
 		 **/
-		public static function controller()
+		public static function route()
 		{
-			return self::$_controller;
-		}
+			Debug::start("inizializzazione controller");
+			if (!controllerExists(self::$_controller."_controller")) {
+				$controller = new StaticController();
+			} else {
+				$controllerClass = to_camel_case(self::$_controller."_controller", true);
+				$controller = new $controllerClass(self::$_id); // creo un oggetto controller e, se presente, ne carico i parametri
+			}
+			Debug::stop("inizializzazione controller");
 
-		/**
-		 * funzione action
-		 * ritorna il nome dell'action
-		 *
-		 * @return string
-		 * @author Phelipe de Sterlich
-		 **/
-		public static function action()
-		{
-			return self::$_action;
-		}
+			// se l'azione non esiste nel controller, esce dall'applicazione mostrando il messaggio d'errore
+			Debug::start("esecuzione azione");
+			if (!method_exists($controller, self::$_action)) {
+				if ((file_exists(APP.DS."views".DS.self::$_controller.DS.self::$_controller."_".self::$_action.".php")) OR (file_exists(SYSTEM.DS."views".DS.self::$_controller.DS.self::$_controller."_".self::$_action.".php"))) {
+					// $controller = new StaticController();
+					$controller->staticPage();
+				} else {
+					die (__("system.method_not_found", array(":controller" => self::$_controller, ":action" => self::$_action)));
+				}
+			} else {
+				$action = self::$_action;
+				$controller->$action();
+			}
+			Debug::stop();
 
-		/**
-		 * funzione id
-		 * ritorna l'identificativo del record
-		 *
-		 * @return integer
-		 * @author Phelipe de Sterlich
-		 **/
-		public static function id()
-		{
-			return self::$_id;
+			if ($controller->useTemplate) {
+				Debug::start("rendering template");
+				$layoutContent = $controller->template->render();
+				Debug::stop("rendering template");
+			} else {
+				$layoutContent = $controller->layoutContent;
+			}
+
+			if ($controller->useLayout) {
+				Debug::start("rendering layout");
+				$controller->layout->set(array("layoutTitle" => $controller->layoutTitle, "layoutContent" => $layoutContent));
+				echo $controller->layout->render("layouts");
+				Debug::stop("rendering layout");
+			} else {
+				echo $layoutContent;
+			}
 		}
 
 	} // END class Router
