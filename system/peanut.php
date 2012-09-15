@@ -9,11 +9,6 @@
 
 	session_start(); // inizializzo la sessione
 
-	// inizializzo le variabili per controller, action e id
-	$controllerName = "";
-	$actionName = "";
-	$idValue = 0;
-
 	// caricamento configurazione
 	include SYSTEM.DS."config".DS."config.defaults.php"; // includo il file di configurazione di default
 	if (file_exists(APP.DS."config".DS."config.application.php")) include APP.DS."config".DS."config.application.php"; // includo, se esiste, il file di configurazione dell'applicazione
@@ -72,7 +67,7 @@
 		Debug::stop("apertura database");
 	}
 
-	getBasicVars();
+	Router::init(); // getBasicVars();
 
 	/*
 		TODO : rendere utf-8 configurabile da opzioni
@@ -80,25 +75,26 @@
 	header('Content-type: text/html; charset=utf-8');
 
 	Debug::start("inizializzazione controller");
-	if (!controllerExists($controllerName."_controller")) {
+	if (!controllerExists(Router::controller()."_controller")) {
 		$controller = new StaticController();
 	} else {
-		$controllerClass = to_camel_case($controllerName."_controller", true);
-		$controller = new $controllerClass($idValue); // creo un oggetto controller e, se presente, ne carico i parametri
+		$controllerClass = to_camel_case(Router::controller()."_controller", true);
+		$controller = new $controllerClass(Router::id()); // creo un oggetto controller e, se presente, ne carico i parametri
 	}
 	Debug::stop("inizializzazione controller");
 
 	// se l'azione non esiste nel controller, esce dall'applicazione mostrando il messaggio d'errore
 	Debug::start("esecuzione azione");
-	if (!method_exists($controller, $actionName)) {
-		if ((file_exists(APP.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php")) OR (file_exists(SYSTEM.DS."views".DS.$controllerName.DS.$controllerName."_".$actionName.".php"))) {
+	if (!method_exists($controller, Router::action())) {
+		if ((file_exists(APP.DS."views".DS.Router::controller().DS.Router::controller()."_".Router::action().".php")) OR (file_exists(SYSTEM.DS."views".DS.Router::controller().DS.Router::controller()."_".Router::action().".php"))) {
 			// $controller = new StaticController();
 			$controller->staticPage();
 		} else {
-			die (__("system.method_not_found", array(":controller" => $controllerName, ":action" => $actionName)));
+			die (__("system.method_not_found", array(":controller" => Router::controller(), ":action" => Router::action())));
 		}
 	} else {
-		$controller->$actionName();
+		$action = Router::action();
+		$controller->$action();
 	}
 	Debug::stop();
 

@@ -34,10 +34,8 @@
 		protected $controllerName = "";
 
 		function __construct($id = 0) {
-			global $controllerName, $actionName;
-
 			// imposta la proprietà controllerName del controller
-			$this->controllerName = $controllerName;
+			$this->controllerName = Router::controller();
 
 			// verifico se la richiesta è stata fatta via ajax
 			if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') $this->isAjax = true;
@@ -62,11 +60,11 @@
 			// creo il template
 			$this->template = new Template();
 			// imposto il nome del template in base al nome del controller
-			$this->template->templateName = $controllerName.DS.$controllerName."_".$actionName.".php";
+			$this->template->templateName = Router::controller().DS.Router::controller()."_".Router::action().".php";
 			// imposta nomie controller e action nel template
 			$this->template->set(array(
-				"controllerName" => $controllerName,
-				"actionName" => $actionName,
+				"controllerName" => Router::controller(),
+				"actionName" => Router::action(),
 				));
 
 			// se è abilitato l'utilizzo del modello
@@ -121,9 +119,8 @@
 		 * @author Phelipe de Sterlich
 		 */
 		function staticPage() {
-			global $controllerName, $actionName;
 			// imposta il nome del template in base a controller / action specificati
-			$this->template->templateName = $controllerName.DS.$controllerName."_".$actionName.".php";
+			$this->template->templateName = Router::controller().DS.Router::controller()."_".Router::action().".php";
 		}
 
 	}

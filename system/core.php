@@ -153,60 +153,6 @@
 		return new $className();
 	}
 
-	/**
-	 * legge da GET, POST e REQUEST_URI i nomi del controller, dell'action e dell'id
-	 *
-	 * @return void
-	 * @author Phelipe de Sterlich
-	 */
-	function getBasicVars() {
-		global $controllerName, $actionName, $idValue;
-
-		// leggo il nome del controller
-		if (isset($_GET["controller"])) {
-			$controllerName = $_GET["controller"];
-		} elseif (isset($_POST["controller"])) {
-			$controllerName = $_POST["controller"];
-		} else {
-			$controllerName = Configure::read("routes.controller");
-		}
-		// leggo il nome dell'action
-		if (isset($_GET["action"])) {
-			$actionName = $_GET["action"];
-		} elseif (isset($_POST["action"])) {
-			$actionName = $_POST["action"];
-		} else {
-			$actionName = Configure::read("routes.action");
-		}
-		// leggo l'identificativo record
-		if (isset($_GET["id"])) {
-			$idValue = $_GET["id"];
-		} elseif (isset($_POST["id"])) {
-			$idValue = $_POST["id"];
-		} else {
-			$idValue = 0;
-		}
-		// se è impostato un request e non inizia con /index.php
-		if ((isset($_SERVER["REQUEST_URI"])) AND (strtolower(substr($_SERVER["REQUEST_URI"], 0, 10)) != "/index.php"))
-		{
-			$pathInfo = $_SERVER["REQUEST_URI"];
-			// rimuove, se presente, la parte di parametri GET
-			if ((isset($_SERVER["QUERY_STRING"])) AND ($_SERVER["QUERY_STRING"] != "")) $pathInfo = str_replace("?".$_SERVER["QUERY_STRING"], "", $pathInfo);
-			// rimuove gli eventuali slash iniziale e finale
-			if (substr($pathInfo, 0, 1) == "/") $pathInfo = substr($pathInfo, 1);
-			if (substr($pathInfo, -1, 1) == "/") $pathInfo = substr($pathInfo, 0, -1);
-			// se quello che resta è una stringa non vuota
-			if (trim($pathInfo) != "") {
-				$pathInfo = explode("/", $pathInfo);
-				$pathInfoCount = count($pathInfo);
-				// legge, se presenti, controller, action e id
-				if ($pathInfoCount > 0) $controllerName = $pathInfo[0];
-				if ($pathInfoCount > 1) $actionName = $pathInfo[1];
-				if ($pathInfoCount > 2) $idValue = $pathInfo[2];
-			}
-		}
-	}
-
 	function __($testo, $params = null, $lang = "")
 	{
 		/**

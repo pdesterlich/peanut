@@ -22,9 +22,8 @@
 		 * @author Phelipe de Sterlich
 		 */
 		function index() {
-			global $controllerName, $actionName;
 			// imposta il nome del template in base a controller / action specificati
-			$this->template->templateName = $controllerName.DS.$controllerName."_".$actionName.".php";
+			$this->template->templateName = Router::controller().DS.Router::controller()."_".Router::action().".php";
 		}
 
 	}
