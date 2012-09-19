@@ -71,6 +71,7 @@
 			$labelClass        = "control-label";
 			$itemClass         = "";
 			$groupAttr         = "";
+			$elementAttr       = "";
 			$passwordShowValue = false;
 
 			if (is_array($options)) {
@@ -83,6 +84,9 @@
 				if (array_key_exists('groupAttr', $options)) {
 					$groupAttr = arrays::attributes($options["groupAttr"]);
 				}
+				if (array_key_exists('elementAttr', $options)) {
+					$elementAttr = arrays::attributes($options["elementAttr"]);
+				}
 				if (array_key_exists('passwordShowValue', $options)) {
 					$passwordShowValue = $options["passwordShowValue"];
 				}
@@ -93,17 +97,17 @@
 			$result .= "<div class='controls' id='controls-{$itemId}'>";
 			switch ($itemType) {
 				case 'input':
-					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
+					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}' {$elementAttr}>";
 					break;
 				case 'password':
 					$value = ($passwordShowValue) ? "value='{$value}'" : "";
-					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value}>";
+					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value} {$elementAttr}>";
 					break;
 				case 'textarea':
-					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
+					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6' {$elementAttr}>{$value}</textarea>";
 					break;
 				case 'select':
-					$result .= "<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}'>";					
+					$result .= "<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}' {$elementAttr}>";					
 					if (is_array($options)) {
 						if (array_key_exists('selectOptions', $options)) {
 							if (is_array($options["selectOptions"])) {
@@ -128,7 +132,7 @@
 						. "</select>";
 					break;
 				case 'file':
-					$result .= "<input type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}'>";
+					$result .= "<input type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' {$elementAttr}>";
 					break;
 			}
 			if (is_array($options)) {
