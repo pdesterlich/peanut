@@ -751,6 +751,19 @@
 			// ritorna il valore del campo richiesto
 			return stripslashes($record[$fieldName]);
 		}
+
+		/**
+		 * funzione fieldExists
+		 * verifica se un campo esiste nella tabella
+		 *
+		 * @return bool
+		 * @author Phelipe de Sterlich
+		 **/
+		function fieldExists($fieldName)
+		{
+			return array_key_exists($fieldName, $this->fields);
+		}
+
 	}
 
 ?>
