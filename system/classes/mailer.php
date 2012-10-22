@@ -35,6 +35,14 @@
 		protected $body = "";
 
 		/**
+		 * headers del messaggio
+		 *
+		 * @var string
+		 * @access protected
+		 **/
+		protected $headers = "";
+
+		/**
 		 * funzione factory
 		 * crea e ritorna una nuova istanza della classe
 		 *
@@ -59,7 +67,7 @@
 			// converte, se necessario, l'array dei destinatari in un'unica stringa (indirizzi separati da virgola)
 			$to = (is_array($this->to)) ? implode(",", array_keys($this->to)) : $this->to;
 			// invia il messaggio e ritorna il risultato
-			return mail($to, $this->subject, $this->body);
+			return mail($to, $this->subject, $this->body, $this->headers);
 		}
 	}
 
