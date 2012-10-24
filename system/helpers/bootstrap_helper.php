@@ -87,6 +87,7 @@
 				}
 				if (array_key_exists('groupClass', $options)) {
 					$groupClass = $options["groupClass"];
+				}
 				if (array_key_exists('elementAttr', $options)) {
 					$elementAttr = arrays::attributes($options["elementAttr"]);
 				}
