@@ -72,6 +72,7 @@
 			$itemClass         = "";
 			$groupAttr         = "";
 			$groupClass        = "control-group";
+			$elementAttr       = "";
 			$passwordShowValue = false;
 
 			if (is_array($options)) {
@@ -86,6 +87,8 @@
 				}
 				if (array_key_exists('groupClass', $options)) {
 					$groupClass = $options["groupClass"];
+				if (array_key_exists('elementAttr', $options)) {
+					$elementAttr = arrays::attributes($options["elementAttr"]);
 				}
 				if (array_key_exists('passwordShowValue', $options)) {
 					$passwordShowValue = $options["passwordShowValue"];
@@ -97,17 +100,17 @@
 			$result .= "<div class='controls' id='controls-{$itemId}'>";
 			switch ($itemType) {
 				case 'input':
-					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}'>";
+					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}' {$elementAttr}>";
 					break;
 				case 'password':
 					$value = ($passwordShowValue) ? "value='{$value}'" : "";
-					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value}>";
+					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value} {$elementAttr}>";
 					break;
 				case 'textarea':
-					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6'>{$value}</textarea>";
+					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6' {$elementAttr}>{$value}</textarea>";
 					break;
 				case 'select':
-					$result .= "<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}'>";					
+					$result .= "<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}' {$elementAttr}>";					
 					if (is_array($options)) {
 						if (array_key_exists('selectOptions', $options)) {
 							if (is_array($options["selectOptions"])) {
@@ -132,7 +135,7 @@
 						. "</select>";
 					break;
 				case 'file':
-					$result .= "<input type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}'>";
+					$result .= "<input type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' {$elementAttr}>";
 					break;
 			}
 			if (is_array($options)) {
@@ -187,6 +190,36 @@
 			$result .= $testo;
 			$result .= "</div>";
 
+			return $result;
+		}
+
+		/**
+		 * funzione tabs
+		 * genera il codice html per l'header di una pagina con tabs
+		 *
+		 * @param $tabs array elenco dei tab
+		 *        formato 1: caption => link
+		 *        formato 2: caption => array("link" => link, "tabName" => nome del tab)
+		 * @param $class string classe dell'header
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function tabs($tabs, $class = "nav nav-tabs")
+		{
+			$result = "<ul class='{$class}'>";
+			$i = 0;
+			foreach ($tabs as $caption => $value) {
+				$elementClass = ($i == 0) ? "class='active'" : "";
+				if (is_array($value)) {
+					$link = $value["link"];
+					$tabName = (array_key_exists("tabName", $value)) ? "data-tabname='{$value["tabName"]}'" : ""; 
+					$result .= "<li {$elementClass}><a href='{$link}' {$tabName} data-toggle='tab'>{$caption}</a></li>";
+				} else {
+					$result .= "<li {$elementClass}><a href='{$value}' data-toggle='tab'>{$caption}</a></li>";
+				}
+				$i++;
+			}
+			$result .= "</ul>";
 			return $result;
 		}
 
