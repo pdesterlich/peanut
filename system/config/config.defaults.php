@@ -92,4 +92,11 @@
 	$config["security"]["cleanup"]["probability"] = 5; // probabilità che venga eseguita la pulizia delle sessioni non attive (minimo: 1) (va letta come 1 su x)
 
 	$config["sessions"]["session_id_name"] = "peanut_session_id";
+
+	/**
+	 * prefisso da utilizzare nella lettura / scrittura dei cookies (usato nelle funzioni dell'helper request)
+	 *
+	 * @var string
+	 **/
+	$config["cookies"]["prefix"] = "peanut";
 ?>
