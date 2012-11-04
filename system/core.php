@@ -148,7 +148,7 @@
 	{
 		if ($libName != "") {
 			if (file_exists(APP.DS."libs".DS."{$libName}.php")) { require_once APP.DS."libs".DS."{$libName}.php"; }
-			else if (file_exists(SYSTEM.DS."libs".DS."{$className}.php")) { require_once SYSTEM.DS."libs".DS."{$className}.php"; }
+			else if (file_exists(SYSTEM.DS."libs".DS."{$libName}.php")) { require_once SYSTEM.DS."libs".DS."{$libName}.php"; }
 		}
 		return new $className();
 	}
