@@ -144,13 +144,15 @@
 	 * @return object
 	 * @author Phelipe de Sterlich
 	 **/
-	function loadClass($className, $libName = "")
+	function loadClass($className = "", $libName = "")
 	{
 		if ($libName != "") {
 			if (file_exists(APP.DS."libs".DS."{$libName}.php")) { require_once APP.DS."libs".DS."{$libName}.php"; }
-			else if (file_exists(SYSTEM.DS."libs".DS."{$className}.php")) { require_once SYSTEM.DS."libs".DS."{$className}.php"; }
+			else if (file_exists(SYSTEM.DS."libs".DS."{$libName}.php")) { require_once SYSTEM.DS."libs".DS."{$libName}.php"; }
 		}
-		return new $className();
+		if ($className != "") {
+			return new $className();
+		}
 	}
 
 	function __($testo, $params = null, $lang = "")
