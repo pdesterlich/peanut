@@ -117,7 +117,8 @@
 		 * funzione __construct
 		 * inizializzazione class
 		 *
-		 * @param  int $id identificativo record
+		 * @param $id       integer identificativo record
+		 * @param $useCache boolean definisce se caricare il record dalla cache (se presente) o se forzare il caricamento da database
 		 * @return void
 		 * @author Phelipe de Sterlich
 		 **/
