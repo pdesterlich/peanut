@@ -132,4 +132,13 @@
 	 **/
 	$config["stats"]["local"]["details_table"] = "stats_connections_details";
 
+	/**
+	 * tempo dall'ultima attività (in minuti) trascorso il quale viene considerata una nuova connessione
+	 * default: 30
+	 * se 0, non viene mai considerata una nuova connessione
+	 *
+	 * @var integer
+	 **/
+	$config["stats"]["local"]["timeout"] = 30;
+
 ?>
