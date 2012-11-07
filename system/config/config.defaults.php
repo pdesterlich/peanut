@@ -99,4 +99,46 @@
 	 * @var string
 	 **/
 	$config["cookies"]["prefix"] = "peanut";
+
+	/**
+	 * abilitazione statistiche locali
+	 * default: false (non abilitate)
+	 *
+	 * @var boolean
+	 **/
+	$config["stats"]["local"]["enabled"] = false;
+
+	/**
+	 * nome del cookie da usare per identificare univocamente l'utente
+	 * default: "stats_uniqueid"
+	 *
+	 * @var string
+	 **/
+	$config["stats"]["local"]["cookie_name"] = "stats_uniqueid";
+
+	/**
+	 * nome della tabella delle connessioni
+	 * default: "stats_connections"
+	 *
+	 * @var string
+	 **/
+	$config["stats"]["local"]["connections_table"] = "stats_connections";
+
+	/**
+	 * nome della tabella dei dettagli
+	 * default: "stats_connections_details"
+	 *
+	 * @var string
+	 **/
+	$config["stats"]["local"]["details_table"] = "stats_connections_details";
+
+	/**
+	 * tempo dall'ultima attività (in minuti) trascorso il quale viene considerata una nuova connessione
+	 * default: 30
+	 * se 0, non viene mai considerata una nuova connessione
+	 *
+	 * @var integer
+	 **/
+	$config["stats"]["local"]["timeout"] = 30;
+
 ?>

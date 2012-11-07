@@ -137,6 +137,13 @@
 		 **/
 		public static function route()
 		{
+			// se abilitate, esegue la registrazione delle statistiche di accesso
+			if (Configure::read("stats.local.enabled")) {
+				Debug::start("registrazione statistiche accesso");
+				Stats::log();
+				Debug::stop("registrazione statistiche accesso");
+			}
+
 			Debug::start("inizializzazione controller");
 			if (!controllerExists(self::$_controller."_controller")) {
 				$controller = new StaticController();
