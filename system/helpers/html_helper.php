@@ -303,6 +303,17 @@
 			return $result;
 		}
 
+		/**
+		 * apre un elemento html
+		 *
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function openElement($element, $attr = null)
+		{
+			return "<{$element} ".arrays::attributes($attr).">";
+		}
+
 	}
 
 ?>
