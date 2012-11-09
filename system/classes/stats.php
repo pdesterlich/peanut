@@ -71,16 +71,22 @@
 					$connection->unique_id        = $uniqueId;
 					$connection->connection_date  = $now->format("Y-m-d");
 					$connection->ip_address       = $_SERVER["REMOTE_ADDR"];
+					if (isset($_SERVER["HTTP_REFERER"])) {
+						$connection->referer          = $_SERVER["HTTP_REFERER"];
+					}
 					$connection->start_time       = $now->format("Y-m-d H:i:s");
 					$connection->time_spent       = "00:00:00";
 					$connection->browser_family   = $ua->browser;
 					$connection->browser_major    = $ua->major;
 					$connection->browser_minor    = $ua->minor;
+					$connection->browser_build    = $ua->build;
+					$connection->browser_revision = $ua->revision;
 					$connection->browser_full     = $ua->browserFull;
 					$connection->os_family        = $ua->os;
 					$connection->os_major         = $ua->osMajor;
 					$connection->os_minor         = $ua->osMinor;
-					$connection->os_build         = $ua->osPatch;
+					$connection->os_build         = $ua->osBuild;
+					$connection->os_revision      = $ua->osRevision;
 					$connection->os_full          = $ua->osFull;
 					$connection->is_mobile        = $ua->isMobile;
 					$connection->is_mobile_device = $ua->isMobileDevice;
@@ -100,6 +106,9 @@
 				$details->detail_date    = $now->format("Y-m-d H:i:s");
 				$details->request        = $_SERVER["REQUEST_URI"];
 				$details->request_method = $_SERVER["REQUEST_METHOD"];
+				if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+					$details->ajax = 1;
+				}
 				$details->save();
 			}
 		}
