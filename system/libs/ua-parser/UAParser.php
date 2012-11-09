@@ -135,6 +135,11 @@ class UA {
 			// build the obj that will be returned starting with defaults
 			$obj = (object) $defaults;
 
+			$obj->major    = 0;
+			$obj->minor    = 0;
+			$obj->build    = 0;
+			$obj->revision = 0;
+
 			// build the version numbers for the browser
 			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
 				$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
@@ -264,8 +269,8 @@ class UA {
 				$osObj->osMajor    = isset($osRegex['os_v1_replacement']) ? $osRegex['os_v1_replacement'] : $matches[2];
 				$osObj->osMinor    = isset($osRegex['os_v2_replacement']) ? $osRegex['os_v2_replacement'] : $matches[3];
 				$osObj->osBuild    = 0;
-				$osObj->osPatch    = 0;
 				$osObj->osRevision = 0;
+
 				if (isset($matches[4])) {
 					$osObj->osBuild = $matches[4];
 					$osObj->osPatch = $matches[4];

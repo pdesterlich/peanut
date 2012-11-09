@@ -9,7 +9,7 @@
         </location>
         <size>
             <width>241.00</width>
-            <height>120.00</height>
+            <height>140.00</height>
         </size>
         <zorder>1</zorder>
         <SQLField>
@@ -47,7 +47,15 @@
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
             <uid><![CDATA[1DDEA40A-D00C-4A13-9CBA-21BD1F769452]]></uid>
         </SQLField>
+        <SQLField>
+            <name><![CDATA[ajax]]></name>
+            <type><![CDATA[SMALLINT]]></type>
+            <defaultValue><![CDATA[0]]></defaultValue>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[0D1C0B21-7337-4765-B137-A6058A690624]]></uid>
+        </SQLField>
         <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+        <labelWindowIndex><![CDATA[1]]></labelWindowIndex>
         <uid><![CDATA[776DA9C8-4153-4C9D-94E4-5CCD6DD6964E]]></uid>
     </SQLTable>
     <SQLTable>
@@ -59,7 +67,7 @@
         </location>
         <size>
             <width>248.00</width>
-            <height>440.00</height>
+            <height>520.00</height>
         </size>
         <zorder>0</zorder>
         <SQLField>
@@ -90,6 +98,12 @@
             <type><![CDATA[VARCHAR(50)]]></type>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
             <uid><![CDATA[DC9886B9-6B90-42B9-B80E-629F458421AF]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[referer]]></name>
+            <type><![CDATA[VARCHAR(255)]]></type>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[17A54D64-F91A-4416-8336-3D1018117F1D]]></uid>
         </SQLField>
         <SQLField>
             <name><![CDATA[start_time]]></name>
@@ -128,6 +142,18 @@
             <uid><![CDATA[7BAC70DE-5B0A-4EDB-B864-939CCD110981]]></uid>
         </SQLField>
         <SQLField>
+            <name><![CDATA[browser_build]]></name>
+            <type><![CDATA[VARCHAR(50)]]></type>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[173BC26C-2009-4996-964D-5617CA00D50C]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[browser_revision]]></name>
+            <type><![CDATA[VARCHAR(50)]]></type>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[1AC59965-5DE1-40AE-B9B9-4F42693BC065]]></uid>
+        </SQLField>
+        <SQLField>
             <name><![CDATA[browser_full]]></name>
             <type><![CDATA[VARCHAR(255)]]></type>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
@@ -156,6 +182,12 @@
             <type><![CDATA[VARCHAR(50)]]></type>
             <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
             <uid><![CDATA[F9DA5242-64BE-4F6D-9173-9F5A69F15D27]]></uid>
+        </SQLField>
+        <SQLField>
+            <name><![CDATA[os_revision]]></name>
+            <type><![CDATA[VARCHAR(50)]]></type>
+            <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+            <uid><![CDATA[DA2E45F7-318C-4729-AF1E-470A1B68A8A1]]></uid>
         </SQLField>
         <SQLField>
             <name><![CDATA[os_full]]></name>
@@ -199,6 +231,7 @@
             <uid><![CDATA[4BE3BA8C-0172-458F-B095-30B2435EA9DA]]></uid>
         </SQLField>
         <didChangeNameDuringValidation><![CDATA[0]]></didChangeNameDuringValidation>
+        <labelWindowIndex><![CDATA[0]]></labelWindowIndex>
         <uid><![CDATA[BBDACBE0-748C-4DA7-9139-8D566A920F4F]]></uid>
     </SQLTable>
     <SQLDocumentInfo>
@@ -336,12 +369,12 @@ aW50LnRpY2tldC50eXBlPC9rZXk+Cgk8c3RyaW5nPmNvbS5hcHBsZS5wcmludC5Q
 YWdlRm9ybWF0VGlja2V0PC9zdHJpbmc+CjwvZGljdD4KPC9wbGlzdD4KhpKEmZkL
 TlNQYXBlclNpemWGkoSEhAdOU1ZhbHVlAJSEASqEhAt7Q0dTaXplPWRkfZ+BUwKB
 SgOGkoSZmRZOU0hvcml6b250YWxseUNlbnRlcmVkhpKEhIQITlNOdW1iZXIAn56E
-hAFjoQGGkoSZmRROU1ZlcnRpY2FsbHlDZW50ZXJlZIaSopKEmZkMTlNMZWZ0TWFy
-Z2luhpKEo56EhAFkohKGkoSZmQ1OU1JpZ2h0TWFyZ2luhpKEo56oohKGkoSZmQtO
-U1RvcE1hcmdpboaShKOeqKIehpKEmZkNTlNPcmllbnRhdGlvboaShKOehJeXAIaS
-hJmZFU5TSG9yaXpvbmFsUGFnaW5hdGlvboaSrpKEmZkUTlNWZXJ0aWNhbFBhZ2lu
-YXRpb26Gkq6ShJmZDk5TQm90dG9tTWFyZ2luhpKEo56oojWGkoSZmQtOU1BhcGVy
-TmFtZYaShJmZBmlzby1hNIaShJmZD05TU2NhbGluZ0ZhY3RvcoaShKOeqKIBhoaG
+l5cBhpKEmZkUTlNWZXJ0aWNhbGx5Q2VudGVyZWSGkqKShJmZDE5TTGVmdE1hcmdp
+boaShKOehIQBZKEShpKEmZkNTlNSaWdodE1hcmdpboaShKOeqKEShpKEmZkLTlNU
+b3BNYXJnaW6GkoSjnqihHoaShJmZDU5TT3JpZW50YXRpb26GkoSjnqSXAIaShJmZ
+FU5TSG9yaXpvbmFsUGFnaW5hdGlvboaSrpKEmZkUTlNWZXJ0aWNhbFBhZ2luYXRp
+b26Gkq6ShJmZDk5TQm90dG9tTWFyZ2luhpKEo56ooTWGkoSZmQtOU1BhcGVyTmFt
+ZYaShJmZBmlzby1hNIaShJmZD05TU2NhbGluZ0ZhY3RvcoaShKOeqKEBhoaG
 ]]></encodedPrintInfo>
         <autoSizeTablesOption><![CDATA[1]]></autoSizeTablesOption>
         <documentScaleFactor><![CDATA[1]]></documentScaleFactor>
