@@ -74,8 +74,12 @@
 			$groupClass        = "control-group";
 			$elementAttr       = "";
 			$passwordShowValue = false;
+			$inputType         = "text";
 
 			if (is_array($options)) {
+				if (array_key_exists('inputType', $options)) {
+					$inputType = $options["inputType"];
+				}
 				if (array_key_exists('labelClass', $options)) {
 					$labelClass .= " ".$options["labelClass"];
 				}
@@ -101,7 +105,7 @@
 			$result .= "<div class='controls' id='controls-{$itemId}'>";
 			switch ($itemType) {
 				case 'input':
-					$result .= "<input type='text' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}' {$elementAttr}>";
+					$result .= "<input type='{$inputType}' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}' {$elementAttr}>";
 					break;
 				case 'password':
 					$value = ($passwordShowValue) ? "value='{$value}'" : "";
