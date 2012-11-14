@@ -65,7 +65,7 @@
 					}
 				}
 				if ($connection->id == 0) {
-					loadClass("", "ua-parser".DS."UAparser");
+					loadClass("", "ua-parser".DS."UAParser");
 					// UA::get();
 					$ua = UA::parse();
 					$connection->unique_id        = $uniqueId;
