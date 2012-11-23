@@ -17,7 +17,7 @@
 		 * @return bool (True se l'indirizzo è valido, False altrimenti)
 		 * @author Phelipe de Sterlich
 		 **/
-		function email($email)
+		public static function email($email)
 		{
 			$isValid = true;
 			$atIndex = strrpos($email, "@");
