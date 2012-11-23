@@ -132,7 +132,7 @@
 		// altre classi
 		else if (file_exists(APP.DS."classes".DS."{$className}.php")) { require_once APP.DS."classes".DS."{$className}.php"; }
 		else if (file_exists(SYSTEM.DS."classes".DS."{$className}.php")) { require_once SYSTEM.DS."classes".DS."{$className}.php"; }
-		else { die (__("system.file_not_found", array(":filename" => $className))); }
+		else { die (__("system.file_not_found", array(":filename" => $className . " / " . $altClassName))); }
 	}
 
 	/**
