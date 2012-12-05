@@ -400,7 +400,7 @@
 				// altrimenti (query non in cache)
 				} else {
 					// esegue la query e ottiene la descrizione delle colonne dalla tabella
-					$this->fields = database::query($query, "array");
+					$this->fields = Database::query($query, "array");
 					// copia i dati del record nell'array originalFields
 					$this->originalFields = $this->fields;
 					// salva il risultato della query in cache
@@ -421,7 +421,7 @@
 				// altrimenti (query non in cache)
 				} else {
 					// esegue la query e ottiene la descrizione delle colonne dalla tabella
-					$fields = database::query($query, "records");
+					$fields = Database::query($query, "records");
 					// salva il risultato della query in cache
 					self::$queryCache[$query] = $fields;
 				}
@@ -494,7 +494,7 @@
 			if ($limit != "") $sql .= " LIMIT {$limit}"; // se specificato, aggiungo il limitatore
 
 			// ritorno i record ottenuti dalla query
-			return database::query($sql, "records");
+			return Database::query($sql, "records");
 		}
 
 		function findAll($fields = null, $order = null)
@@ -553,13 +553,13 @@
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
 				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i:s");
 
-				$this->id = database::insert($this->tableName, $fields, true);
+				$this->id = Database::insert($this->tableName, $fields, true);
 				$this->_initializeHasOne();
 			} else {
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
 				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i");
 
-				database::update($this->tableName, $fields, array($this->idFieldName => $this->id));
+				Database::update($this->tableName, $fields, array($this->idFieldName => $this->id));
 			}
 		}
 
@@ -585,7 +585,7 @@
 
 			// elimina il record dalla tabella
 			if ($where == null) $where = array($this->idFieldName => $this->id);
-			database::delete($this->tableName, $where); // elimina il record (o i record, se e' specificato il parametro $where) dalla tabella
+			Database::delete($this->tableName, $where); // elimina il record (o i record, se e' specificato il parametro $where) dalla tabella
 		}
 
 		/**
@@ -615,7 +615,7 @@
 			}
 
 			// eseguo la query e leggo il risultato
-			$result = database::query($sql, "array");
+			$result = Database::query($sql, "array");
 
 			// ritorno il numero di records presenti
 			return $result["totale"];
@@ -748,7 +748,7 @@
 			// se non specificato da parametro, legge il nome del campo chiave
 			if ($idFieldName == "") $idFieldName = $this->idFieldName;
 			// ottiene il record corrispondente al campo chiave
-			$record = database::query("SELECT {$fieldName} FROM {$this->tableName} WHERE {$idFieldName} = '$idFieldValue'", "array");
+			$record = Database::query("SELECT {$fieldName} FROM {$this->tableName} WHERE {$idFieldName} = '$idFieldValue'", "array");
 			// ritorna il valore del campo richiesto
 			return stripslashes($record[$fieldName]);
 		}

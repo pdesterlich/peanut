@@ -98,12 +98,12 @@ class Migrations extends base
 	 **/
 	protected function getCurrentVersion()
 	{
-		if (mysql_num_rows(database::query("SHOW TABLES LIKE '{$this->migrationsTableName}'"))) {
-			$record = database::query("SELECT * FROM {$this->migrationsTableName} ORDER BY id", "array");
+		if (count(Database::query("SHOW TABLES LIKE '{$this->migrationsTableName}'", "records"))) {
+			$record = Database::query("SELECT * FROM {$this->migrationsTableName} ORDER BY id", "array");
 			$this->currentVersion = $record["current"];
 		} else {
-			database::query("CREATE TABLE {$this->migrationsTableName} (id INTEGER AUTO_INCREMENT PRIMARY KEY, current INTEGER DEFAULT 0)");
-			database::query("INSERT INTO {$this->migrationsTableName} (current) VALUES (0)");
+			Database::query("CREATE TABLE {$this->migrationsTableName} (id INTEGER AUTO_INCREMENT PRIMARY KEY, current INTEGER DEFAULT 0)");
+			Database::query("INSERT INTO {$this->migrationsTableName} (current) VALUES (0)");
 		}
 	}
 
@@ -116,7 +116,7 @@ class Migrations extends base
 	 **/
 	protected function setAvailableVersion()
 	{
-		database::query("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
+		Database::query("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
 	}
 
 	/**
@@ -194,7 +194,7 @@ class Migrations extends base
 					$query = str_replace($key, $value, $query);
 				}
 				// esegue la query
-				database::query($query);
+				Database::query($query);
 			}
 		}
 	}

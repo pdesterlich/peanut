@@ -7,8 +7,54 @@
 	 * helper per gestione database
 	 **/
 
-	class database
+	class Database
 	{
+
+		/**
+		 * funzione connect
+		 * esegue la connessione al database
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function connect()
+		{
+			// debug: avvio timer
+			Debug::start("apertura database");
+			// eseguo la connessione al server mysql
+			if (!mysql_connect(Configure::read("database.host"), Configure::read("database.username"), Configure::read("database.password"))) {
+				// se non riesco, mostro un messaggio di errore
+				die (__("system.mysql_server_connect_fail", array(":server" => Configure::read("database.host"), ":errore" => mysql_error())));
+			}
+			// eseguo la connessione al database
+			if (!mysql_select_db(Configure::read("database.name"))) {
+				// se non riesco, verifico se devo tentarne la creazione
+				// se la creazione non è abilitata
+				if (Configure::read("database.create") == false) {
+					// mostro un messaggio di errore
+					die (__("system.mysql_database_connect_fail", array(":database" => Configure::read("database.name"), ":errore" => mysql_error())));
+				} else {
+					if (!mysql_query("CREATE DATABASE " . Configure::read("database.name"))) {
+						// mostro un messaggio di errore
+						die (__("system.mysql_database_create_fail", array(":database" => Configure::read("database.name"), ":errore" => mysql_error())));
+					} else {
+						if (!mysql_select_db(Configure::read("database.name"))) {
+							// mostro un messaggio di errore
+							die (__("system.mysql_database_connect_fail", array(":database" => Configure::read("database.name"), ":errore" => mysql_error())));
+						}
+					}
+				}
+			}
+			// imposto il charset a utf-8
+			$charset = Configure::read("database.charset", "");
+			if ($charset != "") {
+				if (!mysql_query("SET CHARACTER SET " . $charset)) {
+					// se non riesco, mostro un messaggio di errore
+					die (__("system.mysql_set_charset_fail", array(":database" => Configure::read("database.name"), ":errore" => mysql_error())));
+				}
+			}
+			Debug::stop("apertura database");
+		}
 
 		/**
 		 * funzione query
@@ -113,7 +159,7 @@
 				);
 
 			// eseguo la query di inserimento
-			database::query($sql, "query");
+			Database::query($sql, "query");
 
 			// 
 			if ($returnId) return mysql_insert_id();
@@ -147,7 +193,7 @@
 			}
 
 			// esegue la query di aggiornamento
-			return database::query($sql, "query");
+			return Database::query($sql, "query");
 		}
 
 		public static function delete($tableName, $where = null) {
@@ -177,7 +223,7 @@
 			}
 
 			// esegue la query di eliminazione
-			return database::query($sql, "query");
+			return Database::query($sql, "query");
 		}
 	}
 
