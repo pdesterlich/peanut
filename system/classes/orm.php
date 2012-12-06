@@ -89,7 +89,7 @@
 		public static function factory($model, $id = 0)
 		{
 			// imposta il nome della classe del modello
-			$model = to_camel_case($model)."Model";
+			$model = to_camel_case($model, true)."Model";
 			// crea il modello e lo ritorna
 			return new $model($id);
 		}
