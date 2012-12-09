@@ -385,28 +385,14 @@
 
 			// se l'identificativo record è specificato (o sono specificati i criteri per la ricerca)
 			if (($this->id) OR (is_array($id))) {
-				// imposta la query di lettura record
-				$query = "SELECT * FROM {$this->tableName}";
-				if (is_array($id)) {
-					$query .= " WHERE ".arrays::implode($id, " = ", " AND ", "'", "mysql_real_escape_string");
-				} else {
-					$query .= " WHERE {$this->idFieldName} = '{$this->id}'";	
-				}
+				// imposta l'array delle condizioni where
+				$where = (is_array($id)) ? $id : array($this->idFieldName => $this->id);
+				// ottiene il record
+				$this->fields = Database::select($this->tableName, array("where" => $where), "array");
+				// copia i dati del record nell'array originalFields
+				$this->originalFields = $this->fields;
 
-				// se la query è già presente nella cache
-				if (($useCache == true) AND (isset(self::$queryCache[$query]))) {
-					// carica il risultato dalla cache
-					$this->fields = self::$queryCache[$query];
-				// altrimenti (query non in cache)
-				} else {
-					// esegue la query e ottiene la descrizione delle colonne dalla tabella
-					$this->fields = Database::query($query, "array");
-					// copia i dati del record nell'array originalFields
-					$this->originalFields = $this->fields;
-					// salva il risultato della query in cache
-					self::$queryCache[$query] = $this->fields;
-				}
-
+				// se è passato un array, imposta l'identificativo del record
 				if (is_array($id)) $this->id = $this->fields["id"];
 			}
 			// se l'identificativo non è passato, oppure non ci sono campi ottenuti dalla precedente query
@@ -414,17 +400,8 @@
 			{
 				// imposta la query di lettura struttura tabella
 				$query = "SHOW COLUMNS FROM {$this->tableName}";
-				// se la query è già presente nella cache
-				if (isset(self::$queryCache[$query])) {
-					// carica il risultato dalla cache
-					$fields = self::$queryCache[$query];
-				// altrimenti (query non in cache)
-				} else {
-					// esegue la query e ottiene la descrizione delle colonne dalla tabella
-					$fields = Database::query($query, "records");
-					// salva il risultato della query in cache
-					self::$queryCache[$query] = $fields;
-				}
+				// esegue la query e ottiene la descrizione delle colonne dalla tabella
+				$fields = Database::query($query, null, "records");
 				// per ogni colonna trovata
 				foreach ($fields as $field) {
 					// aggiungo la colonna all'array campi / valori
@@ -435,82 +412,39 @@
 			}
 		}
 
-		function find($fields = null, $where = null, $order = null, $limit = "")
+		/**
+		 * funzione find
+		 *
+		 * carica dalla tabella del modello uno o più records corrispondenti
+		 * alle impostazioni di ricerca, eventualmente ordinandoli
+		 * è possibile inoltre limitare il numero di record risultanti
+		 *
+		 * @access public
+		 * @param  $options array parametri della ricerca record (vedi database::select -> $options)
+		 * @return array          record ottenuti
+		 */
+		function find($options = array())
 		{
-			/**
-			 * funzione find
-			 *
-			 * carica dalla tabella del modello uno o più records corrispondenti
-			 * alle impostazioni di ricerca, eventualmente ordinandoli
-			 * è possibile inoltre limitare il numero di record risultanti
-			 *
-			 * @access public
-			 * @param  mixed  $fields elenco dei campi da ritornare, stringa (se vuota ritorna tutti i campi) o array (campo, campo, ...)
-			 * @param  mixed  $where  condizioni di ricerca (where), stringa o array (campo => valore, campo => valore, ...)
-			 * @param  mixed  $order  impostazioni di ordinamento (order by), stringa o array (campo, campo, ...)
-			 * @param  string $limit  limitatore di record
-			 * @return array          record ottenuti
-			 */
-
-			$sql = "SELECT "; // inizializzo la query di selezione
-			if (($fields == null) OR ($fields == "")) { // se non sono stati impostati i campi da ritornare
-				$sql .= "* "; // ritorno tutti i campi
-			} else {
-				if (is_array($fields)) { // se le condizioni di ricerca sono un array
-					$sql .= implode(",", $fields); // converto da array a stringa e aggiungo alla query
-				} else { // se invece è una stringa
-					$sql .= $fields; // aggiungo la stringa alla query
-				}
-			}
-
-			$sql .= " FROM {$this->tableName}"; // aggiungo il nome della tabella
-
-			// se sono impostate le condizioni di ricerca
-			if (($where != null) && ($where != "")) {
-				// se le condizioni di ricerca sono un array
-				if (is_array($where)) {
-					// converto da array a stringa e aggiungo alla query
-					$sql .= " WHERE ".arrays::implode($where, " = ", " AND ", "'", "mysql_real_escape_string");
-				// se invece è una stringa
-				} else {
-					// aggiungo la stringa alla query
-					$sql .= " WHERE {$where}";
-				}
-			}
-
-			// se sono impostate le condizioni di ordinamento
-			if ($order != null) {
-				// se le condizioni di ordinamento sono un array
-				if (is_array($order)) {
-					// converto da array a stringa e aggiungo alla query
-					$sql .= " ORDER BY ".implode(",", $order);
-				// se invece è una stringa
-				} else {
-					// aggiungo la stringa alla query
-					$sql .= " ORDER BY {$order}";
-				}
-			}
-
-			if ($limit != "") $sql .= " LIMIT {$limit}"; // se specificato, aggiungo il limitatore
-
 			// ritorno i record ottenuti dalla query
-			return Database::query($sql, "records");
+			return Database::select($this->tableName, $options, "records");
 		}
 
-		function findAll($fields = null, $order = null)
+		/**
+		 * funzione findAll
+		 * ritorna tutti i record
+		 *
+		 * @param $fields array / string elenco dei campi da ritornare
+		 * @param $sort  array / string elenco dei campi per l'ordinamento
+		 * @return array
+		 * @author Phelipe de Sterlich
+		 **/
+		function findAll($fields = null, $sort = null)
 		{
-			/** orm **
-			 * funzione findAll
-			 * ritorna tutti i record (shortcut per Orm->find)
-			 * -- input --
-			 * $order (string) ordinamento da utilizzare nella query
-			 *        (array) elenco dei campi da utilizzare come ordinamento nella query
-			 * -- output --
-			 * (array) records della tabella
-			 **/
-
-			// richiama la funzione Orm->find per ottenere tutti i records
-			return $this->find($fields, null, $order);
+			$options = array();
+			if ($fields != null) $options["fields"] = $fields;
+			if ($sort != null) $options["sort"] = $sort;
+			// ritorno i record ottenuti dalla query
+			return Database::select($this->tableName, $options, "records");
 		}
 
 		/**
@@ -553,7 +487,7 @@
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
 				if (array_key_exists('modified', $fields)) $fields['modified'] = date("Y-m-d H:i:s");
 
-				$this->id = Database::insert($this->tableName, $fields, true);
+				$this->id = Database::insert($this->tableName, $fields);
 				$this->_initializeHasOne();
 			} else {
 				// se esiste, imposta il valore del campo "modified" alla data / ora corrente
@@ -576,46 +510,46 @@
 			$this->save();
 		}
 
-		function delete($where = null)
+		/**
+		 * funzione delete
+		 * elimina uno o piu' record
+		 *
+		 * @param $where     array  array associativo campo => valore contenente il campo (o i campi) da usare come condizioni where
+		 * @param $whereSql  string testo sql da usare come condizione where (se non presente viene fatto un and di tutti i campi presenti nell'array $where)
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		function delete($where = null, $whereSql = "")
 		{
-			/** orm **
-			 * funzione delete
-			 * elimina il record dalla tabella
-			 **/
-
 			// elimina il record dalla tabella
 			if ($where == null) $where = array($this->idFieldName => $this->id);
-			Database::delete($this->tableName, $where); // elimina il record (o i record, se e' specificato il parametro $where) dalla tabella
+			Database::delete($this->tableName, $where, $whereSql); // elimina il record (o i record, se e' specificato il parametro $where) dalla tabella
 		}
 
 		/**
 		 * funzione count
 		 * ritorna il numero di records presenti nella tabella
 		 *
-		 * @param  mixed $where (string) condizioni di ricerca (WHERE)
-		 *                      (array) elenco dei campi / valori da utilizzare come condizioni di ricerca (WHERE)
+		 * @param $where     array  array associativo campo => valore contenente il campo (o i campi) da usare come condizioni where
+		 * @param $whereSql  string testo sql da usare come condizione where (se non presente viene fatto un and di tutti i campi presenti nell'array $where)
 		 * @return int          numero di records presenti
 		 * @author Phelipe de Sterlich
 		 **/
-		function count($where = null)
+		function count($where = null, $whereSql = "")
 		{
-			// imposto la query di selezione
-			$sql = "SELECT COUNT(*) totale FROM {$this->tableName}";
-			// se sono impostate le condizioni di ricerca
-			if ($where != null) {
-				// se le condizioni di ricerca sono un array
-				if (is_array($where)) {
-					// converto da array a stringa e aggiungo alla query
-					$sql .= " WHERE ".arrays::implode($where, " = ", " AND ", "'", "mysql_real_escape_string");
-				// se invece è una stringa
-				} else {
-					// aggiungo la stringa alla query
-					$sql .= " WHERE {$where}";
+			// crea l'elenco dei campi / parametri per le condizioni where
+			if (($whereSql == "") AND ($where != null) AND (is_array($where))) {
+				foreach ($where as $key => $value) {
+					$whereSql .= (($whereSql == "") ? "" : " AND ") . $key . " = :" . $key;
 				}
 			}
 
+			// crea la stringa sql di aggiornamento
+			$sql = "SELECT COUNT(*) totale FROM {$this->tableName}";
+			if ($whereSql != "") $sql .= " WHERE " . $whereSql;
+
 			// eseguo la query e leggo il risultato
-			$result = Database::query($sql, "array");
+			$result = Database::query($sql, $where, "array");
 
 			// ritorno il numero di records presenti
 			return $result["totale"];
@@ -627,14 +561,16 @@
 		 *
 		 * @param  string $valueField nome del campo contenente l'identificativo del record
 		 * @param  string $descField  nome del campo contenente la descrizione del record
-		 * @param  mixed  $where      (opzionale) eventuali condizioni where per l'estrapolazione dei records
-		 * @param  mixed  $order      (opzionale) eventuali condizioni order by per l'estrapolazione dei records
+		 * @param  array  $options    parametri
 		 * @param  array  $prepend    (opzionale) eventuali elementi da aggiungere in testa all'array
 		 * @return array
 		 * @author Phelipe de Sterlich
 		 **/
-		function getComboValues($valueField, $descField, $where = null, $order = null, $prepend = null)
+		function getComboValues($valueField, $descField, $options = array(), $prepend = null)
 		{
+			// imposto i campi da estrapolare per la ricerca
+			$options["fields"] = array($valueField, $descField);
+
 			// inizializza l'array dei risultati
 			$result = array();
 			// se è definito un array di elementi da aggiungere in testa al risultato
@@ -646,7 +582,7 @@
 				}
 			}
 			// ottiene i record che corrispondono ai criteri di ricerca
-			$records = $this->find(array($valueField, $descField), $where, $order);
+			$records = $this->find($options);
 			// cicla sui record ottenuti
 			foreach ($records as $record) {
 				// aggiunge all'array dei risultati la coppia id > descrizione
@@ -748,7 +684,7 @@
 			// se non specificato da parametro, legge il nome del campo chiave
 			if ($idFieldName == "") $idFieldName = $this->idFieldName;
 			// ottiene il record corrispondente al campo chiave
-			$record = Database::query("SELECT {$fieldName} FROM {$this->tableName} WHERE {$idFieldName} = '$idFieldValue'", "array");
+			$record = Database::query("SELECT {$fieldName} FROM {$this->tableName} WHERE {$idFieldName} = '$idFieldValue'", null, "array");
 			// ritorna il valore del campo richiesto
 			return stripslashes($record[$fieldName]);
 		}

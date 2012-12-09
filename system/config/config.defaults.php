@@ -55,37 +55,6 @@
 	
 	$config["layout"]["title"] = "Peanut!";
 
-	$config["database"]["enabled"]  = false;
-	$config["database"]["host"]     = "";
-	$config["database"]["name"]     = "";
-	$config["database"]["username"] = "";
-	$config["database"]["password"] = "";
-	$config["database"]["create"]   = false; // crea il database se non esiste
-
-	/**
-	 * charset da impostare sul database
-	 * se specificato, viene eseguita la query "SET CHARACTER SET x"
-	 *
-	 * @var string
-	 **/
-	$config["database"]["charset"]  = "";
-
-	/**
-	 * prefisso tabelle in database - istanza da sostituire
-	 * se specificato, viene sostituito con il valore del prefisso (indicato in prefix_replace)
-	 *
-	 * @var string
-	 **/
-	$config["database"]["prefix_search"] = "{table_prefix}";
-
-	/**
-	 * prefisso tabelle in database
-	 * se specificato, viene sostituito a tutte le istanze di $config["database"]["prefix_search"] nelle query eseguite dall'helper database
-	 *
-	 * @var string
-	 **/
-	$config["database"]["prefix_replace"] = "";
-
 	$config["security"]["salt"] = "cj9aht3lfj7hw3ac37thmu34f83jc2mhdzo7i853";
 	$config["security"]["cipher"] = "h3x4tc347tf2gy3ih2xdq876293cjo182u3hgn2c";
 	$config["security"]["disconnect"]["timeout"] = 30; // tempo in minuti dopo cui l'utente, se non ha attività, viene disconnesso
@@ -140,5 +109,80 @@
 	 * @var integer
 	 **/
 	$config["stats"]["local"]["timeout"] = 30;
+
+	/**************************************************************************
+	 * configurazione database
+	 **************************************************************************/
+
+	/**
+	 * flag abilitazione database
+	 *
+	 * @var bool
+	 **/
+	$config["database"]["enabled"]  = false;
+
+	/**
+	 * libreria connessione database
+	 * valori possibili:
+	 *   mysql - utilizza la libreria mysql
+	 *     pdo - utilizza la libreria pdo
+	 *
+	 * @var string
+	 **/
+	$config["database"]["library"]  = "mysql";
+
+	/**
+	 * driver pdo
+	 * driver del database da utilizzare nella creazione della stringa DSN
+	 * (solo con libreria pdo)
+	 *
+	 * @var string
+	 **/
+	$config["database"]["pdo_driver"] = "mysql";
+
+	$config["database"]["host"]     = "";
+	$config["database"]["name"]     = "";
+	$config["database"]["username"] = "";
+	$config["database"]["password"] = "";
+
+	/**
+	 * flag creazione database
+	 * se abilitato, la procedura tenta di creare il database se questo non esiste
+	 * (solo con libreria mysql)
+	 *
+	 * @var bool
+	 **/
+	$config["database"]["create"]   = false; // crea il database se non esiste
+
+	/**
+	 * charset da impostare sul database
+	 * se specificato, viene eseguita la query "SET CHARACTER SET x"
+	 *
+	 * @var string
+	 **/
+	$config["database"]["charset"]  = "";
+
+	/**
+	 * abilita l'uso della cache locale
+	 *
+	 * @var bool
+	 **/
+	$config["database"]["cache"] = false;
+
+	/**
+	 * prefisso tabelle in database - istanza da sostituire
+	 * se specificato, viene sostituito con il valore del prefisso (indicato in prefix_replace)
+	 *
+	 * @var string
+	 **/
+	$config["database"]["prefix_search"] = "{table_prefix}";
+
+	/**
+	 * prefisso tabelle in database
+	 * se specificato, viene sostituito a tutte le istanze di $config["database"]["prefix_search"] nelle query eseguite dall'helper database
+	 *
+	 * @var string
+	 **/
+	$config["database"]["prefix_replace"] = "";
 
 ?>

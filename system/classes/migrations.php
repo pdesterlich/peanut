@@ -98,8 +98,8 @@ class Migrations extends base
 	 **/
 	protected function getCurrentVersion()
 	{
-		if (count(Database::query("SHOW TABLES LIKE '{$this->migrationsTableName}'", "records"))) {
-			$record = Database::query("SELECT * FROM {$this->migrationsTableName} ORDER BY id", "array");
+		if (count(Database::query("SHOW TABLES LIKE '{$this->migrationsTableName}'", null, "records"))) {
+			$record = Database::query("SELECT * FROM {$this->migrationsTableName} ORDER BY id", null, "array");
 			$this->currentVersion = $record["current"];
 		} else {
 			Database::query("CREATE TABLE {$this->migrationsTableName} (id INTEGER AUTO_INCREMENT PRIMARY KEY, current INTEGER DEFAULT 0)");
@@ -116,7 +116,7 @@ class Migrations extends base
 	 **/
 	protected function setAvailableVersion()
 	{
-		Database::query("UPDATE {$this->migrationsTableName} SET current = {$this->availableVersion}");
+		Database::query("UPDATE {$this->migrationsTableName} SET current = :current", array("current" => $this->availableVersion));
 	}
 
 	/**

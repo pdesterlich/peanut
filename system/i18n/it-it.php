@@ -18,5 +18,7 @@
 		"system.mysql_database_connect_fail" => "connessione al database :database non possibile: :errore",
 		"system.mysql_database_create_fail" => "creazione database :database non possibile: :errore",
 		"system.mysql_set_charset_fail" => "impostazione charset sul database :database non possibile: :errore",
+		"system.pdo_connect_fail" => "connessione al database :server &rarr; :database non possibile: :errore",
+		"system.pdo_set_charset_fail" => "impostazione charset sul database :server &rarr; :database non possibile: :errore",
 		);
 ?>

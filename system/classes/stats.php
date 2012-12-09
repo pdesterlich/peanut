@@ -47,7 +47,12 @@
 				$connection = new StatsConnectionsModel();
 
 				// cerca delle connessioni precedenti con lo stesso unique_id
-				$records = $connection->find("id, ip_address, end_time", array("unique_id" => $uniqueId), "id DESC", 1);
+				$records = $connection->find(array(
+					"fields" => "id, ip_address, end_time",
+					"where"  => array("unique_id" => $uniqueId),
+					"sort"   => "id DESC",
+					"limit"  => "1"
+					));
 				// se ci sono connessioni precedenti
 				if (count($records) > 0) {
 					// se l'indirizzo ip è lo stesso
