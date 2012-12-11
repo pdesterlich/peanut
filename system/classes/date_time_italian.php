@@ -44,6 +44,26 @@
 		{
 			list($giorno, $mese, $anno) = explode("/", $date);
 			$this->setDate($anno, $mese, $giorno);
+
+			// ritorno l'oggetto (per concatenazione)
+			return $this;
+		}
+
+		/**
+		 * imposta la data / ora in base al valore passato
+		 * (record mysql datetime nel formato YYYY-MM-DD HH:MM:SS)
+		 *
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public function fromMysqlDateTime($datetime)
+		{
+			$delimiters = array("-", " ", ":");
+			list($anno, $mese, $giorno, $ore, $minuti, $secondi) = explode($delimiters[0], str_replace($delimiters, $delimiters[0], $datetime));
+			$this->setDate($anno, $mese, $giorno);
+			$this->setTime($ore, $minuti, $secondi);
+
+			return $this;
 		}
 
 	} // END class DateTimeItalian extends DateTime
