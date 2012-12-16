@@ -75,6 +75,9 @@
 			$elementAttr       = "";
 			$passwordShowValue = false;
 			$inputType         = "text";
+			$helpType          = "block";
+			$helpText          = "";
+			$elementHelpAttr   = "";
 
 			if (is_array($options)) {
 				if (array_key_exists('inputType', $options)) {
@@ -98,24 +101,41 @@
 				if (array_key_exists('passwordShowValue', $options)) {
 					$passwordShowValue = $options["passwordShowValue"];
 				}
+				if (array_key_exists('helpBlock', $options)) {
+					$helpText = $options["helpBlock"];
+				}
+				if (array_key_exists('helpType', $options)) {
+					$helpType = $options["helpType"];
+				}
 			}
+
+			if (($helpText != "") AND ($helpType == "popover")) {
+				$elementHelpAttr = arrays::attributes(array(
+					"rel"            =>"popover",
+					"data-trigger"   => "hover",
+					"data-placement" => "bottom",
+					"data-title"     => $label,
+					"data-content"   => $helpText,
+					));
+			}
+
 			$result = "";
 			$result .= "<div class='{$groupClass}' {$groupAttr}>";
 			$result .= "<label class='{$labelClass}' for='{$itemId}'>{$label}</label>";
 			$result .= "<div class='controls' id='controls-{$itemId}'>";
 			switch ($itemType) {
 				case 'input':
-					$result .= "<input type='{$inputType}' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}' {$elementAttr}>";
+					$result .= "<input {$elementHelpAttr} type='{$inputType}' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' value='{$value}' {$elementAttr}>";
 					break;
 				case 'password':
 					$value = ($passwordShowValue) ? "value='{$value}'" : "";
-					$result .= "<input type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value} {$elementAttr}>";
+					$result .= "<input {$elementHelpAttr} type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value} {$elementAttr}>";
 					break;
 				case 'textarea':
-					$result .= "<textarea class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6' {$elementAttr}>{$value}</textarea>";
+					$result .= "<textarea {$elementHelpAttr} class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6' {$elementAttr}>{$value}</textarea>";
 					break;
 				case 'select':
-					$result .= "<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}' {$elementAttr}>";					
+					$result .= "<select {$elementHelpAttr} class='{$width} {$itemClass}' id='$itemId' name='{$itemId}' {$elementAttr}>";					
 					if (is_array($options)) {
 						if (array_key_exists('selectOptions', $options)) {
 							if (is_array($options["selectOptions"])) {
@@ -134,19 +154,17 @@
 					break;
 				case 'yesno':
 					$result .=
-						"<select class='{$width} {$itemClass}' id='$itemId' name='{$itemId}'>"
+						"<select {$elementHelpAttr} class='{$width} {$itemClass}' id='$itemId' name='{$itemId}'>"
 						. "<option value='0' ".(($value == 0) ? "selected" : "").">no</option>"
 						. "<option value='1' ".(($value == 1) ? "selected" : "").">si</option>"
 						. "</select>";
 					break;
 				case 'file':
-					$result .= "<input type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' {$elementAttr}>";
+					$result .= "<input {$elementHelpAttr} type='file' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' {$elementAttr}>";
 					break;
 			}
-			if (is_array($options)) {
-				if (array_key_exists('helpBlock', $options)) {
-					$result .= "<p class='help-block'>".$options["helpBlock"]."</p>";
-				}
+			if (($helpText != "") AND ($helpType == "block")) {
+				$result .= "<p class='help-block'>".$options["helpBlock"]."</p>";
 			}
 			$result .= "</div>";
 			$result .= "</div>";
