@@ -1,0 +1,1471 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"login",
+				"loginName"
+			],
+			[
+				"varc",
+				"varcoPresente"
+			],
+			[
+				"data",
+				"dataOra"
+			],
+			[
+				"aggiu",
+				"aggiungiTimbratura"
+			],
+			[
+				"port",
+				"portaleClienti"
+			],
+			[
+				"tipo",
+				"tipo_varco"
+			],
+			[
+				"text",
+				"text_long"
+			],
+			[
+				"full",
+				"fullName"
+			],
+			[
+				"dest",
+				"destNameMini"
+			],
+			[
+				"destN",
+				"destName"
+			],
+			[
+				"src",
+				"srcH"
+			],
+			[
+				"image",
+				"imageSize"
+			],
+			[
+				"dst",
+				"dstX"
+			],
+			[
+				"cliente",
+				"cliente_id"
+			],
+			[
+				"load",
+				"loadTabComandi"
+			],
+			[
+				"elem",
+				"elementAttr"
+			],
+			[
+				"artic",
+				"articolo_id"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"badge",
+				"badgeValido"
+			],
+			[
+				"timbra",
+				"timbratura"
+			],
+			[
+				"table",
+				"table_prefix"
+			],
+			[
+				"prenot",
+				"prenotazioneId"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"gett",
+				"gettype"
+			],
+			[
+				"reques",
+				"requestedLevel"
+			],
+			[
+				"requ",
+				"requestedLevel"
+			],
+			[
+				"user",
+				"userType"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"backu",
+				"backupFile"
+			],
+			[
+				"clie",
+				"clienteId"
+			],
+			[
+				"loadTabC",
+				"loadTabCorsi"
+			],
+			[
+				"con",
+				"confirm"
+			],
+			[
+				"loadTabD",
+				"loadTabDocumenti"
+			],
+			[
+				"doc",
+				"documenti"
+			],
+			[
+				"fotogra",
+				"fotografia_presente"
+			],
+			[
+				"fotogr",
+				"fotografia_presente"
+			],
+			[
+				"strip",
+				"stripslashes"
+			],
+			[
+				"si",
+				"sizeSmall"
+			],
+			[
+				"size",
+				"sizeNormal"
+			],
+			[
+				"stri",
+				"stripslashes"
+			],
+			[
+				"add",
+				"addslashes"
+			],
+			[
+				"base",
+				"base64_encode"
+			],
+			[
+				"destName",
+				"destNameNormal"
+			],
+			[
+				"des",
+				"destName"
+			],
+			[
+				"temp",
+				"tempDir"
+			],
+			[
+				"login_",
+				"login_username"
+			],
+			[
+				"_",
+				"_options"
+			],
+			[
+				"_load",
+				"_loadOptions"
+			],
+			[
+				"arry",
+				"array"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"cli",
+				"clienteId"
+			],
+			[
+				"options",
+				"optionalParams"
+			],
+			[
+				"option",
+				"optionalParams"
+			],
+			[
+				"int",
+				"int_long"
+			],
+			[
+				"ini",
+				"inizializzaVarco"
+			],
+			[
+				"abbon",
+				"abbonamento_id"
+			],
+			[
+				"ultim",
+				"ultimaTimbratura"
+			],
+			[
+				"get",
+				"getJSON"
+			],
+			[
+				"aggiorna",
+				"aggiornaEntrateResidue"
+			],
+			[
+				"num",
+				"numEntrate"
+			],
+			[
+				"clienti",
+				"clienti_abbonamenti"
+			],
+			[
+				"timb",
+				"timbrature"
+			],
+			[
+				"loadTab",
+				"loadTabTimbrature"
+			],
+			[
+				"sql",
+				"sqlAbbonamentiSelezionati"
+			],
+			[
+				"client",
+				"clientiAbbonamento"
+			],
+			[
+				"entrateRe",
+				"entrateResidueCliente"
+			],
+			[
+				"entra",
+				"entrateResidueCliente"
+			],
+			[
+				"validita",
+				"validita_numero"
+			],
+			[
+				"abbona",
+				"abbonamento"
+			],
+			[
+				"entrate",
+				"entrate_residue"
+			],
+			[
+				"period",
+				"periodoInizioFieldName"
+			],
+			[
+				"perio",
+				"periodoFineFieldName"
+			],
+			[
+				"master",
+				"masterFieldName"
+			],
+			[
+				"lez",
+				"lezioneId"
+			],
+			[
+				"corsi",
+				"corso_id"
+			],
+			[
+				"le",
+				"lezioneId"
+			],
+			[
+				"record",
+				"recordLezioneId"
+			],
+			[
+				"preno",
+				"prenotazioni"
+			],
+			[
+				"pren",
+				"prenotazioniEdit"
+			],
+			[
+				"template",
+				"templateVars"
+			],
+			[
+				"templ",
+				"templateVars"
+			],
+			[
+				"in",
+				"inAttesa"
+			],
+			[
+				"lezione",
+				"lezioneDesc"
+			],
+			[
+				"corso",
+				"corsoId"
+			],
+			[
+				"ar",
+				"attr"
+			],
+			[
+				"prenota",
+				"prenotazioni"
+			],
+			[
+				"lezion",
+				"lezioneId"
+			],
+			[
+				"pre",
+				"prenotazioniEdit"
+			],
+			[
+				"abboname",
+				"abbonamento"
+			],
+			[
+				"impo",
+				"importoTipo"
+			],
+			[
+				"desc",
+				"descTipo"
+			],
+			[
+				"importo",
+				"importoTipo"
+			],
+			[
+				"clien",
+				"clientiTipo"
+			],
+			[
+				"timbr",
+				"timbratura"
+			],
+			[
+				"date_cre",
+				"date_create"
+			],
+			[
+				"zip",
+				"zipFile"
+			],
+			[
+				"remove",
+				"removeClass"
+			],
+			[
+				"lin",
+				"lineHeight"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"aut",
+				"authCodeRead"
+			],
+			[
+				"gtx",
+				"gtxcube_import_auth"
+			],
+			[
+				"auth",
+				"authCode"
+			],
+			[
+				"curre",
+				"currentRev"
+			],
+			[
+				"exc",
+				"excludeList"
+			],
+			[
+				"inc",
+				"includeList"
+			],
+			[
+				"ex",
+				"exclude"
+			],
+			[
+				"oct",
+				"octopus"
+			],
+			[
+				"imp",
+				"import"
+			],
+			[
+				"change",
+				"changeComando"
+			],
+			[
+				"opt",
+				"options"
+			],
+			[
+				"cm",
+				"cmdBackupComplete"
+			],
+			[
+				"cmdd",
+				"cmdBackupMedia"
+			],
+			[
+				"cmd",
+				"cmdBackupMedia"
+			],
+			[
+				"ili",
+				"iListAttivi"
+			],
+			[
+				"iList",
+				"iListAttivi"
+			],
+			[
+				"entr",
+				"entrateResidue"
+			],
+			[
+				"etr",
+				"entrateResidue"
+			],
+			[
+				"abb",
+				"abbonamentoId"
+			],
+			[
+				"trova",
+				"trovaAbbonamento"
+			],
+			[
+				"varco",
+				"varco"
+			],
+			[
+				"valid",
+				"validitaTipo"
+			],
+			[
+				"vali",
+				"validitaTipo"
+			],
+			[
+				"ibase_err",
+				"ibase_errmsg"
+			],
+			[
+				"ibase",
+				"ibase_errcode"
+			],
+			[
+				"cale",
+				"calendarDefaults"
+			],
+			[
+				"array_k",
+				"array_key_exists"
+			],
+			[
+				"wh",
+				"where"
+			],
+			[
+				"cors",
+				"corsoId"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 49.0,
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"upg",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"ftp",
+				"SFTP: Show Panel"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 579.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/layouts/base_layout.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/home/home_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/impressum/impressum_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/home_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/impressum_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/login/login_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/home/home_impressum.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/config/config.application.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/corsi/costi_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/js/palestre.js",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/corsi/lezioni_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/corsi_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/istruttori_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/classes/base_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/istruttori_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/clienti_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/utenti_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/classes/base_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/utenti_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/clienti_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/portale_cliente/portale_cliente_cliente.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/utenti/utenti_view.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/utenti/utenti_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/classes/orm.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/migrations/full.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/notifiche_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/varchi_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/portale_cliente_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/timbrature_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/helpers/database_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/varchi_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/timbrature_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/development_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/development/development_rebuild.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/varchi/varchi_view.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/varchi/varchi_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_view.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/helpers/palestre_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/helpers/html_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_lista_timbrature.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/css/palestre.less",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/css/palestre_variables.less",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/helpers/utils_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/portale_cliente/portale_cliente_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/portale_cliente/portale_cliente_cerca.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/agenti/agenti_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/portale_clienti/portale_cliente_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/setup_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/setup/setup_config.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/helpers/request_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/classes/configure.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/migrations/0022.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/log_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/abbonamenti/abbonamenti_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/migrations/defines.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_filtra.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/js/palestre.controller.js",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/abbonamenti_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/js/peanut.js",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/articoli/articoli_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/clienti/fotografie_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/abbonamenti/abbonamenti_view.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/js/palestre.controller.min.js",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/clienti/fotografie_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/helpers/images_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/classes/migrations.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/migrations/0020.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/support/corsi.txt",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_delete.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/prenotazioni/prenotazioni_get_prenotazioni_data.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/classes/controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/common/common_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/scheduler_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/abbonamenti_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/helpers/session_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/classes/template.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/abbonamenti/abbonamenti_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/css/palestre_mixins.less",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/mrtimb_comandi_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/clienti/badge_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/clienti/badge_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/setup/setup_options.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_lista_badge.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/opzioni_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/varchi/varchi_view_log.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/login_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/varchi/varchi_reset.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/log/log_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/helpers/bootstrap_helper.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/elements/report_abbonamenti_form.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/articoli/clienti_articoli_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/config/config.defaults.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/config/config.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/abbonamenti/clienti_abbonamenti_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/articoli_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/clienti_lista_articoli.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/clienti/articoli_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/clienti/articoli_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/clienti/pagamenti_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/migrations/0018.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/corsi/corsi_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/sconti_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/sconti/sconti_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/peanut.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/core.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/css/bootstrap_override.less",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/js/accounting.js",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/report/timbrature_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/elements/report_timbrature_form.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/report/timbrature/report_timbrature_timbrature.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/htdocs/js/jquery.validate.additional-methods.js",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/clienti/badge/clienti_badge_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/report/timbrature/report_timbrature_timbrature_per_cliente.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/report/badge_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/report/badge/report_badge_assegnati.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/system/classes/date_time_italian.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/presenti_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/presenti/presenti_index.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/octopus.php/lib/octopus_term_class.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/models/prenotazioni_model.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/controllers/prenotazioni_controller.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/corsi/corsi_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/articoli/articoli_edit.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/sale/sale_view.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/views/articoli/articoli_view.php",
+		"/Users/phelipe/Progetti/Elco Sistemi/Apps/esPalestre/frontend.php/app/elements/record_buttons.php"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"<open folders>",
+			"/Users/phelipe/Progetti/Elco Sistemi/Siti/Helpdesk/",
+			"/Users/phelipe/Progetti/Elco Sistemi/Siti/Helpdesk/_support/icone_16.sketch",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"timestamp",
+			"gestione palestre",
+			"factory",
+			"extends orm",
+			"basemodel",
+			"login_name",
+			"clienti",
+			"$this->model",
+			"count(",
+			"parent::save",
+			"$this->model",
+			"limit",
+			"dataShort",
+			"lista_timbrature",
+			"display",
+			"templatename",
+			"LogModel",
+			"table",
+			"ng-bind-html-unsafe",
+			"getLista",
+			"non ci sono articoli",
+			"clienti_foto",
+			"images::resize",
+			"image::resize",
+			"actionname",
+			"$controllerName",
+			"controllername",
+			"orm::factory",
+			"parent::delete",
+			"utils::age",
+			"->element",
+			"dd",
+			"factory",
+			"->add",
+			"session::get",
+			"usertype",
+			"userType",
+			"resetConfirm",
+			"reset_exec",
+			"checkIsAjax",
+			"new MrtimbComandiModel",
+			"live",
+			"\"",
+			"var varch",
+			"alertMessageType",
+			"clienti_abbonamenti",
+			"loadtababb",
+			"var clienti",
+			"no-current",
+			"===",
+			"non-attivo",
+			"'",
+			"var menu",
+			"formatmone",
+			"config::read",
+			"isajax",
+			"isjaxa",
+			"$this->controllerName",
+			"mrtimb_comandi",
+			"num",
+			"$lezione",
+			"TODO",
+			"giorni",
+			"calenda",
+			"calendar",
+			"arti",
+			"$abbonamento",
+			"Abbonamento",
+			"desc_abbonamento",
+			"$abbonamento",
+			"abbonamento_id",
+			"$abbonamento",
+			"Abbonamento",
+			"\"abbonamenti\"",
+			"desc_abbonamento",
+			"$abbonamento",
+			"sqlAbbonamentiSelezionati",
+			"istruttor",
+			"data-controller",
+			"abbonamenti.remove",
+			"_abbonamenti",
+			"abbonamenti_",
+			"factory",
+			"clienti.remove",
+			"elemento",
+			"vuoi rimuovere l'elemento",
+			"$this->user->",
+			"usertype",
+			"$this->user->",
+			"istruttoremodel",
+			"$this->user->",
+			"$this->user",
+			"->load(",
+			"$this->user->",
+			"session::get",
+			"get_",
+			"get_sys",
+			".location",
+			"bootbox.conf",
+			"opzionimodel",
+			"timbraturaEditConfirm",
+			"global.alert",
+			"del_fotografia",
+			"set_fotografia",
+			"hasone",
+			"set_fotografia",
+			"$_FILES['foto']",
+			"get_fotografia",
+			"peanut.url",
+			"get_fotografia",
+			"load",
+			"$_FILES[\"doc\"]",
+			"$documenti",
+			"request::read",
+			"Searching",
+			"date_created",
+			"fotografia",
+			"\"fotografia\"",
+			"images::resize",
+			"fotog",
+			"setOutputFile",
+			"Normal",
+			"login_username",
+			"istrutt",
+			"opzionimodel",
+			"$config",
+			"gtxcube.import",
+			"$config"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"$timbratura",
+			"'",
+			"clienti_articoli",
+			"\"",
+			"$corso",
+			"Corso",
+			"desc_corso",
+			"$corso",
+			"corso_id",
+			"$corso",
+			"Corso",
+			"\"corsi\"",
+			"desc_corso",
+			"$corso",
+			"sqlCorsiSelezionati",
+			"$fotografia",
+			"$documento",
+			"$this",
+			"Small",
+			"$this",
+			"",
+			"'",
+			"corsi",
+			"<table class='table table-striped'>",
+			"table class=\"table table-striped\"",
+			"(window.confirm",
+			"",
+			"td",
+			"\"&nbsp;\"",
+			"$currentYear",
+			"@radius"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.sftp":
+	{
+		"height": 159.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"lay",
+				"frontend.php/app/layouts/base_layout.php"
+			],
+			[
+				"def",
+				"frontend.php/app/migrations/defines.php"
+			],
+			[
+				"fu",
+				"frontend.php/app/migrations/full.php"
+			],
+			[
+				"home",
+				"frontend.php/app/views/home/home_index.php"
+			],
+			[
+				"basec",
+				"frontend.php/app/classes/base_controller.php"
+			],
+			[
+				"corsicosticontr",
+				"frontend.php/app/controllers/corsi/costi_controller.php"
+			],
+			[
+				"pale",
+				"frontend.php/htdocs/js/palestre.js"
+			],
+			[
+				"corsicocontr",
+				"frontend.php/app/controllers/corsi/costi_controller.php"
+			],
+			[
+				"corsilecon",
+				"frontend.php/app/controllers/corsi/lezioni_controller.php"
+			],
+			[
+				"corsicontr",
+				"frontend.php/app/controllers/corsi_controller.php"
+			],
+			[
+				"clicontr",
+				"frontend.php/app/controllers/clienti_controller.php"
+			],
+			[
+				"istruttcontr",
+				"frontend.php/app/controllers/istruttori_controller.php"
+			],
+			[
+				"utentied",
+				"frontend.php/app/views/utenti/utenti_edit.php"
+			],
+			[
+				"utentivi",
+				"frontend.php/app/views/utenti/utenti_view.php"
+			],
+			[
+				"basecontr",
+				"frontend.php/app/classes/base_controller.php"
+			],
+			[
+				"orm",
+				"frontend.php/system/classes/orm.php"
+			],
+			[
+				"istr",
+				"frontend.php/app/models/istruttori_model.php"
+			],
+			[
+				"istru",
+				"frontend.php/app/models/istruttori_model.php"
+			],
+			[
+				"climodel",
+				"frontend.php/app/models/clienti_model.php"
+			],
+			[
+				"utentimode",
+				"frontend.php/app/models/utenti_model.php"
+			],
+			[
+				"utentiedi",
+				"frontend.php/app/views/utenti/utenti_edit.php"
+			],
+			[
+				"utenticontr",
+				"frontend.php/app/controllers/utenti_controller.php"
+			],
+			[
+				"ute",
+				"frontend.php/app/views/utenti/utenti_edit.php"
+			],
+			[
+				"full",
+				"frontend.php/app/migrations/full.php"
+			],
+			[
+				"port",
+				"frontend.php/app/controllers/portale_cliente_controller.php"
+			],
+			[
+				"database",
+				"frontend.php/system/helpers/database_helper.php"
+			],
+			[
+				"varchicontr",
+				"frontend.php/app/controllers/varchi_controller.php"
+			],
+			[
+				"varchimode",
+				"frontend.php/app/models/varchi_model.php"
+			],
+			[
+				"timbmode",
+				"frontend.php/app/models/timbrature_model.php"
+			],
+			[
+				"climode",
+				"frontend.php/app/models/clienti_model.php"
+			],
+			[
+				"base",
+				"frontend.php/app/classes/base_controller.php"
+			],
+			[
+				"timbco",
+				"frontend.php/app/controllers/timbrature_controller.php"
+			],
+			[
+				"devcontr",
+				"frontend.php/app/controllers/development_controller.php"
+			],
+			[
+				"deve",
+				"frontend.php/app/views/development/development_rebuild.php"
+			],
+			[
+				"ful",
+				"frontend.php/app/migrations/full.php"
+			],
+			[
+				"clvi",
+				"frontend.php/app/views/clienti/clienti_view.php"
+			],
+			[
+				"palehe",
+				"frontend.php/app/helpers/palestre_helper.php"
+			],
+			[
+				"palhe",
+				"frontend.php/app/helpers/palestre_helper.php"
+			],
+			[
+				"vared",
+				"frontend.php/app/views/varchi/varchi_edit.php"
+			],
+			[
+				"varcvi",
+				"frontend.php/app/views/varchi/varchi_view.php"
+			],
+			[
+				"html",
+				"frontend.php/system/helpers/html_helper.php"
+			],
+			[
+				"homeinde",
+				"frontend.php/app/views/home/home_index.php"
+			],
+			[
+				"clivi",
+				"frontend.php/app/views/clienti/clienti_view.php"
+			],
+			[
+				"clitimbr",
+				"frontend.php/app/views/clienti/clienti_lista_timbrature.php"
+			],
+			[
+				"timbmod",
+				"frontend.php/app/models/timbrature_model.php"
+			],
+			[
+				"uti",
+				"frontend.php/system/helpers/utils_helper.php"
+			],
+			[
+				"notifi",
+				"frontend.php/app/controllers/notifiche_controller.php"
+			],
+			[
+				"clienticontr",
+				"frontend.php/app/controllers/clienti_controller.php"
+			],
+			[
+				"edit",
+				"frontend.php/app/views/agenti/agenti_edit.php"
+			],
+			[
+				"req",
+				"frontend.php/system/helpers/request_helper.php"
+			],
+			[
+				"setupcontr",
+				"frontend.php/app/controllers/setup_controller.php"
+			],
+			[
+				"conf",
+				"frontend.php/system/classes/configure.php"
+			],
+			[
+				"confg",
+				"frontend.php/app/views/setup/setup_config.php"
+			],
+			[
+				"clifi",
+				"frontend.php/app/views/clienti/clienti_filtra.php"
+			],
+			[
+				"peanu",
+				"frontend.php/htdocs/js/peanut.js"
+			],
+			[
+				"palecontr",
+				"frontend.php/htdocs/js/palestre.controller.js"
+			],
+			[
+				"cliinde",
+				"frontend.php/app/views/clienti/clienti_index.php"
+			],
+			[
+				"clifoto",
+				"frontend.php/app/controllers/clienti/fotografie_controller.php"
+			],
+			[
+				"peanut",
+				"frontend.php/htdocs/js/peanut.js"
+			],
+			[
+				"artiinde",
+				"frontend.php/app/views/articoli/articoli_index.php"
+			],
+			[
+				"abboinde",
+				"frontend.php/app/views/abbonamenti/abbonamenti_index.php"
+			],
+			[
+				"abbovi",
+				"frontend.php/app/views/abbonamenti/abbonamenti_view.php"
+			],
+			[
+				"artiin",
+				"frontend.php/app/views/articoli/articoli_index.php"
+			],
+			[
+				"migr",
+				"frontend.php/system/classes/migrations.php"
+			],
+			[
+				"set",
+				"frontend.php/app/controllers/setup_controller.php"
+			],
+			[
+				"image",
+				"frontend.php/app/helpers/images_helper.php"
+			],
+			[
+				"corsitxt",
+				"frontend.php/app/support/corsi.txt"
+			],
+			[
+				"control",
+				"frontend.php/system/classes/controller.php"
+			],
+			[
+				"controller",
+				"frontend.php/system/classes/controller.php"
+			],
+			[
+				"clidele",
+				"frontend.php/app/views/clienti/clienti_delete.php"
+			],
+			[
+				"sess",
+				"frontend.php/system/helpers/session_helper.php"
+			],
+			[
+				"cliv",
+				"frontend.php/app/views/clienti/clienti_view.php"
+			],
+			[
+				"utils",
+				"frontend.php/system/helpers/utils_helper.php"
+			],
+			[
+				"palele",
+				"frontend.php/htdocs/css/palestre.less"
+			],
+			[
+				"cliedi",
+				"frontend.php/app/views/clienti/clienti_edit.php"
+			],
+			[
+				"abboedit",
+				"frontend.php/app/views/abbonamenti/abbonamenti_edit.php"
+			],
+			[
+				"varia",
+				"frontend.php/htdocs/css/palestre_variables.less"
+			],
+			[
+				"mix",
+				"frontend.php/htdocs/css/palestre_mixins.less"
+			],
+			[
+				"palle",
+				"frontend.php/htdocs/css/palestre.less"
+			],
+			[
+				"view",
+				"frontend.php/app/views/abbonamenti/abbonamenti_view.php"
+			],
+			[
+				"basemode",
+				"frontend.php/app/classes/base_model.php"
+			],
+			[
+				"mrt",
+				"frontend.php/app/models/mrtimb_comandi_model.php"
+			],
+			[
+				"clibadgmode",
+				"frontend.php/app/models/clienti/badge_model.php"
+			],
+			[
+				"clibadcontr",
+				"frontend.php/app/controllers/clienti/badge_controller.php"
+			],
+			[
+				"clilisba",
+				"frontend.php/app/views/clienti/clienti_lista_badge.php"
+			],
+			[
+				"climod",
+				"frontend.php/app/models/clienti_model.php"
+			],
+			[
+				"setupop",
+				"frontend.php/app/views/setup/setup_options.php"
+			],
+			[
+				"opzimo",
+				"frontend.php/app/models/opzioni_model.php"
+			],
+			[
+				"setup",
+				"frontend.php/app/controllers/setup_controller.php"
+			],
+			[
+				"login",
+				"frontend.php/app/controllers/login_controller.php"
+			],
+			[
+				"mrtb",
+				"frontend.php/app/models/mrtimb_comandi_model.php"
+			],
+			[
+				"varchilo",
+				"frontend.php/app/views/varchi/varchi_view_log.php"
+			],
+			[
+				"boothelp",
+				"frontend.php/system/helpers/bootstrap_helper.php"
+			],
+			[
+				"repofo",
+				"frontend.php/app/elements/report_abbonamenti_form.php"
+			],
+			[
+				"varchivi",
+				"frontend.php/app/views/varchi/varchi_view_log.php"
+			],
+			[
+				"varchcontr",
+				"frontend.php/app/controllers/varchi_controller.php"
+			],
+			[
+				"loginde",
+				"frontend.php/app/views/log/log_index.php"
+			],
+			[
+				"varc",
+				"frontend.php/app/views/varchi/varchi_view.php"
+			],
+			[
+				"config",
+				"frontend.php/system/config/config.defaults.php"
+			],
+			[
+				"basecon",
+				"frontend.php/app/classes/base_controller.php"
+			],
+			[
+				"cliarted",
+				"frontend.php/app/views/clienti/articoli/clienti_articoli_edit.php"
+			],
+			[
+				"cliabbed",
+				"frontend.php/app/views/clienti/abbonamenti/clienti_abbonamenti_edit.php"
+			],
+			[
+				"cliartiedi",
+				"frontend.php/app/views/clienti/articoli/clienti_articoli_edit.php"
+			],
+			[
+				"articcon",
+				"frontend.php/app/controllers/articoli_controller.php"
+			],
+			[
+				"devereb",
+				"frontend.php/app/views/development/development_rebuild.php"
+			],
+			[
+				"clipagmode",
+				"frontend.php/app/models/clienti/pagamenti_model.php"
+			],
+			[
+				"corsiind",
+				"frontend.php/app/views/corsi/corsi_index.php"
+			],
+			[
+				"sconcontr",
+				"frontend.php/app/controllers/sconti_controller.php"
+			],
+			[
+				"corsiinde",
+				"frontend.php/app/views/corsi/corsi_index.php"
+			],
+			[
+				"cliindex",
+				"frontend.php/app/views/clienti/clienti_index.php"
+			],
+			[
+				"articoli",
+				"frontend.php/app/views/articoli/articoli_index.php"
+			],
+			[
+				"palestr",
+				"frontend.php/htdocs/js/palestre.js"
+			],
+			[
+				"clie",
+				"frontend.php/app/controllers/clienti_controller.php"
+			],
+			[
+				"core",
+				"frontend.php/system/core.php"
+			],
+			[
+				"pales",
+				"frontend.php/htdocs/js/palestre.js"
+			],
+			[
+				"boot",
+				"frontend.php/htdocs/css/bootstrap_override.less"
+			],
+			[
+				"acc",
+				"frontend.php/htdocs/js/accounting.js"
+			],
+			[
+				"palehelp",
+				"frontend.php/app/helpers/palestre_helper.php"
+			],
+			[
+				"confapp",
+				"frontend.php/app/config/config.application.php"
+			],
+			[
+				"articcontr",
+				"frontend.php/app/controllers/articoli_controller.php"
+			],
+			[
+				"abbocontr",
+				"frontend.php/app/controllers/abbonamenti_controller.php"
+			],
+			[
+				"ses",
+				"frontend.php/system/helpers/session_helper.php"
+			],
+			[
+				"contro",
+				"frontend.php/system/classes/controller.php"
+			],
+			[
+				"timbcon",
+				"frontend.php/app/controllers/report/timbrature_controller.php"
+			],
+			[
+				"timbform",
+				"frontend.php/app/elements/report_timbrature_form.php"
+			],
+			[
+				"cliin",
+				"frontend.php/app/views/clienti/clienti_index.php"
+			],
+			[
+				"clibadge",
+				"frontend.php/app/views/clienti/badge/clienti_badge_edit.php"
+			],
+			[
+				"repobadgass",
+				"frontend.php/app/views/report/badge/report_badge_assegnati.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 312.0,
+	"status_bar_visible": true
+}
