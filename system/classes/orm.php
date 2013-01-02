@@ -47,7 +47,7 @@
 		protected $fields = array(); // array contenente campi e valori del record
 
 		/**
-		 * array contenente campi e valori del record attuale, non modificati (per connfronto)
+		 * array contenente campi e valori del record attuale, non modificati (per confronto)
 		 *
 		 * @var    array
 		 * @access protected
