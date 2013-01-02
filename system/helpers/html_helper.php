@@ -154,7 +154,7 @@
 		public static function js_link($caption, $action, $attr = null)
 		{
 			$attributes = arrays::attributes($attr);
-			return "<a href='#' onClick='{$action}' {$attributes}>{$caption}</a>";
+			return "<a onClick='{$action}' {$attributes}>{$caption}</a>";
 		}
 
 		/**
