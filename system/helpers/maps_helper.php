@@ -17,7 +17,7 @@
 		 * @return array
 		 * @author Phelipe de Sterlich
 		 **/
-		function geocode($address)
+		public static function geocode($address)
 		{
 			$string      = str_replace (" ", "+", urlencode($address));
 			$details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$string."&sensor=false";
