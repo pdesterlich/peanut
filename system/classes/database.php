@@ -50,6 +50,8 @@
 						die (__("system.pdo_connect_fail", array(":server" => Configure::read("database.host"), ":database" => Configure::read("database.name"), ":errore" => $e->getMessage())));
 					}
 
+					self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 					// imposto il charset a utf-8
 					$charset = Configure::read("database.charset", "");
 					if ($charset != "") {
