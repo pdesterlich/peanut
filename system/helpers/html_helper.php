@@ -239,7 +239,7 @@
 		{
 			if ($caption == "") $caption = $address;
 
-			return ($address == "") ? "" : "<a href='mailto://{$address}'>{$caption}</a>";
+			return ($address == "") ? "" : "<a href='mailto:{$address}'>{$caption}</a>";
 		}
 
 		/**
