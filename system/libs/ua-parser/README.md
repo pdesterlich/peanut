@@ -1,7 +1,18 @@
 # ua-parser PHP Library #
 
-This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project. This library
-utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device.
+This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project.
+
+## v2.0 Changes ##
+
+v2.0 of the PHP library, released in December 2012, marked a huge transition from the previous pseudo-port of `ua-parser` to a true port that matches up well with the other libraries in the `ua-parser` repo. The primary changes:
+
+* the `UAParser` class is now dynamic
+* properties are nested _(e.g. $result->family is now $result->ua->family)_
+* a user agent string is now required when using `parse()`. the auto-magical "use the server provided UA" is no longer supported.
+* `uaParse()`, `osParse()`, and `deviceParse()` are public and can be used to just return those select bits for a given user agent string.
+* the `is*` boolean properties _(e.g. isMobile)_ have been dropped. they now exist as part of the `ua-classifier` project.
+
+Please refer to the `CHANGELOG` for the full list of changes.
 
 ## Demo ##
 
@@ -12,96 +23,91 @@ You can [test the PHP library](http://uaparser.dmolsen.com/) with your browser.
 Straightforward:
 
 ```php
-require("UAParser.php");
-$ua = UA::parse();
+require("uaparser.php");
 
-print $ua->family;         // Chrome (can also use $ua->browser)
-print $ua->major;          // 16
-print $ua->minor;          // 0
-print $ua->patch;          // 912 (can also use $ua->build)
-print $ua->browserFull;    // Chrome 16.0.912
-print $ua->version;        // 16.0.912
+$ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
-print $ua->os;             // Mac OS X
-print $ua->osMajor;        // 10
-print $ua->osMinor;        // 6
-print $ua->osPatch;        // 8 (can also use $ua->osBuild)
-print $ua->osFull;         // Mac OS X 10.6.8
-print $ua->osVersion;      // 10.6.8
+$parser = new UAParser;
+$result = $parser->parse($ua);
 
-print $ua->full;           // Chrome 16.0.912/Mac OS X 10.6.8
+print $result->ua->family;                // Safari
+print $result->ua->major;                 // 6
+print $result->ua->minor;                 // 0
+print $result->ua->patch;                 // 2
+print $result->ua->toString;              // Safari 6.0.2
+print $result->ua->toVersionString;       // 6.0.2
 
-// in select cases the device information will also be captured
+print $result->os->family;                // Mac OS X
+print $result->os->major;                 // 10
+print $result->os->minor;                 // 7
+print $result->os->patch;                 // 5
+print $result->os->patch_minor;           // [null]
+print $result->os->toString;              // Mac OS X 10.7.5
+print $result->os->toVersionString;       // 10.7.5
 
-print $ua->device;         // Palm Pixi
-print $ua->deviceMajor;    // 1
-print $ua->deviceMinor;    // 0
-print $ua->deviceFull;     // Palm Pixi 1.0
-print $ua->deviceVersion;  // 1.0
+print $result->device->family;            // Other
 
-// some other generic boolean options
-
-print $ua->isMobile;       // true or false
-print $ua->isMobileDevice; // true or false
-print $ua->isTablet;       // true or false
-print $ua->isSpider;       // true or false
-print $ua->isComputer;     // true or false
-print $ua->isUIWebview;    // true or false, iOS-only
+print $result->toFullString;              // Safari 6.0.2/Mac OS X 10.7.5
+print $result->uaOriginal;                // Mozilla/5.0 (Macintosh; Intel Ma...
 ```
 
-## Getting the User-Agent Data ##
+## Using ua-parser PHP Library from the Command Line ##
 
-To get the user-agent data for either the initial load of the project or each night as a cron job you can use the following on the command line:
+A command line utility is now included with the PHP library. The following commands are supported:
 
-    %: cd /path/to/project/
-    %: php UAParser.php -get
+### Get Usage Info
 
-If you use the cron job method it's highly encouraged that you run `UAParser.php -get` in silent mode. To do so do the following:
+Provides simple usage information:
 
-    %: php UAParser.php -get -silent
+    php uaparser-cli.php
 
-You can also turn off back-ups by doing the following:
+### Update the regexes.json File
 
-    %: php UAParser.php -get -nobackup
+Fetches an updated YAML file for `ua-parser` and overwrites the current JSON file. You can use the following as part of a cron job that runs nightly. 
 
-And you can run in silent mode and turn off back-ups by doing the following:
+    php uaparser-cli.php -g [-s] [-n]
+        
+By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
 
-    %: php UAParser.php -get -silent -nobackup
+### Convert an Existing regexes.yaml File to regexes.json
 
-Alternatively, you can create a PHP script that includes the following:
+With the change to v2.0 you may have an existing and customized YAML file for `ua-parser`. Use the following to convert it to JSON.
 
-    <?php
+    php uaparser-cli.php -c [-s] [-n]
 
-			require("/path/to/UAParser.php");
-			UA::get();
-			
-    ?>
+By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
 
-The `silent` and `nobackup` variables can also be modified directly in the `UAParser.php` script on lines #36 and #37 respectively.
+### Grab Just the Latest regexes.yaml File From the Repository
 
-## Using ua-parser For a Redirect Script ##
+If you need to add a new UA it's easier to edit the original YAML and then convert it to JSON.
 
-It's very simple to use ua-parser as a redirect script. To do so do the following:
+    php uaparser-cli.php -y
 
-    <?php
+Fetches an updated YAML file. *Warning:* This method overwrites any existing `regexes.yaml` file.
 
-    	// require the ua-parser-php library
-    	require_once("/path/to/UAParser.php");
+### Parse an Apache Log File
 
-    	// parse the requesting user agent
-    	$result = UA::parse();
+Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file when the UA or OS family aren't recognized or when the UA is listed as a generic smartphone or as a generic feature phone.
 
-    	// redirect phones, to redirect tablets use isMobileDevice
-    	if ($result->isMobile) {
-    		header("location:http://dmolsen.com");
-    	}
-	
-	    // run through the rest of your code for the page for desktop devices & spiders
-	
-    ?>
+    php uaparser-cli.php -l "/path/to/apache/logfile"
+        
 
-You can use any of the properties above to perform the redirect but the boolean options are probably easiest.
+### Parse a Single User Agent String
+
+Parses a user agent string and dumps the results as a list.
+
+    php uaparser-cli.php [-j] "your user agent string"
+           
+Use the `-j` flag to print the result as JSON.
 
 ## Credits ##
 
-Thanks to the [ua-parser team](http://code.google.com/p/ua-parser/people/list) for making the YAML file available for others to build upon. Thanks to Bryan Shelton for some fixes.
+Thanks to the [original ua-parser team](http://code.google.com/p/ua-parser/people/list) for making the YAML file available for others to build upon.
+
+Also, many thanks to the following major contributors to the PHP library:
+
+* Bryan Shelton
+* Michael Bond
+* @rjd22
+* Timo Tijhof 
+* Marcus Bointon
