@@ -111,10 +111,10 @@
 
 			if (($helpText != "") AND ($helpType == "popover")) {
 				$elementHelpAttr = arrays::attributes(array(
-					"rel"            =>"popover",
+					"rel"            => "popover",
 					"data-trigger"   => "hover",
 					"data-placement" => "bottom",
-					"data-title"     => $label,
+					"data-title"     => preg_replace('/<[^>]*>/', '', $label),
 					"data-content"   => $helpText,
 					));
 			}
