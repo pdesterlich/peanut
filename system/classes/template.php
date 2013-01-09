@@ -67,9 +67,19 @@
 			return $this;
 		}
 
-		function element($elementName, $params = array())
+		/**
+		 * funzione element
+		 * esegue il render di un elemento esterno alla view (tipicamente nella directory elements)
+		 *
+		 * @param $elementName string nome dell'elemento da mostrare
+		 * @param $params      array  parametri da passare all'elemento
+		 * @param $baseDir     string directory base in cui cercare l'elemento
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		function element($elementName, $params = array(), $baseDir = "elements")
 		{
-			return $this->_render($elementName, $params, "elements");
+			return $this->_render($elementName, $params, $baseDir);
 		}
 
 		function render($baseDir = "views")
@@ -78,6 +88,5 @@
 		}
 
 	}
-	
 
 ?>
