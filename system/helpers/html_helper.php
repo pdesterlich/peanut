@@ -62,7 +62,7 @@
 			// sostituisce la prima occorrenza di & con ?
 			$result = preg_replace('/&/', '?', $result, 1);
 			// aggiunge protocollo, path base e la pagina base
-			$result = $basePath . (($shortUrl) ? "" : "index.php") . $result;
+			$result = $basePath . (($shortUrl) ? "/" : "index.php") . $result;
 			$result = (($basePath == "") ? "" : Configure::read("url.protocol") . "://") . str_replace("//", "/", $result);
 
 			// ritorna l'url generato, rimuovendo eventuali doppi slash
@@ -82,7 +82,6 @@
 		 */
 		public static function location($controller = "", $action = "", $params = null, $exit = true)
 		{
-
 			// genero l'header e lo invio al browser
 			header("Location: ".html::url($controller, $action, $params));
 			if ($exit) exit;
