@@ -63,6 +63,9 @@
 			$result = preg_replace('/&/', '?', $result, 1);
 			// aggiunge protocollo, path base e la pagina base
 			$result = $basePath . (($shortUrl) ? "/" : "index.php") . $result;
+			// verifica che il risultato non sia una stringa vuota
+			if ($result == "") $result = "/";
+			// compone la stringa url
 			$result = (($basePath == "") ? "" : Configure::read("url.protocol") . "://") . str_replace("//", "/", $result);
 
 			// ritorna l'url generato, rimuovendo eventuali doppi slash
