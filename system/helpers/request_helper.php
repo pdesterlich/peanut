@@ -9,6 +9,7 @@
 	 **/
 	class request
 	{
+		// TODO: controllo e pulizia parametri ricevuti
 
 		/**
 		 * funzione read
