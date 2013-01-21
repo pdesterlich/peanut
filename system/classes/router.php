@@ -27,6 +27,14 @@
 		protected static $_action = "";
 
 		/**
+		 * variabile $_method
+		 * metodo della richiesta
+		 *
+		 * @var string
+		 **/
+		protected static $_method = "";
+
+		/**
 		 * variabile $_id
 		 * identificativo record
 		 *
@@ -60,6 +68,18 @@
 		}
 
 		/**
+		 * funzione method
+		 * ritorna il metodo con cui è stata eseguita la richiesta
+		 *
+		 * @return string
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function method()
+		{
+			return self::$_method;
+		}
+
+		/**
 		 * funzione id
 		 * ritorna l'identificativo del record
 		 *
@@ -80,29 +100,26 @@
 		 **/
 		public static function init()
 		{
+			// leggo il metodo della richiesta
+			self::$_method = $_SERVER["REQUEST_METHOD"];
+
 			// leggo il nome del controller
-			if (isset($_GET["controller"])) {
-				self::$_controller = $_GET["controller"];
-			} elseif (isset($_POST["controller"])) {
-				self::$_controller = $_POST["controller"];
+			if (isset($_REQUEST["controller"])) {
+				self::$_controller = $_REQUEST["controller"];
 			} else {
 				self::$_controller = Configure::read("routes.controller");
 			}
 
 			// leggo il nome dell'action
-			if (isset($_GET["action"])) {
-				self::$_action = $_GET["action"];
-			} elseif (isset($_POST["action"])) {
-				self::$_action = $_POST["action"];
+			if (isset($_REQUEST["action"])) {
+				self::$_action = $_REQUEST["action"];
 			} else {
 				self::$_action = Configure::read("routes.action");
 			}
 
 			// leggo l'identificativo record
-			if (isset($_GET["id"])) {
-				self::$_id = $_GET["id"];
-			} elseif (isset($_POST["id"])) {
-				self::$_id = $_POST["id"];
+			if (isset($_REQUEST["id"])) {
+				self::$_id = $_REQUEST["id"];
 			} else {
 				self::$_id = 0;
 			}
