@@ -48,7 +48,14 @@
 				}
 				else if (is_array($params))
 				{
-					// aggiunge ogni parametro presente nell'array
+					// se sono configurati gli url abbreviati ed esiste il parametro "id"
+					if (($shortUrl) AND (array_key_exists("id", $params))) {
+						// aggiunge l'id all'url
+						$result .= "/" . $params["id"];
+						// rimuove l'id dalla lista dei parametri
+						unset($params["id"]);
+					}
+					// aggiunge ogni parametro (residuo) presente nell'array
 					foreach ($params as $key => $value) $result .= "&{$key}={$value}";
 				}
 				else
