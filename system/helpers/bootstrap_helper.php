@@ -129,7 +129,7 @@
 					break;
 				case 'password':
 					$value = ($passwordShowValue) ? "value='{$value}'" : "";
-					$result .= "<input {$elementHelpAttr} type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' autocomplete='off' {$value} {$elementAttr}>";
+					$result .= "<input {$elementHelpAttr} type='password' class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' {$value} {$elementAttr}>";
 					break;
 				case 'textarea':
 					$result .= "<textarea {$elementHelpAttr} class='{$width} {$itemClass}' id='{$itemId}' name='{$itemId}' rows='6' {$elementAttr}>{$value}</textarea>";
