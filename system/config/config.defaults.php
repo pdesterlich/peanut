@@ -40,6 +40,13 @@
 	$config["url"]["protocol"] = "http";
 
 	/**
+	 * reindirizzamento http > https
+	 *
+	 * @var string
+	 **/
+	$config["url"]["https_redirect_to"] = "";
+
+	/**
 	 * flag attivazione url brevi
 	 * (es. http://tikehau.mooreasoft.ch/projects/view/1 al posto di http://tikehau.mooreasoft.ch/index.php?controller=projects&action=view&id=1)
 	 * è necessaria la presenza di un file .htaccess (vedi htaccess.sample in /htdocs)
