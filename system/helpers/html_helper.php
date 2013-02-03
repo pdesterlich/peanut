@@ -18,17 +18,18 @@
 		 * @param  string $controller nome del controller per cui generare il link
 		 * @param  string $action     nome dell'azione per cui generare il link
 		 * @param  mixed  $params     (array) parametri aggiuntivi: array associativo nome => valore
-		 *                            (string) parametri aggiuntivi: 
+		 *                            (value) identificativo record
+		 * @param  bool   $useBaseUrl flag per abilitare l'uso del base url nella generazione dell'url
 		 * @return string             url generato
 		 * @author Phelipe de Sterlich
 		 */
-		public static function url($controller = "", $action = "", $params = null)
+		public static function url($controller = "", $action = "", $params = null, $useBaseUrl = false)
 		{
 			$result = "";
 
 			// legge l'url base e aggiunge, se necessario, lo slash finale
-			$basePath = Configure::read("url.base");
-			if (($basePath != "") AND (substr($basePath, -1) != "/")) $basePath .= "/";
+			$basePath = ($useBaseUrl) ? Configure::read("url.base") : "";
+			// if (($basePath != "") AND (substr($basePath, -1) != "/")) $basePath .= "/";
 
 			// legge l'impostazione del parametro short url
 			$shortUrl = Configure::read("url.short");
@@ -39,15 +40,8 @@
 			// aggiunge l'action
 			if ($action != "") $result .= ($shortUrl) ? "/{$action}" : "&action={$action}";
 
-			if ($params != null)
-			{
-				if (is_numeric($params))
-				{
-					// lo considera come identificativo record e lo aggiunge all'url
-					$result .= ($shortUrl) ? "/{$params}" : "&id={$params}";
-				}
-				else if (is_array($params))
-				{
+			if ($params != null) {
+				if (is_array($params)) {
 					// se sono configurati gli url abbreviati ed esiste il parametro "id"
 					if (($shortUrl) AND (array_key_exists("id", $params))) {
 						// aggiunge l'id all'url
@@ -57,11 +51,9 @@
 					}
 					// aggiunge ogni parametro (residuo) presente nell'array
 					foreach ($params as $key => $value) $result .= "&{$key}={$value}";
-				}
-				else
-				{
-					// lo aggiunge cosi' com'è all'url
-					$result .= "&".$params;
+				} else {
+					// lo considera come identificativo record e lo aggiunge all'url
+					$result .= ($shortUrl) ? "/{$params}" : "&id={$params}";
 				}
 			}
 
