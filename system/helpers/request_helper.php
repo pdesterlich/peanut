@@ -57,6 +57,21 @@
 		}
 
 		/**
+		 * funzione delCookie
+		 * elimina un cookie dal browser
+		 *
+		 * @param $paramName string  nome del parametro da eliminare
+		 * @return void
+		 * @author Phelipe de Sterlich
+		 **/
+		public static function delCookie($paramName, $path = "/", $domain = "")
+		{
+			$paramName = Configure::read("cookies.prefix")."_".$paramName;
+			if ($domain == "") $domain = Configure::read("url.base");
+			setcookie($paramName, "", time() - 3600, $path, $domain);
+		}
+
+		/**
 		 * funzione exists
 		 * controlla l'esistenza di un parametro nella richiesta
 		 *
