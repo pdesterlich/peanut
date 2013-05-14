@@ -18,17 +18,19 @@
 		 * @param  string $controller nome del controller per cui generare il link
 		 * @param  string $action     nome dell'azione per cui generare il link
 		 * @param  mixed  $params     (array) parametri aggiuntivi: array associativo nome => valore
-		 *                            (value) identificativo record
-		 * @param  bool   $useBaseUrl flag per abilitare l'uso del base url nella generazione dell'url
+		 *                            (string) parametri aggiuntivi: 
 		 * @return string             url generato
 		 * @author Phelipe de Sterlich
 		 */
-		public static function url($controller = "", $action = "", $params = null, $useBaseUrl = false)
+		public static function url($controller = "", $action = "", $params = null)
 		{
 			$result = "";
 
 			// legge l'url base e aggiunge, se necessario, lo slash finale
-			$basePath = ($useBaseUrl) ? Configure::read("url.base") : "";
+			$basePath = Configure::read("url.base");
+
+			if ($basePath == '') $basePath = $_SERVER["SERVER_NAME"];
+
 			// if (($basePath != "") AND (substr($basePath, -1) != "/")) $basePath .= "/";
 
 			// legge l'impostazione del parametro short url
@@ -61,11 +63,11 @@
 			// sostituisce la prima occorrenza di & con ?
 			$result = preg_replace('/&/', '?', $result, 1);
 			// aggiunge protocollo, path base e la pagina base
-			$result = $basePath . (($shortUrl) ? "/" : "index.php") . $result;
+			$result = $basePath . (($shortUrl) ? "" : "index.php") . $result;
 			// verifica che il risultato non sia una stringa vuota
 			if ($result == "") $result = "/";
 			// compone la stringa url
-			$result = (($basePath == "") ? "" : Configure::read("url.protocol") . "://") . str_replace("//", "/", $result);
+			$result = (($basePath == "") ? "" : "//") . str_replace("//", "/", $result);
 
 			// ritorna l'url generato, rimuovendo eventuali doppi slash
 			return $result;
