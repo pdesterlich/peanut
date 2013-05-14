@@ -255,7 +255,7 @@
 			}
 		}
 		
-		private function getWords(&$arr, $count, $loremipsum)
+		private static function getWords(&$arr, $count, $loremipsum)
 		{
 			$i = 0;
 			if($loremipsum)
@@ -278,7 +278,7 @@
 			}
 		}
 		
-		private function getPlain($count, $loremipsum, $returnStr = true)
+		private static function getPlain($count, $loremipsum, $returnStr = true)
 		{
 			$words = array();
 			self::getWords($words, $count, $loremipsum);
@@ -318,7 +318,7 @@
 				return $sentences;
 		}
 		
-		private function getText($count, $loremipsum)
+		private static function getText($count, $loremipsum)
 		{
 			$sentences = self::getPlain($count, $loremipsum, false);
 			$paragraphs = self::getParagraphArr($sentences);
@@ -333,7 +333,7 @@
 			return implode("\n\n\t", $paragraphStr);
 		}
 		
-		private function getParagraphArr($sentences)
+		private static function getParagraphArr($sentences)
 		{
 			$wordsPer = self::$wordsPerParagraph;
 			$sentenceAvg = self::$wordsPerSentence;
@@ -362,7 +362,7 @@
 			return $paragraphs;
 		}
 		
-		private function getHTML($count, $loremipsum)
+		private static function getHTML($count, $loremipsum)
 		{
 			$sentences = self::getPlain($count, $loremipsum, false);
 			$paragraphs = self::getParagraphArr($sentences);
@@ -378,7 +378,7 @@
 			return implode("\n", $paragraphStr);
 		}
 		
-		private function paragraphToString($paragraph, $htmlCleanCode = false)
+		private static function paragraphToString($paragraph, $htmlCleanCode = false)
 		{
 			$paragraphStr = '';
 			foreach($paragraph as $sentence)
@@ -396,7 +396,7 @@
 		* Inserts commas and periods in the given
 		* word array.
 		*/
-		private function punctuate(& $sentence)
+		private static function punctuate(& $sentence)
 		{
 			$count = count($sentence);
 			$sentence[$count - 1] = $sentence[$count - 1] . '.';
@@ -422,7 +422,7 @@
 		* sentence of the given length. Average and
 		* standard deviation are determined superficially
 		*/
-		private function numberOfCommas($len)
+		private static function numberOfCommas($len)
 		{
 			$avg = (float) log($len, 6);
 			$stdDev = (float) $avg / 6.000;
@@ -439,7 +439,7 @@
 		*	Average: 24.46
 		*	Standard Deviation: 5.08
 		*/
-		private function gaussianSentence()
+		private static function gaussianSentence()
 		{
 			$avg = (float) 24.460;
 			$stdDev = (float) 5.080;
@@ -453,7 +453,7 @@
 		* Source:
 		* 	http://us.php.net/manual/en/function.rand.php#53784
 		*/
-		private function gauss()
+		private static function gauss()
 		{   // N(0,1)
 			// returns random number with normal distribution:
 			//   mean=0
@@ -471,12 +471,12 @@
 			return $u;
 		}
 
-		private function gauss_ms($m=0.0,$s=1.0)
+		private static function gauss_ms($m=0.0,$s=1.0)
 		{
 			return self::gauss()*$s+$m;
 		}
 
-		private function random_0_1()
+		private static function random_0_1()
 		{
 			return (float)rand()/(float)getrandmax();
 		}
