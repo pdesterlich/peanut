@@ -31,7 +31,7 @@
 		 * @return void
 		 * @author Phelipe de Sterlich
 		 **/
-		function log()
+		public static function log()
 		{
 			$uniqueId = "";
 			if (Configure::read("database.enabled")) {
